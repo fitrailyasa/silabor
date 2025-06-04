@@ -6,6 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminRoleController;
+use App\Http\Controllers\Admin\AdminAlatController;
+use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminLaporanController;
+use App\Http\Controllers\Admin\AdminRuanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::name('admin.')->prefix('admin')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('beranda');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-
-        // CRUD USER
         Route::resource('user', AdminUserController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('role', AdminRoleController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('alat', AdminAlatController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('category', AdminCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('laporan', AdminLaporanController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('ruangan', AdminRuanganController::class)->only(['index', 'store', 'update', 'destroy']);
     });
 });
 

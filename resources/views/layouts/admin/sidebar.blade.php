@@ -10,7 +10,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <x-sidebar-link route="{{ route('admin.dashboard') }}" icon="tachometer-alt" label="Dashboard" />
+                <x-sidebar-link route="admin.dashboard" icon="tachometer-alt" label="Dashboard" />
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link text-white">
                         <i class="nav-icon fas fa-database"></i>
@@ -20,10 +20,11 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <x-sidebar-link route="{{ route('admin.user.index') }}" label="Data User" can="view-user" />
-                        <x-sidebar-link route="{{ route('admin.role.index') }}" label="Data Role" can="view-role" />
-                        <x-sidebar-link route="#" label="Data Ruangan" can="view-user" />
-                        <x-sidebar-link route="#" label="Data Alat" can="view-user" />
+                        <x-sidebar-link route="admin.user.index" label="Data User" can="view-user" />
+                        <x-sidebar-link route="admin.role.index" label="Data Role" can="view-role" />
+                        <x-sidebar-link route="admin.ruangan.index" label="Data Ruangan" can="view-ruangan" />
+                        <x-sidebar-link route="admin.alat.index" label="Data Alat" can="view-alat" />
+                        <x-sidebar-link route="admin.category.index" label="Data Kategori" can="view-category" />
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -35,9 +36,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <x-sidebar-link route="#" label="Validasi Peminjaman" can="view-user" />
-                        <x-sidebar-link route="#" label="Validasi Penggunaan" can="view-user" />
-                        <x-sidebar-link route="#" label="Validasi Pengembalian" can="view-user" />
+                        <x-sidebar-link route="admin.user.index" label="Validasi Peminjaman" can="view-user" />
+                        <x-sidebar-link route="admin.user.index" label="Validasi Penggunaan" can="view-user" />
+                        <x-sidebar-link route="admin.user.index" label="Validasi Pengembalian" can="view-user" />
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">
@@ -49,15 +50,15 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <x-sidebar-link route="#" label="Laporan Peminjaman" can="view-user" />
-                        <x-sidebar-link route="#" label="Laporan Penggunaan" can="view-user" />
-                        <x-sidebar-link route="#" label="Laporan Pengembalian" can="view-user" />
-                        <x-sidebar-link route="#" label="Laporan Kerusakan" can="view-user" />
+                        <x-sidebar-link route="admin.laporan.index" label="Laporan Peminjaman" can="view-laporan" />
+                        <x-sidebar-link route="admin.laporan.index" label="Laporan Penggunaan" can="view-laporan" />
+                        <x-sidebar-link route="admin.laporan.index" label="Laporan Pengembalian" can="view-laporan" />
+                        <x-sidebar-link route="admin.laporan.index" label="Laporan Kerusakan" can="view-laporan" />
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
+                    <form id="logout-form" action="logout" method="POST" hidden>
                         @csrf
                     </form>
                     <a href="#" class="nav-link text-white"

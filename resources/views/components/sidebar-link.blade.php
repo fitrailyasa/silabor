@@ -1,5 +1,5 @@
 @props([
-    'route' => '#',
+    'route' => null,
     'icon' => null,
     'label' => null,
     'can' => null,
@@ -11,7 +11,7 @@
 
 @if (is_null($can) || (auth()->check() && auth()->user()->can($can)))
     <li class="nav-item">
-        <a href="{{ $route }}" class="nav-link text-white {{ $isActive }}">
+        <a href="{{ route($route) }}" class="nav-link text-white {{ $isActive }}">
             <i class="nav-icon fas fa-{{ $icon }}"></i>
             <p>{{ $label }}</p>
         </a>
