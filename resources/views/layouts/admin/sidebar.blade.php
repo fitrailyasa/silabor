@@ -10,9 +10,9 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <x-sidebar-link route="admin.dashboard" icon="tachometer-alt" label="Dashboard" />
-                <x-sidebar-link route="admin.user.index" icon="users" label="User" can="view-user" />
-                <x-sidebar-link route="admin.role.index" icon="key" label="Role" can="view-role" />
+                <x-sidebar-link route="{{ route('admin.dashboard') }}" icon="tachometer-alt" label="Dashboard" />
+                <x-sidebar-link route="{{ route('admin.user.index') }}" icon="users" label="User" can="view-user" />
+                <x-sidebar-link route="{{ route('admin.role.index') }}" icon="key" label="Role" can="view-role" />
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link text-white">
                         <i class="nav-icon fas fa-receipt"></i>
