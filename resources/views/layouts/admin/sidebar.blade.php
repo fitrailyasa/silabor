@@ -9,13 +9,39 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <x-sidebar-link route="admin.dashboard" icon="tachometer-alt" label="Dashboard" />
-                <x-sidebar-link route="beranda" icon="home" label="Home" />
-
                 <x-sidebar-link route="admin.user.index" icon="users" label="User" can="view-user" />
                 <x-sidebar-link route="admin.role.index" icon="key" label="Role" can="view-role" />
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link text-white">
+                        <i class="nav-icon fas fa-receipt"></i>
+                        <p>
+                            Transaksi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <x-sidebar-link route="#" icon="" label="Validasi Peminjaman" can="view-user" />
+                        <x-sidebar-link route="#" icon="" label="Validasi Penggunaan" can="view-user" />
+                        <x-sidebar-link route="#" icon="" label="Validasi Pengembalian" can="view-user" />
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link text-white">
+                        <i class="nav-icon fas fa-file-signature"></i>
+                        <p>
+                            Laporan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <x-sidebar-link route="#" icon="" label="Laporan Peminjaman" can="view-user" />
+                        <x-sidebar-link route="#" icon="" label="Laporan Penggunaan" can="view-user" />
+                        <x-sidebar-link route="#" icon="" label="Laporan Pengembalian" can="view-user" />
+                        <x-sidebar-link route="#" icon="" label="Laporan Kerusakan" can="view-user" />
+                    </ul>
+                </li>
 
                 <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
