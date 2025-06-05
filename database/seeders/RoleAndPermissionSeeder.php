@@ -16,8 +16,9 @@ class RoleAndPermissionSeeder extends Seeder
             'category' => ['view', 'create', 'edit', 'delete'],
             'alat' => ['view', 'create', 'edit', 'delete'],
             'bahan' => ['view', 'create', 'edit', 'delete'],
-            'laporan' => ['view', 'create', 'edit', 'delete'],
             'ruangan' => ['view', 'create', 'edit', 'delete'],
+            'validasi' => ['view'],
+            'laporan' => ['view'],
         ];
 
         foreach ($entities as $entity => $actions) {

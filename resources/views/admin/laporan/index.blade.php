@@ -5,13 +5,6 @@
         Laporan
     </x-slot>
 
-    <!-- Button Form Create -->
-    <x-slot name="formCreate">
-        @can('create-laporan')
-            @include('admin.laporan.create')
-        @endcan
-    </x-slot>
-
     <!-- Search & Pagination -->
     <x-slot name="search">
         @include('components.search')
@@ -35,7 +28,9 @@
             @foreach ($laporans as $laporan)
                 <tr>
                     <td>{{ $laporans->firstItem() + $loop->index }}</td>
-                    <td>{{ $laporan->user->name ?? '-' }}</td>
+                    <td>
+                        <a href="https://wa.me/+62{{ $laporan->user->no_hp ?? '-' }}"><span>{{ $laporan->user->name ?? '-' }}</span> <i class="fa fa-whatsapp text-success"></i></a>
+                    </td>
                     <td>
                         {{ $laporan->alat->category->name ?? ($laporan->bahan->category->name ?? ($laporan->ruangan->category->name ?? '-')) }}
                     </td>
@@ -50,12 +45,8 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                        <!-- Edit and Delete Button -->
-                        @can('edit-laporan')
-                            @include('admin.laporan.edit')
-                        @endcan
-                        @can('delete-laporan')
-                            @include('admin.laporan.delete')
+                        @can('view-laporan')
+                            @include('admin.laporan.detail')
                         @endcan
                     </td>
                 </tr>
