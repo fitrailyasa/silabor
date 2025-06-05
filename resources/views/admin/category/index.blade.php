@@ -22,7 +22,8 @@
         <thead>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
+                <th>{{ __('Tipe') }}</th>
                 <th class="text-center">{{ __('Action') }}</th>
             </tr>
         </thead>
@@ -31,6 +32,13 @@
                 <tr>
                     <td>{{ $categories->firstItem() + $loop->index }}</td>
                     <td>{{ $category->name ?? '-' }}</td>
+                    <td>
+                        @if ($category->type == 'alat')
+                            <span class="badge badge-primary">Alat</span>
+                        @elseif ($category->type == 'bahan')
+                            <span class="badge badge-success">Bahan</span>
+                        @endif
+                    </td>
                     <td class="manage-row text-center">
                             <!-- Edit and Delete Button -->
                             @can('edit-category')
@@ -46,7 +54,8 @@
         <tfoot>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
+                <th>{{ __('Tipe') }}</th>
                 <th class="text-center">{{ __('Action') }}</th>
             </tr>
         </tfoot>

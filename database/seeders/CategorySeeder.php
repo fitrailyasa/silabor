@@ -31,23 +31,23 @@ class CategorySeeder extends Seeder
                 'type' => 'alat',
             ],
             [
-                'name' => 'Kategori bahan 1',
+                'name' => 'Kategori Bahan 1',
                 'type' => 'bahan',
             ],
             [
-                'name' => 'Kategori bahan 2',
+                'name' => 'Kategori Bahan 2',
                 'type' => 'bahan',
             ],
             [
-                'name' => 'Kategori bahan 3',
+                'name' => 'Kategori Bahan 3',
                 'type' => 'bahan',
             ],
             [
-                'name' => 'Kategori bahan 4',
+                'name' => 'Kategori Bahan 4',
                 'type' => 'bahan',
             ],
             [
-                'name' => 'Kategori bahan 5',
+                'name' => 'Kategori Bahan 5',
                 'type' => 'bahan',
             ],
         ];

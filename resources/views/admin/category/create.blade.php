@@ -18,11 +18,25 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="mb-3">
-                                <label class="form-label">{{ __('Name') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Nama') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="name" name="name" id="name" value="{{ old('name') }}"
+                                    placeholder="nama" name="name" id="name" value="{{ old('name') }}"
                                     required>
                                 @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('Tipe') }}<span class="text-danger">*</span></label>
+                                <select name="type" class="form-select @error('type') is-invalid @enderror"
+                                    id="type">
+                                    <option value="">-- Pilih Tipe --</option>
+                                    <option value="alat" {{ old('type') == 'alat' ? 'selected' : '' }}>Alat</option>
+                                    <option value="bahan" {{ old('type') == 'bahan' ? 'selected' : '' }}>Bahan</option>
+                                </select>
+                                @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
