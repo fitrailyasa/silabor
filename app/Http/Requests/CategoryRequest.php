@@ -22,6 +22,7 @@ class CategoryRequest extends FormRequest
                 'max:100',
                 Rule::unique('categories', 'name')->ignore($id),
             ],
+            'type' => 'required|in:bahan,alat',
         ];
     }
 
@@ -30,7 +31,9 @@ class CategoryRequest extends FormRequest
         return [
             'name.required' => 'Nama tidak boleh kosong!',
             'name.max' => 'Nama maksimal 100 karakter!',
-            'name.unique' => 'Tag sudah ada!'
+            'name.unique' => 'Tag sudah ada!',
+            'type.required' => 'Tipe tidak boleh kosong!',
+            'type.in' => 'Tipe tidak valid!',
         ];
     }
 }

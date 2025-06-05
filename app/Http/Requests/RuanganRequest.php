@@ -18,6 +18,11 @@ class RuanganRequest extends FormRequest
                 'required',
                 'max:100',
             ],
+            'kapasitas' => 'required|numeric',
+            'gedung' => 'required|max:100',
+            'lantai' => 'required|max:100',
+            'foto_ruangan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto_denah' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -26,6 +31,18 @@ class RuanganRequest extends FormRequest
         return [
             'name.required' => 'Nama tidak boleh kosong!',
             'name.max' => 'Nama maksimal 100 karakter!',
+            'kapasitas.required' => 'Kapasitas tidak boleh kosong!',
+            'kapasitas.numeric' => 'Kapasitas harus berupa angka!',
+            'gedung.required' => 'Gedung tidak boleh kosong!',
+            'gedung.max' => 'Gedung maksimal 100 karakter!',
+            'lantai.required' => 'Lantai tidak boleh kosong!',
+            'lantai.max' => 'Lantai maksimal 100 karakter!',
+            'foto_ruangan.image' => 'File harus berupa gambar!',
+            'foto_ruangan.mimes' => 'Format gambar tidak valid!',
+            'foto_ruangan.max' => 'Ukuran gambar maksimal 2MB!',
+            'foto_denah.image' => 'File harus berupa gambar!',
+            'foto_denah.mimes' => 'Format gambar tidak valid!',
+            'foto_denah.max' => 'Ukuran gambar maksimal 2MB!',
         ];
     }
 }

@@ -41,7 +41,24 @@ class AdminRuanganController extends Controller
 
     public function store(RuanganRequest $request)
     {
-        Ruangan::create($request->validated());
+        $ruangan = Ruangan::create($request->validated());
+
+        if ($request->hasFile('foto_ruangan')) {
+            $foto_ruangan = $request->file('foto_ruangan');
+            $file_name = $ruangan->name . '_' . $foto_ruangan->getClientOriginalExtension();
+            $ruangan->foto_ruangan = $file_name;
+            $ruangan->update();
+            $foto_ruangan->storeAs('public', $file_name);
+        }
+        
+        if ($request->hasFile('foto_denah')) {
+            $foto_denah = $request->file('foto_denah');
+            $file_name = $ruangan->name . '_' . $foto_denah->getClientOriginalExtension();
+            $ruangan->foto_denah = $file_name;
+            $ruangan->update();
+            $foto_denah->storeAs('public', $file_name);
+        }
+
         return back()->with('message', 'Berhasil Tambah Data Ruangan!');
     }
 
@@ -49,6 +66,23 @@ class AdminRuanganController extends Controller
     {
         $ruangan = Ruangan::findOrFail($id);
         $ruangan->update($request->validated());
+
+        if ($request->hasFile('foto_ruangan')) {
+            $foto_ruangan = $request->file('foto_ruangan');
+            $file_name = $ruangan->name . '_' . $foto_ruangan->getClientOriginalExtension();
+            $ruangan->foto_ruangan = $file_name;
+            $ruangan->update();
+            $foto_ruangan->storeAs('public', $file_name);
+        }
+        
+        if ($request->hasFile('foto_denah')) {
+            $foto_denah = $request->file('foto_denah');
+            $file_name = $ruangan->name . '_' . $foto_denah->getClientOriginalExtension();
+            $ruangan->foto_denah = $file_name;
+            $ruangan->update();
+            $foto_denah->storeAs('public', $file_name);
+        }
+        
         return back()->with('message', 'Berhasil Edit Data Ruangan!');
     }
 

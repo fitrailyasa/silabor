@@ -22,7 +22,12 @@
         <thead>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
+                <th>{{ __('Kapasitas') }}</th>
+                <th>{{ __('Gedung') }}</th>
+                <th>{{ __('Lantai') }}</th>
+                <th>{{ __('Foto Ruangan') }}</th>
+                <th>{{ __('Foto Denah') }}</th>
                 <th class="text-center">{{ __('Action') }}</th>
             </tr>
         </thead>
@@ -31,6 +36,93 @@
                 <tr>
                     <td>{{ $ruangans->firstItem() + $loop->index }}</td>
                     <td>{{ $ruangan->name ?? '-' }}</td>
+                    <td>{{ $ruangan->kapasitas ?? '-' }}</td>
+                    <td>{{ $ruangan->gedung ?? '-' }}</td>
+                    <td>{{ $ruangan->lantai ?? '-' }}</td>
+                    <td>
+                        @if ($ruangan->foto_ruangan == null)
+                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}"
+                                width="100">
+                        @else
+                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $ruangan->id }}">
+                                <img class="img img-fluid rounded" src="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
+                                    alt="{{ $ruangan->foto_ruangan }}" width="100" loading="lazy">
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade myModal{{ $ruangan->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">{{ $ruangan->name }}</h3>
+                                                    <div class="card-tools">
+                                                        <button type="button" class="btn btn-tool"
+                                                            data-card-widget="maximize"><i
+                                                                class="fas fa-expand"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img class="img img-fluid col-12"
+                                                        src="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
+                                                        alt="{{ $ruangan->foto_ruangan }}">
+                                                    <!-- Tombol Download -->
+                                                    <a href="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
+                                                        download="{{ $ruangan->foto_ruangan }}"
+                                                        class="btn btn-success mt-2 col-12">Download
+                                                        Gambar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($ruangan->foto_denah == null)
+                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}"
+                                width="100">
+                        @else
+                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $ruangan->id }}">
+                                <img class="img img-fluid rounded" src="{{ asset('storage/' . $ruangan->foto_denah) }}"
+                                    alt="{{ $ruangan->foto_denah }}" width="100" loading="lazy">
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade myModal{{ $ruangan->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">{{ $ruangan->name }}</h3>
+                                                    <div class="card-tools">
+                                                        <button type="button" class="btn btn-tool"
+                                                            data-card-widget="maximize"><i
+                                                                class="fas fa-expand"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <img class="img img-fluid col-12"
+                                                        src="{{ asset('storage/' . $ruangan->foto_denah) }}"
+                                                        alt="{{ $ruangan->foto_denah }}">
+                                                    <!-- Tombol Download -->
+                                                    <a href="{{ asset('storage/' . $ruangan->foto_denah) }}"
+                                                        download="{{ $ruangan->foto_denah }}"
+                                                        class="btn btn-success mt-2 col-12">Download
+                                                        Gambar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </td>
                     <td class="manage-row text-center">
                             <!-- Edit and Delete Button -->
                             @can('edit-ruangan')
@@ -46,7 +138,12 @@
         <tfoot>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
+                <th>{{ __('Kapasitas') }}</th>
+                <th>{{ __('Gedung') }}</th>
+                <th>{{ __('Lantai') }}</th>
+                <th>{{ __('Foto Ruangan') }}</th>
+                <th>{{ __('Foto Denah') }}</th>
                 <th class="text-center">{{ __('Action') }}</th>
             </tr>
         </tfoot>

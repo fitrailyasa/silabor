@@ -24,6 +24,7 @@
                         <x-sidebar-link route="admin.role.index" label="Data Role" can="view-role" />
                         <x-sidebar-link route="admin.ruangan.index" label="Data Ruangan" can="view-ruangan" />
                         <x-sidebar-link route="admin.alat.index" label="Data Alat" can="view-alat" />
+                        <x-sidebar-link route="admin.bahan.index" label="Data Bahan" can="view-bahan" />
                         <x-sidebar-link route="admin.category.index" label="Data Kategori" can="view-category" />
                     </ul>
                 </li>

@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('ruangans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('kapasitas')->nullable();
+            $table->string('gedung')->nullable();
+            $table->string('lantai')->nullable();
+            $table->string('foto_ruangan')->nullable();
+            $table->string('foto_denah')->nullable();
             $table->timestamps();
         });
     }

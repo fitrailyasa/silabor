@@ -41,7 +41,16 @@ class AdminAlatController extends Controller
 
     public function store(AlatRequest $request)
     {
-        Alat::create($request->validated());
+        $alat = Alat::create($request->validated());
+
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            $file_name = $alat->name . '_' . $img->getClientOriginalExtension();
+            $alat->img = $file_name;
+            $alat->update();
+            $img->storeAs('public', $file_name);
+        }
+
         return back()->with('message', 'Berhasil Tambah Data Alat!');
     }
 
@@ -49,6 +58,15 @@ class AdminAlatController extends Controller
     {
         $alat = Alat::findOrFail($id);
         $alat->update($request->validated());
+
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            $file_name = $alat->name . '_' . $img->getClientOriginalExtension();
+            $alat->img = $file_name;
+            $alat->update();
+            $img->storeAs('public', $file_name);
+        }
+        
         return back()->with('message', 'Berhasil Edit Data Alat!');
     }
 

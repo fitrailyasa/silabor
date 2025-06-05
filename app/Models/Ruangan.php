@@ -12,22 +12,5 @@ class Ruangan extends Model
 
     protected $table = 'ruangans';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'slug'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->slug) && !empty($model->name)) {
-                $model->slug = Str::slug($model->name, '-');
-            }
-        });
-
-        static::updating(function ($model) {
-            if ($model->isDirty('name')) {
-                $model->slug = Str::slug($model->name, '-');
-            }
-        });
-    }
+    protected $fillable = ['name', 'kapasitas', 'gedung', 'lantai', 'foto_ruangan', 'foto_denah'];
 }

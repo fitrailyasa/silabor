@@ -12,22 +12,10 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'type'];
 
-    protected static function boot()
+    public function alats()
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->slug) && !empty($model->name)) {
-                $model->slug = Str::slug($model->name, '-');
-            }
-        });
-
-        static::updating(function ($model) {
-            if ($model->isDirty('name')) {
-                $model->slug = Str::slug($model->name, '-');
-            }
-        });
+        return $this->hasMany(Alat::class);
     }
 }

@@ -13,8 +13,9 @@ class RoleAndPermissionSeeder extends Seeder
         $entities = [
             'user' => ['view', 'create', 'edit', 'delete'],
             'role' => ['view', 'create', 'edit', 'delete'],
-            'alat' => ['view', 'create', 'edit', 'delete'],
             'category' => ['view', 'create', 'edit', 'delete'],
+            'alat' => ['view', 'create', 'edit', 'delete'],
+            'bahan' => ['view', 'create', 'edit', 'delete'],
             'laporan' => ['view', 'create', 'edit', 'delete'],
             'ruangan' => ['view', 'create', 'edit', 'delete'],
         ];
