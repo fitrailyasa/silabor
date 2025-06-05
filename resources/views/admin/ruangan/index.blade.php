@@ -28,7 +28,7 @@
                 <th>{{ __('Lantai') }}</th>
                 <th>{{ __('Foto Ruangan') }}</th>
                 <th>{{ __('Foto Denah') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -41,11 +41,11 @@
                     <td>{{ $ruangan->lantai ?? '-' }}</td>
                     <td>
                         @if ($ruangan->foto_ruangan == null)
-                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}"
-                                width="100">
+                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}" width="100">
                         @else
                             <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $ruangan->id }}">
-                                <img class="img img-fluid rounded" src="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
+                                <img class="img img-fluid rounded"
+                                    src="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
                                     alt="{{ $ruangan->foto_ruangan }}" width="100" loading="lazy">
                             </a>
 
@@ -124,13 +124,13 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                            <!-- Edit and Delete Button -->
-                            @can('edit-ruangan')
-                                @include('admin.ruangan.edit')
-                            @endcan
-                            @can('delete-ruangan')
-                                @include('admin.ruangan.delete')
-                            @endcan
+                        <!-- Edit and Delete Button -->
+                        @can('edit-ruangan')
+                            @include('admin.ruangan.edit')
+                        @endcan
+                        @can('delete-ruangan')
+                            @include('admin.ruangan.delete')
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -144,7 +144,7 @@
                 <th>{{ __('Lantai') }}</th>
                 <th>{{ __('Foto Ruangan') }}</th>
                 <th>{{ __('Foto Denah') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>

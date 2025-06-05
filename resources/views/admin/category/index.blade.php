@@ -24,7 +24,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama') }}</th>
                 <th>{{ __('Tipe') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -40,13 +40,13 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                            <!-- Edit and Delete Button -->
-                            @can('edit-category')
-                                @include('admin.category.edit')
-                            @endcan
-                            @can('delete-category')
-                                @include('admin.category.delete')
-                            @endcan
+                        <!-- Edit and Delete Button -->
+                        @can('edit-category')
+                            @include('admin.category.edit')
+                        @endcan
+                        @can('delete-category')
+                            @include('admin.category.delete')
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -56,7 +56,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama') }}</th>
                 <th>{{ __('Tipe') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>

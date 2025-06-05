@@ -25,7 +25,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Name') }}</th>
                 <th>{{ __('Permissions') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -78,7 +78,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Name') }}</th>
                 <th>{{ __('Permissions') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>

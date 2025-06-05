@@ -26,7 +26,7 @@
                 <th>{{ __('Kategori') }}</th>
                 <th>{{ __('Lokasi') }}</th>
                 <th>{{ __('Gambar') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -38,8 +38,7 @@
                     <td>{{ $bahan->location ?? '-' }}</td>
                     <td>
                         @if ($bahan->img == null)
-                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $bahan->name }}"
-                                width="100">
+                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $bahan->name }}" width="100">
                         @else
                             <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $bahan->id }}">
                                 <img class="img img-fluid rounded" src="{{ asset('storage/' . $bahan->img) }}"
@@ -79,13 +78,13 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                            <!-- Edit and Delete Button -->
-                            @can('edit-bahan')
-                                @include('admin.bahan.edit')
-                            @endcan
-                            @can('delete-bahan')
-                                @include('admin.bahan.delete')
-                            @endcan
+                        <!-- Edit and Delete Button -->
+                        @can('edit-bahan')
+                            @include('admin.bahan.edit')
+                        @endcan
+                        @can('delete-bahan')
+                            @include('admin.bahan.delete')
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -97,7 +96,7 @@
                 <th>{{ __('Kategori') }}</th>
                 <th>{{ __('Lokasi') }}</th>
                 <th>{{ __('Gambar') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>

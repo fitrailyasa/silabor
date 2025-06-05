@@ -22,7 +22,7 @@
                 <th class="d-none d-lg-table-cell">{{ __('Level') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Foto') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -101,7 +101,7 @@
                 <th class="d-none d-lg-table-cell">{{ __('Email') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Role') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>

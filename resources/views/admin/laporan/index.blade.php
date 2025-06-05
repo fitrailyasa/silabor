@@ -23,7 +23,7 @@
             <tr>
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Name') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -32,13 +32,13 @@
                     <td>{{ $laporans->firstItem() + $loop->index }}</td>
                     <td>{{ $laporan->name ?? '-' }}</td>
                     <td class="manage-row text-center">
-                            <!-- Edit and Delete Button -->
-                            @can('edit-laporan')
-                                @include('admin.laporan.edit')
-                            @endcan
-                            @can('delete-laporan')
-                                @include('admin.laporan.delete')
-                            @endcan
+                        <!-- Edit and Delete Button -->
+                        @can('edit-laporan')
+                            @include('admin.laporan.edit')
+                        @endcan
+                        @can('delete-laporan')
+                            @include('admin.laporan.delete')
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -47,7 +47,7 @@
             <tr>
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Name') }}</th>
-                <th class="text-center">{{ __('Action') }}</th>
+                <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>
