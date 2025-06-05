@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Requests\RuanganRequest;
+use App\Models\Category;
 
 class AdminRuanganController extends Controller
 {
@@ -41,7 +42,10 @@ class AdminRuanganController extends Controller
 
     public function store(RuanganRequest $request)
     {
-        $ruangan = Ruangan::create($request->validated());
+        $data = $request->validated();
+        $data['category_id'] = $this->Category('Ruangan');
+
+        $ruangan = Ruangan::create($data);
 
         if ($request->hasFile('foto_ruangan')) {
             $foto_ruangan = $request->file('foto_ruangan');
@@ -65,7 +69,10 @@ class AdminRuanganController extends Controller
     public function update(RuanganRequest $request, $id)
     {
         $ruangan = Ruangan::findOrFail($id);
-        $ruangan->update($request->validated());
+        $data = $request->validated();
+        $data['category_id'] = $this->Category('Ruangan');
+
+        $ruangan->update($data);
 
         if ($request->hasFile('foto_ruangan')) {
             $foto_ruangan = $request->file('foto_ruangan');
@@ -90,5 +97,17 @@ class AdminRuanganController extends Controller
     {
         Ruangan::findOrFail($id)->forceDelete();
         return back()->with('message', 'Berhasil Hapus Data Ruangan!');
+    }
+
+    private function Category(string $name): string
+    {
+        $category = Category::where('name', $name)->first();
+        if (!$category) {
+            $category = Category::create([
+                'name' => $name,
+                'type' => 'ruangan',
+            ]);
+        }
+        return $category->id;
     }
 }

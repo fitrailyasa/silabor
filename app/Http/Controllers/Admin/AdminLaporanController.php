@@ -12,9 +12,6 @@ class AdminLaporanController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view-laporan')->only(['index']);
-        $this->middleware('permission:create-laporan')->only(['store']);
-        $this->middleware('permission:edit-laporan')->only(['update']);
-        $this->middleware('permission:delete-laporan')->only(['destroy']);
     }
 
     public function index(Request $request)
@@ -37,24 +34,5 @@ class AdminLaporanController extends Controller
         }
 
         return view("admin.laporan.index", compact('laporans', 'search', 'perPage'));
-    }
-
-    public function store(LaporanRequest $request)
-    {
-        Laporan::create($request->validated());
-        return back()->with('message', 'Berhasil Tambah Data Laporan!');
-    }
-
-    public function update(LaporanRequest $request, $id)
-    {
-        $laporan = Laporan::findOrFail($id);
-        $laporan->update($request->validated());
-        return back()->with('message', 'Berhasil Edit Data Laporan!');
-    }
-
-    public function destroy($id)
-    {
-        Laporan::findOrFail($id)->forceDelete();
-        return back()->with('message', 'Berhasil Hapus Data Laporan!');
     }
 }

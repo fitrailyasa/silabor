@@ -94,6 +94,7 @@ class RuanganSeeder extends Seeder
         if (!$category) {
             $category = Category::create([
                 'name' => $name,
+                'type' => 'ruangan',
             ]);
         }
         return $category->id;

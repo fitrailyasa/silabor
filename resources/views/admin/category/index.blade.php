@@ -37,6 +37,8 @@
                             <span class="badge badge-primary">Alat</span>
                         @elseif ($category->type == 'bahan')
                             <span class="badge badge-success">Bahan</span>
+                        @else
+                            <span class="badge badge-secondary">Ruangan</span>
                         @endif
                     </td>
                     <td class="manage-row text-center">
