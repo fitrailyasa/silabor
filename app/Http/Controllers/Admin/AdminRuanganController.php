@@ -76,7 +76,7 @@ class AdminRuanganController extends Controller
 
         if ($request->hasFile('foto_ruangan')) {
             $foto_ruangan = $request->file('foto_ruangan');
-            $file_name = $ruangan->name . '_' . $foto_ruangan->getClientOriginalExtension();
+            $file_name = $ruangan->name . '_' . time() . '.' . $foto_ruangan->getClientOriginalExtension();
             $ruangan->foto_ruangan = $file_name;
             $ruangan->update();
             $foto_ruangan->storeAs('public', $file_name);
@@ -84,7 +84,7 @@ class AdminRuanganController extends Controller
         
         if ($request->hasFile('foto_denah')) {
             $foto_denah = $request->file('foto_denah');
-            $file_name = $ruangan->name . '_' . $foto_denah->getClientOriginalExtension();
+            $file_name = $ruangan->name . '_' . time() . '.' . $foto_denah->getClientOriginalExtension();
             $ruangan->foto_denah = $file_name;
             $ruangan->update();
             $foto_denah->storeAs('public', $file_name);

@@ -48,7 +48,7 @@ class AdminBahanController extends Controller
 
         if ($request->hasFile('img')) {
             $img = $request->file('img');
-            $file_name = $bahan->name . '_' . $img->getClientOriginalExtension();
+            $file_name = $bahan->name . '_' . time() . '.' . $img->getClientOriginalExtension();
             $bahan->img = $file_name;
             $bahan->update();
             $img->storeAs('public', $file_name);
@@ -64,7 +64,7 @@ class AdminBahanController extends Controller
 
         if ($request->hasFile('img')) {
             $img = $request->file('img');
-            $file_name = $bahan->name . '_' . $img->getClientOriginalExtension();
+            $file_name = $bahan->name . '_' . time() . '.' . $img->getClientOriginalExtension();
             $bahan->img = $file_name;
             $bahan->update();
             $img->storeAs('public', $file_name);

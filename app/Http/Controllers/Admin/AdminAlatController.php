@@ -131,7 +131,7 @@ class AdminAlatController extends Controller
 
         if ($request->hasFile('img')) {
             $img = $request->file('img');
-            $file_name = $alat->name . '_' . $img->getClientOriginalExtension();
+            $file_name = $alat->name . '_' . time() . '.' . $img->getClientOriginalExtension();
             $alat->img = $file_name;
             $alat->update();
             $img->storeAs('public', $file_name);
