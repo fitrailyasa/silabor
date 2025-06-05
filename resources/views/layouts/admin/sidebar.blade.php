@@ -37,9 +37,9 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <x-sidebar-link route="admin.user.index" label="Validasi Peminjaman" can="view-user" />
-                        <x-sidebar-link route="admin.user.index" label="Validasi Penggunaan" can="view-user" />
-                        <x-sidebar-link route="admin.user.index" label="Validasi Pengembalian" can="view-user" />
+                        <x-sidebar-link route="admin.transaksi.index" label="Validasi Peminjaman" can="view-transaksi" />
+                        <x-sidebar-link route="admin.transaksi.index" label="Validasi Penggunaan" can="view-transaksi" />
+                        <x-sidebar-link route="admin.transaksi.index" label="Validasi Pengembalian" can="view-transaksi" />
                     </ul>
                 </li>
                 <li class="nav-item has-treeview">

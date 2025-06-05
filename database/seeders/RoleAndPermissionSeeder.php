@@ -11,14 +11,16 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         $entities = [
+            'dashboard' => ['admin', 'client'],
             'user' => ['view', 'create', 'edit', 'delete'],
             'role' => ['view', 'create', 'edit', 'delete'],
             'category' => ['view', 'create', 'edit', 'delete'],
             'alat' => ['view', 'create', 'edit', 'delete'],
             'bahan' => ['view', 'create', 'edit', 'delete'],
             'ruangan' => ['view', 'create', 'edit', 'delete'],
-            'validasi' => ['view'],
+            'transaksi' => ['view'],
             'laporan' => ['view'],
+            'client' => ['check', 'pengajuan-peminjaman', 'penggunaan-alat', 'penggunaan-bahan', 'penggunaan-ruangan', 'history'],
         ];
 
         foreach ($entities as $entity => $actions) {

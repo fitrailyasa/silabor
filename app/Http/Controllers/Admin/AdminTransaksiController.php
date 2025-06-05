@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use Illuminate\Http\Request;
 
-class AdminLaporanController extends Controller
+class AdminTransaksiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:view-laporan')->only(['index']);
+        $this->middleware('permission:view-transaksi')->only(['index']);
     }
 
     public function index(Request $request)
@@ -32,6 +32,6 @@ class AdminLaporanController extends Controller
             $laporans = Laporan::paginate($validPerPage);
         }
 
-        return view("admin.laporan.index", compact('laporans', 'search', 'perPage'));
+        return view("admin.transaksi.index", compact('laporans', 'search', 'perPage'));
     }
 }
