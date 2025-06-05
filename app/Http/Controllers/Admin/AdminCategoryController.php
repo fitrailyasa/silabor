@@ -30,9 +30,9 @@ class AdminCategoryController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $categories = Category::where('name', 'like', "%{$search}%")->paginate($validPerPage);
+            $categories = Category::where('name', 'like', "%{$search}%")->where('name', '!=', 'Ruangan')->paginate($validPerPage);
         } else {
-            $categories = Category::paginate($validPerPage);
+            $categories = Category::where('name', '!=', 'Ruangan')->paginate($validPerPage);
         }
 
         return view("admin.category.index", compact('categories', 'search', 'perPage'));
