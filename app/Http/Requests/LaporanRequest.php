@@ -14,34 +14,31 @@ class LaporanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'max:100',
-            ],
-            'user_id' => 'required',
-            'alat_id' => 'required',
-            'bahan_id' => 'required',
-            'ruangan_id' => 'required',
-            'tgl_peminjaman' => 'required',
-            'tgl_pengembalian' => 'required',
-            'status_peminjaman' => 'required',
-            'status_pengembalian' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'alat_id' => 'required|exists:alats,id',
+            'bahan_id' => 'required|exists:bahans,id',
+            'ruangan_id' => 'required|exists:ruangans,id',
+            'jenis_peminjaman' => 'required|max:100',
+            'tujuan_peminjaman' => 'required|max:100',
+            'ringkasan_peminjaman' => 'required|max:100',
+            'tgl_peminjaman' => 'required|max:100',
+            'tgl_pengembalian' => 'required|max:100',
+            'jam_peminjaman' => 'required|max:100',
+            'jam_pengembalian' => 'required|max:100',
+            'status_peminjaman' => 'required|max:100',
+            'status_pengembalian' => 'required|max:100',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Nama tidak boleh kosong!',
-            'name.max' => 'Nama maksimal 100 karakter!',
-            'user_id.required' => 'User tidak boleh kosong!',
-            'alat_id.required' => 'Alat tidak boleh kosong!',
-            'bahan_id.required' => 'Bahan tidak boleh kosong!',
-            'ruangan_id.required' => 'Ruangan tidak boleh kosong!',
-            'tgl_peminjaman.required' => 'Tanggal peminjaman tidak boleh kosong!',
-            'tgl_pengembalian.required' => 'Tanggal pengembalian tidak boleh kosong!',
-            'status_peminjaman.required' => 'Status peminjaman tidak boleh kosong!',
-            'status_pengembalian.required' => 'Status pengembalian tidak boleh kosong!',
+            '*.required' => ':attribute wajib diisi.',
+            '*.max' => 'Maksimal 100 karakter.',
+            'user_id.exists' => 'User tidak valid.',
+            'alat_id.exists' => 'Alat tidak valid.',
+            'bahan_id.exists' => 'Bahan tidak valid.',
+            'ruangan_id.exists' => 'Ruangan tidak valid.',
         ];
     }
 }

@@ -18,4 +18,14 @@ class Category extends Model
     {
         return $this->hasMany(Alat::class);
     }
+
+    public function bahan()
+    {
+        return $this->hasMany(Bahan::class);
+    }
+
+    public function ruangan()
+    {
+        return $this->hasMany(Ruangan::class);
+    }
 }

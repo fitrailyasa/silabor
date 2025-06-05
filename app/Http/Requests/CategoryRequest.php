@@ -22,7 +22,7 @@ class CategoryRequest extends FormRequest
                 'max:100',
                 Rule::unique('categories', 'name')->ignore($id),
             ],
-            'type' => 'required|in:bahan,alat',
+            'type' => 'required|in:alat,bahan,ruangan',
         ];
     }
 

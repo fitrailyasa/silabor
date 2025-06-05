@@ -12,5 +12,10 @@ class Ruangan extends Model
 
     protected $table = 'ruangans';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'kapasitas', 'gedung', 'lantai', 'foto_ruangan', 'foto_denah'];
+    protected $fillable = ['name', 'kapasitas', 'gedung', 'lantai', 'foto_ruangan', 'foto_denah', 'category_id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
