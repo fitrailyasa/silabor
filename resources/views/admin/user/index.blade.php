@@ -17,7 +17,7 @@
         <thead>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('NIM') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Level') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Foto') }}</th>
@@ -97,7 +97,7 @@
         <tfoot>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Email') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Role') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>

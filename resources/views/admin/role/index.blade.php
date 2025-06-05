@@ -23,7 +23,7 @@
         <thead>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
                 <th>{{ __('Permissions') }}</th>
                 <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
@@ -76,7 +76,7 @@
         <tfoot>
             <tr>
                 <th>{{ __('No') }}</th>
-                <th>{{ __('Name') }}</th>
+                <th>{{ __('Nama') }}</th>
                 <th>{{ __('Permissions') }}</th>
                 <th class="text-center">{{ __('Aksi') }}</th>
             </tr>

@@ -19,7 +19,7 @@
 
         <div class="mb-2">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="name"
+            <input type="text" name="name" id="name" class="form-control" placeholder="nama"
                 value="{{ old('name', $user->name) }}">
         </div>
 

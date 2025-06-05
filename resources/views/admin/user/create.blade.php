@@ -20,7 +20,7 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Nama') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="name" name="name" id="name" value="{{ old('name') }}"
+                                    placeholder="nama" name="name" id="name" value="{{ old('name') }}"
                                     required>
                                 @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div>
