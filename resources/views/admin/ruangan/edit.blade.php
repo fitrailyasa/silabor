@@ -5,7 +5,7 @@
 
 <!-- Modal -->
 <div class="modal fade formEdit{{ $ruangan->id }}" tabindex="-1" role="dialog" aria-hidden="">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form method="POST" action="{{ route('admin.ruangan.update', $ruangan->id) }}"
                 enctype="multipart/form-data">
@@ -18,18 +18,52 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-left">
+                <div class="modal-body text-left row">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">{{ __('Nama') }}<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="nama" name="name" id="name"
-                                    value="{{ old('name', $ruangan->name) }}" required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <!-- Nama -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Nama') }}<span class="text-danger">*</span></label>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                   value="{{ old('name', $ruangan->name) }}" placeholder="Nama ruangan" required>
+                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Kapasitas -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Kapasitas') }}<span class="text-danger">*</span></label>
+                            <input type="number" name="kapasitas" class="form-control @error('kapasitas') is-invalid @enderror"
+                                   value="{{ old('kapasitas', $ruangan->kapasitas) }}" placeholder="100" required>
+                            @error('kapasitas') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Gedung -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Gedung') }}<span class="text-danger">*</span></label>
+                            <input type="text" name="gedung" class="form-control @error('gedung') is-invalid @enderror"
+                                   value="{{ old('gedung', $ruangan->gedung) }}" placeholder="GK1" required>
+                            @error('gedung') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Lantai -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Lantai') }}<span class="text-danger">*</span></label>
+                            <input type="text" name="lantai" class="form-control @error('lantai') is-invalid @enderror"
+                                   value="{{ old('lantai', $ruangan->lantai) }}" placeholder="Lantai 1" required>
+                            @error('lantai') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Foto Ruangan -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Foto Ruangan') }}</label>
+                            <input type="file" name="foto_ruangan" class="form-control @error('foto_ruangan') is-invalid @enderror" accept="image/*">
+                            @error('foto_ruangan') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <!-- Foto Denah -->
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">{{ __('Foto Denah') }}</label>
+                            <input type="file" name="foto_denah" class="form-control @error('foto_denah') is-invalid @enderror" accept="image/*">
+                            @error('foto_denah') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,6 @@ class RuanganRequest extends FormRequest
             'lantai' => 'required|max:100',
             'foto_ruangan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'foto_denah' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required',
         ];
     }
 
@@ -44,7 +43,6 @@ class RuanganRequest extends FormRequest
             'foto_denah.image' => 'File harus berupa gambar!',
             'foto_denah.mimes' => 'Format gambar tidak valid!',
             'foto_denah.max' => 'Ukuran gambar maksimal 2MB!',
-            'category_id.required' => 'Kategori tidak boleh kosong!',
         ];
     }
 }
