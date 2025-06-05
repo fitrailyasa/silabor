@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Spatie\Permission\Models\Role;
@@ -19,11 +20,30 @@ class AdminUserController extends Controller
         $this->middleware('permission:delete-user')->only(['destroy']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+            'perPage' => 'nullable|integer|in:10,50,100',
+        ]);
+
+        $search = $request->input('search');
+        $perPage = (int) $request->input('perPage', 10);
+
+        $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
+
         $roles = Role::all();
-        $users = User::all();
-        return view('admin.user.index', compact('users', 'roles'));
+
+        if ($search) {
+            $users = User::where('name', 'like', "%{$search}%")
+                ->paginate($validPerPage);
+        } else {
+            $users = User::paginate($validPerPage);
+        }
+
+        $counter = ($users->currentPage() - 1) * $users->perPage() + 1;
+
+        return view("admin.user.index", compact('users', 'roles', 'counter', 'search', 'perPage'));
     }
 
     public function store(UserStoreRequest $request)

@@ -47,6 +47,18 @@ class UserSeeder extends Seeder
             $user->assignRole($role);
         }
 
-        \App\Models\User::factory(10)->create();
+        User::factory()
+            ->afterCreating(function ($user) {
+                $user->assignRole('dosen');
+            })
+            ->count(5)
+            ->create();
+
+        User::factory()
+            ->afterCreating(function ($user) {
+                $user->assignRole('mahasiswa');
+            })
+            ->count(20)
+            ->create();
     }
 }

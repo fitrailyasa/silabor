@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,22 +19,24 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'no_hp' => $this->faker->phoneNumber(),
+            'nim' => $this->faker->unique()->numerify('#########'),
+            'prodi' => $this->faker->randomElement(['Matematika', 'Fisika', 'Kimia', 'Biologi']),
+            'angkatan' => $this->faker->year(),
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
+            'status' => $this->faker->randomElement(['aktif', 'nonaktif']),
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return $this
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
-    }
+    // public function configure(): static
+    // {
+    //     return $this->afterCreating(function (User $user) {
+    //         $role = ['admin', 'dosen', 'mahasiswa'];
+    //         $user->assignRole($this->faker->randomElement($role));
+    //     });
+    // }
+
 }

@@ -13,7 +13,7 @@
     </x-slot>
 
     <!-- Table -->
-    <table id="example1" class="table table-bordered table-striped">
+    <table id="" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>{{ __('No') }}</th>
@@ -98,12 +98,14 @@
             <tr>
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama') }}</th>
-                <th class="d-none d-lg-table-cell">{{ __('Email') }}</th>
-                <th class="d-none d-lg-table-cell">{{ __('Role') }}</th>
+                <th class="d-none d-lg-table-cell">{{ __('NIM') }}</th>
+                <th class="d-none d-lg-table-cell">{{ __('Level') }}</th>
+                <th class="d-none d-lg-table-cell">{{ __('Foto') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>
                 <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
         </tfoot>
     </table>
+    {{ $users->appends(['perPage' => $perPage, 'search' => $search])->links() }}
 
 </x-admin-table>
