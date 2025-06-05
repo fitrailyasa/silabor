@@ -11,7 +11,7 @@ class Alat extends Model
 
     protected $table = 'alats';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'img', 'location', 'category_id'];
+    protected $fillable = ['name', 'serial_number', 'desc', 'img', 'condition', 'status', 'location', 'category_id'];
 
     public function category()
     {

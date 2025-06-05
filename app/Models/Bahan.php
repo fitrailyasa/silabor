@@ -11,7 +11,7 @@ class Bahan extends Model
 
     protected $table = 'bahans';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'img', 'location', 'category_id'];
+    protected $fillable = ['name', 'desc', 'img', 'unit', 'stock', 'min_stock', 'date_received', 'date_expired', 'status', 'location', 'category_id'];
 
     public function category()
     {

@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->text('desc')->nullable();
             $table->string('img')->nullable();
+            $table->string('unit')->nullable();
+            $table->integer('stock')->nullable();
+            $table->integer('min_stock')->nullable();
+            $table->date('date_received')->nullable();
+            $table->date('date_expired')->nullable();
+            $table->string('status')->nullable();
             $table->string('location')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->timestamps();
