@@ -42,8 +42,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('alat', AdminAlatController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('bahan', AdminBahanController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('category', AdminCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('laporan', AdminLaporanController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('ruangan', AdminRuanganController::class)->only(['index']);
+        Route::resource('ruangan', AdminRuanganController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('laporan', AdminLaporanController::class)->only(['index']);
     });
 });
 
