@@ -5,8 +5,34 @@
         Alat
     </x-slot>
 
-    <!-- Button Form Create -->
     <x-slot name="formCreate">
+        <form method="GET" class="d-flex align-items-center me-3">
+            <label class="me-2">{{ __('Status') }}:</label>
+            <select name="status" onchange="this.form.submit()" class="form-select form-select-sm w-auto">
+                <option value="">Semua</option>
+                <option value="Tersedia" {{ request('status') == 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
+                <option value="Dipinjam" {{ request('status') == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+                <option value="Rusak" {{ request('status') == 'Rusak' ? 'selected' : '' }}>Rusak</option>
+                <option value="Hilang" {{ request('status') == 'Hilang' ? 'selected' : '' }}>Hilang</option>
+            </select>
+
+            <input type="hidden" name="view" value="{{ request('view', 'compact') }}">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+        </form>
+
+        <form method="GET" class="d-flex align-items-center me-3">
+            <label class="me-2">{{ __('Tampilan') }}:</label>
+            <select name="view" onchange="this.form.submit()" class="form-select form-select-sm w-auto">
+                <option value="compact" {{ request('view') == 'compact' ? 'selected' : '' }}>Compact</option>
+                <option value="detail" {{ request('view') == 'detail' ? 'selected' : '' }}>Detail</option>
+            </select>
+
+            <input type="hidden" name="status" value="{{ request('status') }}">
+            <input type="hidden" name="search" value="{{ request('search') }}">
+            <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+        </form>
+
         @can('create-alat')
             @include('admin.alat.create')
         @endcan
@@ -17,89 +43,146 @@
         @include('components.search')
     </x-slot>
 
-    <!-- Table -->
-    <table id="" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>{{ __('No') }}</th>
-                <th>{{ __('Nama') }}</th>
-                <th>{{ __('Kategori') }}</th>
-                <th>{{ __('Lokasi') }}</th>
-                <th>{{ __('Gambar') }}</th>
-                <th class="text-center">{{ __('Aksi') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($alats as $alat)
+    @if (request('view') == 'detail')
+        <!-- Tampilan Detail -->
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>{{ $alats->firstItem() + $loop->index }}</td>
-                    <td>{{ $alat->name ?? '-' }}</td>
-                    <td>{{ $alat->category->name ?? '-' }}</td>
-                    <td>{{ $alat->location ?? '-' }}</td>
-                    <td>
-                        @if ($alat->img == null)
-                            <img src="{{ asset('assets/img/default.png') }}" alt="{{ $alat->name }}" width="100">
-                        @else
-                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $alat->id }}">
-                                <img class="img img-fluid rounded" src="{{ asset('storage/' . $alat->img) }}"
-                                    alt="{{ $alat->img }}" width="100" loading="lazy">
-                            </a>
+                    <th>No</th>
+                    <th>Nama Alat</th>
+                    <th>Serial Number</th>
+                    <th>Kategori</th>
+                    <th>Kondisi</th>
+                    <th>Status</th>
+                    <th>Lokasi</th>
+                    <th>Gambar</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($alats as $alat)
+                    <tr>
+                        <td>{{ $loop->iteration + ($alats->currentPage() - 1) * $alats->perPage() }}</td>
+                        <td>{{ $alat->name }}</td>
+                        <td>{{ $alat->serial_number }}</td>
+                        <td>{{ $alat->category->name ?? '-' }}</td>
+                        <td>
+                            @if ($alat->condition == 'Baik')
+                                <span class="badge bg-success">{{ $alat->condition }}</span>
+                            @elseif ($alat->condition == 'Rusak')
+                                <span class="badge bg-danger">{{ $alat->condition }}</span>
+                            @else
+                                <span class="badge bg-warning">{{ $alat->condition }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($alat->status == 'Tersedia')
+                                <span class="badge bg-primary">{{ $alat->status }}</span>
+                            @else
+                                <span class="badge bg-warning">{{ $alat->status }}</span>
+                            @endif
+                        </td>
+                        <td>{{ $alat->location ?? '-' }}</td>
+                        <td>
+                            @if ($alat->img)
+                                <img src="{{ asset('storage/' . $alat->img) }}" alt="Gambar" width="100">
+                            @else
+                                <img src="{{ asset('assets/img/default.png') }}" alt="Default" width="100">
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            @can('edit-alat')
+                                @include('admin.alat.edit')
+                            @endcan
+                            @can('delete-alat')
+                                @include('admin.alat.delete')
+                            @endcan
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <!-- Tampilan Compact -->
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Alat</th>
+                    <th>Kategori</th>
+                    <th>Lokasi</th>
+                    <th>Jumlah Total</th>
+                    <th class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($alat_groups as $key => $group)
+                    <tr>
+                        <td>{{ $loop->iteration + ($alat_groups->currentPage() - 1) * $alat_groups->perPage() }}</td>
+                        <td>{{ $key }}</td>
+                        <td>{{ $group->first()->category->name ?? '-' }}</td>
+                        <td>{{ $group->first()->location ?? '-' }}</td>
+                        <td>{{ $group->count() }}</td>
+                        <td class="manage-row text-center">
+                            <!-- Tombol Lihat atau Detail -->
+                            <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalDetail{{ \Illuminate\Support\Str::slug($key, '-') }}">Lihat</a>
 
                             <!-- Modal -->
-                            <div class="modal fade myModal{{ $alat->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="modalDetail{{ \Illuminate\Support\Str::slug($key, '-') }}"
+                                tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ $key }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
                                         <div class="modal-body">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">{{ $alat->name }}</h3>
-                                                    <div class="card-tools">
-                                                        <button type="button" class="btn btn-tool"
-                                                            data-card-widget="maximize"><i
-                                                                class="fas fa-expand"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <img class="img img-fluid col-12"
-                                                        src="{{ asset('storage/' . $alat->img) }}"
-                                                        alt="{{ $alat->img }}">
-                                                    <!-- Tombol Download -->
-                                                    <a href="{{ asset('storage/' . $alat->img) }}"
-                                                        download="{{ $alat->img }}"
-                                                        class="btn btn-success mt-2 col-12">Download
-                                                        Gambar</a>
-                                                </div>
-                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Serial Number</th>
+                                                        <th>Kondisi</th>
+                                                        <th>Status</th>
+                                                        <th>Gambar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($group as $item)
+                                                        <tr>
+                                                            <td>{{ $item->serial_number }}</td>
+                                                            <td>{{ $item->condition ?? '-' }}</td>
+                                                            <td>{{ $item->status ?? '-' }}</td>
+                                                            <td>
+                                                                @if ($item->img)
+                                                                    <img src="{{ asset('storage/' . $item->img) }}"
+                                                                        alt="Gambar" width="100">
+                                                                @else
+                                                                    <img src="{{ asset('assets/img/default.png') }}"
+                                                                        alt="Default" width="100">
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endif
-                    </td>
-                    <td class="manage-row text-center">
-                        <!-- Edit and Delete Button -->
-                        @can('edit-alat')
-                            @include('admin.alat.edit')
-                        @endcan
-                        @can('delete-alat')
-                            @include('admin.alat.delete')
-                        @endcan
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>{{ __('No') }}</th>
-                <th>{{ __('Nama') }}</th>
-                <th>{{ __('Kategori') }}</th>
-                <th>{{ __('Lokasi') }}</th>
-                <th>{{ __('Gambar') }}</th>
-                <th class="text-center">{{ __('Aksi') }}</th>
-            </tr>
-        </tfoot>
-    </table>
-    {{ $alats->appends(['perPage' => $perPage, 'search' => $search])->links() }}
+
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <!-- Pagination -->
+    @if ($view === 'detail')
+        {{ $alats->appends(['perPage' => $perPage, 'search' => $search, 'view' => $view])->links() }}
+    @else
+        {{ $alat_groups->appends(['perPage' => $perPage, 'search' => $search, 'view' => $view])->links() }}
+    @endif
 
 </x-admin-table>

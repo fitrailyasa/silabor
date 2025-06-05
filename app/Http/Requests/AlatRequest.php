@@ -18,10 +18,11 @@ class AlatRequest extends FormRequest
                 'required',
                 'max:100',
             ],
+            'qty' => 'nullable|integer|min:1|max:1000000',
             'desc' => 'nullable|max:1000',
             'img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'condition' => 'required|max:100',
-            'status' => 'required|max:100',
+            'condition' => 'nullable|max:100',
+            'status' => 'nullable|max:100',
             'location' => 'required|max:100',
             'category_id' => 'required|exists:categories,id',
         ];
@@ -32,6 +33,9 @@ class AlatRequest extends FormRequest
         return [
             'name.required' => 'Nama tidak boleh kosong!',
             'name.max' => 'Nama maksimal 100 karakter!',
+            'qty.integer' => 'Jumlah harus berupa angka!',
+            'qty.min' => 'Jumlah minimal 1!',
+            'qty.max' => 'Jumlah maksimal 1000000!',
             'desc.max' => 'Deskripsi maksimal 1000 karakter!',
             'img.image' => 'File harus berupa gambar!',
             'img.mimes' => 'Format gambar tidak valid!',

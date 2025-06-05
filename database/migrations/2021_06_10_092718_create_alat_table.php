@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('serial_number')->nullable();
             $table->text('desc')->nullable();
             $table->string('img')->nullable();
-            $table->string('condition')->nullable();
-            $table->string('status')->nullable();
+            $table->string('condition')->nullable()->default('Baik');
+            $table->string('status')->nullable()->default('Tersedia');
             $table->string('location')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->timestamps();

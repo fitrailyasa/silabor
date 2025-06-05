@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Bahan;
 use Illuminate\Http\Request;
 use App\Http\Requests\BahanRequest;
@@ -27,6 +28,8 @@ class AdminBahanController extends Controller
         $search = $request->input('search');
         $perPage = (int) $request->input('perPage', 10);
 
+        $categories = Category::all();
+
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
@@ -36,7 +39,7 @@ class AdminBahanController extends Controller
             $bahans = Bahan::paginate($validPerPage);
         }
 
-        return view("admin.bahan.index", compact('bahans', 'search', 'perPage'));
+        return view("admin.bahan.index", compact('bahans', 'categories', 'search', 'perPage'));
     }
 
     public function store(BahanRequest $request)

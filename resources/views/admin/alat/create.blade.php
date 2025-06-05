@@ -4,7 +4,7 @@
 
 <!-- Modal -->
 <div class="modal fade formCreate" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form method="POST" action="{{ route('admin.alat.store') }}" enctype="multipart/form-data">
                 @csrf
@@ -14,19 +14,64 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-left">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">{{ __('Nama') }}<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    placeholder="nama" name="name" id="name" value="{{ old('name') }}"
-                                    required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
+                <div class="modal-body text-left row">
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Nama Alat') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            id="name" placeholder="Masukkan Nama Alat" value="{{ old('name') }}" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Jumlah') }}<span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="qty" id="edit_qty" placeholder="Masukkan Jumlah Alat" value="{{ old('qty') }}" required>
+                        @error('qty')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Kategori') }}<span class="text-danger">*</span></label>
+                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id"
+                            required>
+                            <option value="">{{ __('Pilih Kategori') }}</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Lokasi') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('location') is-invalid @enderror"
+                            name="location" placeholder="Masukkan Lokasi Alat" value="{{ old('location') }}" required>
+                        @error('location')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Spesifikasi Alat') }}</label>
+                        <textarea class="form-control @error('desc') is-invalid @enderror" name="desc" rows="1" placeholder="Masukkan Spesifikasi Alat">{{ old('desc') }}</textarea>
+                        @error('desc')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Gambar') }}</label>
+                        <input type="file" class="form-control @error('img') is-invalid @enderror" name="img">
+                        @error('img')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">

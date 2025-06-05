@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Alat;
 use Illuminate\Http\Request;
 use App\Http\Requests\AlatRequest;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AdminAlatController extends Controller
 {
@@ -22,36 +25,103 @@ class AdminAlatController extends Controller
         $request->validate([
             'search' => 'nullable|string|max:255',
             'perPage' => 'nullable|integer|in:10,50,100',
+            'view' => 'nullable|in:compact,detail',
+            'status' => 'nullable|string|in:Tersedia,Dipinjam,Rusak,Hilang', // sesuaikan dengan status valid
         ]);
 
         $search = $request->input('search');
         $perPage = (int) $request->input('perPage', 10);
-
+        $view = $request->input('view', 'compact');
+        $status = $request->input('status');
+        $page = $request->input('page', 1);
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
-        if ($search) {
-            $alats = Alat::where('name', 'like', "%{$search}%")
+        $categories = Category::all();
+
+        if ($view === 'detail') {
+            $alats = Alat::with('category')
+                ->when($search, function ($query, $search) {
+                    return $query->where('name', 'like', "%{$search}%");
+                })
+                ->when($status, function ($query, $status) {
+                    return $query->where('status', $status);
+                })
                 ->paginate($validPerPage);
-        } else {
-            $alats = Alat::paginate($validPerPage);
+
+            return view('admin.alat.index', compact('alats', 'categories', 'search', 'perPage', 'view', 'status'));
         }
 
-        return view("admin.alat.index", compact('alats', 'search', 'perPage'));
+        $allAlats = Alat::with('category')->get();
+
+        if ($search) {
+            $allAlats = $allAlats->filter(function ($item) use ($search) {
+                return stripos($item->name, $search) !== false;
+            });
+        }
+
+        if ($status) {
+            $allAlats = $allAlats->where('status', $status);
+        }
+
+        $alat_groups = $allAlats->groupBy(function ($item) {
+            $normalizedName = preg_replace('/\s+#\d+$/', '', $item->name);
+            return $normalizedName;
+        });
+
+        $sliced = $alat_groups->forPage($page, $validPerPage);
+        $alat_groups_paginated = new \Illuminate\Pagination\LengthAwarePaginator(
+            $sliced,
+            $alat_groups->count(),
+            $validPerPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
+
+        return view('admin.alat.index', [
+            'alat_groups' => $alat_groups_paginated,
+            'categories' => $categories,
+            'search' => $search,
+            'perPage' => $perPage,
+            'view' => $view,
+            'status' => $status,
+        ]);
     }
 
     public function store(AlatRequest $request)
     {
-        $alat = Alat::create($request->validated());
+        $validated = $request->validated();
+        $qty = (int) $request->input('qty', 1);
 
+        $file_name = null;
         if ($request->hasFile('img')) {
             $img = $request->file('img');
-            $file_name = $alat->name . '_' . $img->getClientOriginalExtension();
-            $alat->img = $file_name;
-            $alat->update();
+            $file_name = Str::slug($validated['name']) . '_' . time() . '.' . $img->getClientOriginalExtension();
             $img->storeAs('public', $file_name);
         }
 
-        return back()->with('message', 'Berhasil Tambah Data Alat!');
+        $created = [];
+        $prefix = strtoupper(Str::substr($validated['name'], 0, 2));
+        $year = Carbon::now()->year;
+        $series = Alat::max('id') + 100;
+
+        for ($i = 1; $i <= $qty; $i++) {
+            $serial_number = "{$prefix}-{$year}-{$series}-{$i}";
+
+            $alat = Alat::create([
+                'name' => $validated['name'] . " #{$i}",
+                'desc' => $validated['desc'] ?? null,
+                'category_id' => $validated['category_id'],
+                'location' => $validated['location'],
+                'condition' => 'Baik',
+                'status' => 'Tersedia',
+                'serial_number' => $serial_number,
+                'img' => $file_name,
+            ]);
+
+            $created[] = $alat;
+        }
+
+        return back()->with('message', count($created) . ' Data Alat berhasil ditambahkan!');
     }
 
     public function update(AlatRequest $request, $id)
@@ -66,7 +136,7 @@ class AdminAlatController extends Controller
             $alat->update();
             $img->storeAs('public', $file_name);
         }
-        
+
         return back()->with('message', 'Berhasil Edit Data Alat!');
     }
 
