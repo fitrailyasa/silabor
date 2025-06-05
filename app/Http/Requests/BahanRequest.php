@@ -25,7 +25,6 @@ class BahanRequest extends FormRequest
             'min_stock' => 'required|numeric|min:0',
             'date_received' => 'required|date',
             'date_expired' => 'required|date',
-            'status' => 'required|max:100',
             'location' => 'required|max:100',
             'category_id' => 'required|exists:categories,id',
         ];
