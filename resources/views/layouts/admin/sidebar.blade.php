@@ -74,6 +74,10 @@
                     <x-sidebar-link route="mahasiswa.check.index" icon="search" label="Cek Alat, Bahan, Ruangan" can="check-client" />
                 @endcan
 
+                @can('pengajuan-peminjaman-client')
+                    <x-sidebar-link route="mahasiswa.pengajuan-peminjaman.index" icon="user-friends" label="Pengajuan Peminjaman" can="pengajuan-peminjaman-client" />
+                @endcan 
+
                 @can('penggunaan-alat-client')
                     <x-sidebar-link route="mahasiswa.penggunaan-alat" icon="tools" label="Penggunaan Alat" can="penggunaan-alat-client" />
                 @endcan

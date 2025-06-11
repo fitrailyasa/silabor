@@ -12,7 +12,7 @@ class ClientPengajuanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:check-client')->only(['index']);
+        $this->middleware('permission:pengajuan-peminjaman-client')->only(['index']);
     }
 
     public function index(Request $request)
@@ -40,6 +40,6 @@ class ClientPengajuanController extends Controller
             $ruangans = Ruangan::paginate($validPerPage);
         }
 
-        return view("client.cek.index", compact('alats', 'bahans', 'ruangans', 'search', 'perPage'));
+        return view("client.pengajuan-peminjaman.index", compact('alats', 'bahans', 'ruangans', 'search', 'perPage'));
     }
 }
