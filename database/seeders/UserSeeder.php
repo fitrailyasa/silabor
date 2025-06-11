@@ -17,6 +17,8 @@ class UserSeeder extends Seeder
         // Buat roles jika belum ada
         $superAdminRole = Role::firstOrCreate(['name' => 'super-admin']);
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        $dosenRole = Role::firstOrCreate(['name' => 'dosen']);
+        $mahasiswaRole = Role::firstOrCreate(['name' => 'mahasiswa']);
 
         // Daftar user
         $users = [
@@ -26,7 +28,7 @@ class UserSeeder extends Seeder
                 'status' => 'aktif',
                 'no_hp' => '081234567890',
                 'password' => Hash::make('password'),
-                'role' => 'super-admin'
+                'role' => $superAdminRole->id
             ],
             [
                 'name' => 'Administrator',
@@ -34,8 +36,24 @@ class UserSeeder extends Seeder
                 'status' => 'aktif',
                 'no_hp' => '081234567890',
                 'password' => Hash::make('password'),
-                'role' => 'admin'
+                'role' => $adminRole->id
             ],
+            [
+                'name' => 'Dosen',
+                'email' => 'dosen@dosen.com',
+                'status' => 'aktif',
+                'no_hp' => '081234567890',
+                'password' => Hash::make('password'),
+                'role' => $dosenRole->id
+            ],
+            [
+                'name' => 'Mahasiswa',
+                'email' => 'mahasiswa@mahasiswa.com',
+                'status' => 'aktif',
+                'no_hp' => '081234567890',
+                'password' => Hash::make('password'),
+                'role' => $mahasiswaRole->id
+            ]
         ];
 
         // Insert user satu per satu dan assign role

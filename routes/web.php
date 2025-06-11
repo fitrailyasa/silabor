@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\AdminBahanController;
 use App\Http\Controllers\Admin\AdminRuanganController;
 use App\Http\Controllers\Admin\AdminTransaksiController;
 use App\Http\Controllers\Admin\AdminLaporanController;
+use App\Http\Controllers\Client\ClientCekController;
+use App\Http\Controllers\Client\ClientPengajuanController;
+use App\Http\Controllers\Client\ClientPenggunaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +49,23 @@ Route::middleware('auth')->group(function () {
         Route::resource('ruangan', AdminRuanganController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('transaksi', AdminTransaksiController::class)->only(['index']);
         Route::resource('laporan', AdminLaporanController::class)->only(['index']);
+    });
+
+    // CMS DOSEN
+    Route::name('dosen.')->prefix('dosen')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('beranda');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('role', AdminRoleController::class)->only(['index', 'store', 'update', 'destroy']);
+    });
+
+    // CMS MAHASISWA
+    Route::name('mahasiswa.')->prefix('mahasiswa')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('beranda');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('cek', ClientCekController::class)->only(['index']);
+        Route::get('/penggunaan-alat', [ClientPenggunaanController::class, 'indexAlat'])->name('penggunaan-alat');
+        Route::get('/penggunaan-bahan', [ClientPenggunaanController::class, 'indexBahan'])->name('penggunaan-bahan');
+        Route::get('/penggunaan-ruangan', [ClientPenggunaanController::class, 'indexRuangan'])->name('penggunaan-ruangan');
     });
 });
 
