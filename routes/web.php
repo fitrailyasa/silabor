@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminLaporanController;
 use App\Http\Controllers\Client\ClientCekController;
 use App\Http\Controllers\Client\ClientPengajuanController;
 use App\Http\Controllers\Client\ClientPenggunaanController;
+use App\Http\Controllers\Client\ClientRiwayatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,10 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::name('mahasiswa.')->prefix('mahasiswa')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('beranda');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('cek', ClientCekController::class)->only(['index']);
+        Route::resource('check', ClientCekController::class)->only(['index']);
         Route::get('/penggunaan-alat', [ClientPenggunaanController::class, 'indexAlat'])->name('penggunaan-alat');
         Route::get('/penggunaan-bahan', [ClientPenggunaanController::class, 'indexBahan'])->name('penggunaan-bahan');
         Route::get('/penggunaan-ruangan', [ClientPenggunaanController::class, 'indexRuangan'])->name('penggunaan-ruangan');
+        Route::resource('history', ClientRiwayatController::class)->only(['index']);
     });
 });
 

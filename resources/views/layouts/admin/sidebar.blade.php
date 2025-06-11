@@ -71,7 +71,7 @@
                 @endcan
 
                 @can('check-client')
-                    <x-sidebar-link route="mahasiswa.cek.index" icon="search" label="Cek Alat, Bahan, Ruangan" can="check-client" />
+                    <x-sidebar-link route="mahasiswa.check.index" icon="search" label="Cek Alat, Bahan, Ruangan" can="check-client" />
                 @endcan
 
                 @can('penggunaan-alat-client')
@@ -84,6 +84,10 @@
 
                 @can('penggunaan-ruangan-client')
                     <x-sidebar-link route="mahasiswa.penggunaan-ruangan" icon="building" label="Penggunaan Ruangan" can="penggunaan-ruangan-client" />
+                @endcan
+
+                @can('history-client')
+                    <x-sidebar-link route="mahasiswa.history.index" icon="history" label="Riwayat" can="history-client" />
                 @endcan
 
                 <li class="nav-item">
