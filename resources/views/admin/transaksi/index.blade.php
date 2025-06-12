@@ -17,7 +17,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama Pemesan') }}</th>
                 <th>{{ __('Jenis') }}</th>
-                <th>{{ __('Nama Ruang/Alat/Bahan') }}</th>
+                <th>{{ __('Nama Ruang/Alat') }}</th>
                 <th>{{ __('Keterangan') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>
@@ -38,7 +38,7 @@
                     <td>
                         {{ $laporan->alat->category->name ?? ($laporan->bahan->category->name ?? ($laporan->ruangan->category->name ?? '-')) }}
                     </td>
-                    <td>{{ $laporan->alat->name ?? ($laporan->bahan->name ?? ($laporan->ruangan->name ?? '-')) }}</td>
+                    <td>{{ $laporan->alat->name ?? ($laporan->ruangan->name ?? '-') }}</td>
                     <td>{{ $laporan->tujuan_peminjaman ?? '-' }}</td>
                     <td>{{ $laporan->tgl_peminjaman ?? '-' }}</td>
                     <td>{{ $laporan->tgl_pengembalian ?? '-' }}</td>
@@ -66,7 +66,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama Pemesan') }}</th>
                 <th>{{ __('Jenis') }}</th>
-                <th>{{ __('Nama Ruang/Alat/Bahan') }}</th>
+                <th>{{ __('Nama Ruang/Alat') }}</th>
                 <th>{{ __('Keterangan') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>

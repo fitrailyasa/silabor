@@ -17,7 +17,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama Pemesan') }}</th>
                 <th>{{ __('Jenis') }}</th>
-                <th>{{ __('Nama Ruang/Alat/Bahan') }}</th>
+                <th>{{ __('Nama Ruang/Alat') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>
                 <th>{{ __('Status Pengembalian') }}</th>
@@ -32,7 +32,7 @@
                         <a href="https://wa.me/+62{{ $laporan->user->no_hp ?? '-' }}"><span>{{ $laporan->user->name ?? '-' }}</span> <i class="fa fa-whatsapp text-success"></i></a>
                     </td>
                     <td>
-                        {{ $laporan->alat->category->name ?? ($laporan->bahan->category->name ?? ($laporan->ruangan->category->name ?? '-')) }}
+                        {{ $laporan->alat->category->name ?? ($laporan->ruangan->category->name ?? '-') }}
                     </td>
                     <td>{{ $laporan->alat->name ?? ($laporan->bahan->name ?? ($laporan->ruangan->name ?? '-')) }}</td>
                     <td>{{ $laporan->tgl_peminjaman ?? '-' }}</td>
@@ -57,7 +57,7 @@
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama Pemesan') }}</th>
                 <th>{{ __('Jenis') }}</th>
-                <th>{{ __('Nama Ruang/Alat/Bahan') }}</th>
+                <th>{{ __('Nama Ruang/Alat') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>
                 <th>{{ __('Status Pengembalian') }}</th>
