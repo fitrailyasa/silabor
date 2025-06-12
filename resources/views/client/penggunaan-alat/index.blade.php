@@ -56,7 +56,6 @@
             <label class="block font-semibold mb-2">Tujuan Peminjaman</label>
             <input name="tujuan_peminjaman" type="text" class="w-full border border-gray-300 px-4 py-2 rounded">
         </div>
-        </div>
 
         <!-- Submit -->
         <div class="text-center">
