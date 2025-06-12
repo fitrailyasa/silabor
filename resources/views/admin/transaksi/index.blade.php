@@ -41,7 +41,13 @@
                     <td>{{ $laporan->alat->name ?? ($laporan->ruangan->name ?? '-') }}</td>
                     <td>{{ $laporan->tujuan_peminjaman ?? '-' }}</td>
                     <td>{{ $laporan->tgl_peminjaman ?? '-' }}</td>
-                    <td>{{ $laporan->tgl_pengembalian ?? '-' }}</td>
+                    <td>
+                        @if ($laporan->status_peminjaman == 'Diterima')
+                            {{ $laporan->tgl_pengembalian }}
+                        @else
+                            -
+                        @endif
+                    </td>
                     <td>{{ $laporan->jam_peminjaman ?? '-' }}</td>
                     <td>{{ $laporan->jam_pengembalian ?? '-' }}</td>
                     <td>

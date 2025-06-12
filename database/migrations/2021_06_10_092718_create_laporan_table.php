@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('ruangan_id')->nullable();
             $table->string('jenis_peminjaman')->nullable();
             $table->string('tujuan_peminjaman')->nullable();
-            $table->string('ringkasan_peminjaman')->nullable();
+            $table->string('catatan')->nullable();
             $table->date('tgl_peminjaman')->nullable();
             $table->date('tgl_pengembalian')->nullable();
             $table->string('jam_peminjaman')->nullable();

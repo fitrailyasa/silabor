@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Alat;
-use App\Models\Bahan;
-use App\Models\Ruangan;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientRiwayatController extends Controller
 {
@@ -27,19 +26,16 @@ class ClientRiwayatController extends Controller
 
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
+        $userId = Auth::id();
+
+        $query = Laporan::where('user_id', $userId);
+
         if ($search) {
-            $alats = Alat::where('name', 'like', "%{$search}%")
-                ->paginate($validPerPage);
-            $bahans = Bahan::where('name', 'like', "%{$search}%")
-                ->paginate($validPerPage);
-            $ruangans = Ruangan::where('name', 'like', "%{$search}%")
-                ->paginate($validPerPage);
-        } else {
-            $alats = Alat::paginate($validPerPage);
-            $bahans = Bahan::paginate($validPerPage);
-            $ruangans = Ruangan::paginate($validPerPage);
+            $query->where('name', 'like', "%{$search}%");
         }
 
-        return view("client.riwayat.index", compact('alats', 'bahans', 'ruangans', 'search', 'perPage'));
+        $laporans = $query->orderBy('created_at', 'desc')->paginate($validPerPage);
+
+        return view("client.riwayat.index", compact('laporans', 'search', 'perPage'));
     }
 }

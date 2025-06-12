@@ -19,7 +19,7 @@ class LaporanRequest extends FormRequest
             'ruangan_id' => 'required|exists:ruangans,id',
             'jenis_peminjaman' => 'required|max:100',
             'tujuan_peminjaman' => 'required|max:100',
-            'ringkasan_peminjaman' => 'required|max:100',
+            'catatan' => 'required|max:100',
             'tgl_peminjaman' => 'required|max:100',
             'tgl_pengembalian' => 'required|max:100',
             'jam_peminjaman' => 'required|max:100',

@@ -23,7 +23,7 @@ class LaporanFactory extends Factory
             'ruangan_id' => $selected === 'ruangan' ? $this->faker->numberBetween(1, 10) : null,
             'jenis_peminjaman' => $this->faker->randomElement(['Pribadi', 'Kelompok']),
             'tujuan_peminjaman' => $this->faker->sentence(3),
-            'ringkasan_peminjaman' => $this->faker->sentence(5),
+            'catatan' => $this->faker->sentence(5),
             'tgl_peminjaman' => $startDate->format('Y-m-d'),
             'tgl_pengembalian' => $endDate->format('Y-m-d'),
             'jam_peminjaman' => $this->faker->time('H:i'),

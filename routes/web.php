@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -28,9 +29,7 @@ use App\Http\Controllers\Client\ClientRiwayatController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('beranda');
+Route::get('/',  [AuthenticatedSessionController::class, 'create'])->name('beranda');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
