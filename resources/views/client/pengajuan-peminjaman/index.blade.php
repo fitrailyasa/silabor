@@ -89,14 +89,19 @@
             </div>
 
             <!-- Tambah Alat -->
-            <div x-data="{ alat: '', qty: 1, daftarAlat: [] }" class="mb-6">
+            <div class="mb-6">
                 <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam</label>
                 <div class="flex items-center gap-2 mb-2">
-                    <input x-model="alat" type="text" placeholder="Nama alat"
-                        class="border border-gray-300 px-4 py-2 rounded w-1/2">
+                    <select x-model="alat" class="border border-gray-300 px-4 py-2 rounded w-1/2">
+                        <option value="" disabled selected>Pilih alat</option>
+                        <option value="Alat 1">Alat 1</option>
+                        <option value="Alat 2">Alat 2</option>
+                        <option value="Alat 3">Alat 3</option>
+                    </select>
                     <input x-model="qty" type="number" min="1"
                         class="border border-gray-300 px-4 py-2 rounded w-20">
-                    <button type="button" @click="daftarAlat.push({ nama: alat, qty: qty }); alat=''; qty=1"
+                    <button type="button"
+                        @click="if (alat) { daftarAlat.push({ nama: alat, qty: qty }); alat=''; qty=1 }"
                         class="bg-blue-600 text-white px-4 py-2 rounded">+</button>
                 </div>
                 <ul class="list-decimal pl-5 space-y-1">
