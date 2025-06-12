@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 
-    <form class="bg-white p-8 rounded shadow" method="POST" action="#" enctype="multipart/form-data">
+    <form class="bg-white p-8 rounded shadow mb-5" method="POST" action="#" enctype="multipart/form-data">
         <div x-data="{ jenis: 'pribadi', anggota: '', daftarAnggota: [], alat: '', qty: 1, daftarAlat: [] }">
             <!-- Jenis Peminjaman -->
             <div class="mb-6">
