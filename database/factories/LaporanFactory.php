@@ -14,13 +14,12 @@ class LaporanFactory extends Factory
         $startDate = $this->faker->dateTimeThisYear();
         $endDate = $this->faker->dateTimeBetween($startDate, '+7 days');
 
-        $types = ['alat', 'bahan', 'ruangan'];
+        $types = ['alat', 'ruangan'];
         $selected = $this->faker->randomElement($types);
 
         return [
             'user_id' => $this->faker->numberBetween(3, 12),
             'alat_id' => $selected === 'alat' ? $this->faker->numberBetween(1, 10) : null,
-            'bahan_id' => $selected === 'bahan' ? $this->faker->numberBetween(1, 10) : null,
             'ruangan_id' => $selected === 'ruangan' ? $this->faker->numberBetween(1, 10) : null,
             'jenis_peminjaman' => $this->faker->randomElement(['Pribadi', 'Kelompok']),
             'tujuan_peminjaman' => $this->faker->sentence(3),

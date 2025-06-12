@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('alat_id')->nullable();
-            $table->foreignId('bahan_id')->nullable();
             $table->foreignId('ruangan_id')->nullable();
             $table->string('jenis_peminjaman')->nullable();
             $table->string('tujuan_peminjaman')->nullable();

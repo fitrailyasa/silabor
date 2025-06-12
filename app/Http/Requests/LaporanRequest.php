@@ -16,7 +16,6 @@ class LaporanRequest extends FormRequest
         return [
             'user_id' => 'required|exists:users,id',
             'alat_id' => 'required|exists:alats,id',
-            'bahan_id' => 'required|exists:bahans,id',
             'ruangan_id' => 'required|exists:ruangans,id',
             'jenis_peminjaman' => 'required|max:100',
             'tujuan_peminjaman' => 'required|max:100',
@@ -37,7 +36,6 @@ class LaporanRequest extends FormRequest
             '*.max' => 'Maksimal 100 karakter.',
             'user_id.exists' => 'User tidak valid.',
             'alat_id.exists' => 'Alat tidak valid.',
-            'bahan_id.exists' => 'Bahan tidak valid.',
             'ruangan_id.exists' => 'Ruangan tidak valid.',
         ];
     }

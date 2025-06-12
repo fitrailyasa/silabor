@@ -11,7 +11,7 @@ class Laporan extends Model
 
     protected $table = 'laporans';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'alat_id', 'bahan_id', 'ruangan_id', 'jenis_peminjaman', 'tujuan_peminjaman', 'ringkasan_peminjaman', 'tgl_peminjaman', 'tgl_pengembalian', 'jam_peminjaman', 'jam_pengembalian', 'status_peminjaman', 'status_pengembalian'];
+    protected $fillable = ['user_id', 'alat_id', 'ruangan_id', 'jenis_peminjaman', 'tujuan_peminjaman', 'ringkasan_peminjaman', 'tgl_peminjaman', 'tgl_pengembalian', 'jam_peminjaman', 'jam_pengembalian', 'status_peminjaman', 'status_pengembalian'];
 
     public function user()
     {
@@ -21,11 +21,6 @@ class Laporan extends Model
     public function alat()
     {
         return $this->belongsTo(Alat::class, 'alat_id');
-    }
-
-    public function bahan()
-    {
-        return $this->belongsTo(Bahan::class, 'bahan_id');
     }
 
     public function ruangan()
