@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,13 @@ class LaporanFactory extends Factory
         $types = ['alat', 'ruangan'];
         $selected = $this->faker->randomElement($types);
 
+        $anggotaId = User::role('mahasiswa')->inRandomOrder()->value('id');
+
+        $dosenId = User::role('dosen')->inRandomOrder()->value('id');
+
         return [
-            'user_id' => $this->faker->numberBetween(3, 12),
+            'anggota_id' => $anggotaId,
+            'dosen_id' => $dosenId,
             'alat_id' => $selected === 'alat' ? $this->faker->numberBetween(1, 10) : null,
             'ruangan_id' => $selected === 'ruangan' ? $this->faker->numberBetween(1, 10) : null,
             'jenis_peminjaman' => $this->faker->randomElement(['Pribadi', 'Kelompok']),

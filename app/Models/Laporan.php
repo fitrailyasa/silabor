@@ -11,11 +11,16 @@ class Laporan extends Model
 
     protected $table = 'laporans';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'alat_id', 'ruangan_id', 'jenis_peminjaman', 'tujuan_peminjaman', 'catatan', 'tgl_peminjaman', 'tgl_pengembalian', 'jam_peminjaman', 'jam_pengembalian', 'status_peminjaman', 'status_pengembalian'];
+    protected $fillable = ['anggota_id', 'dosen_id', 'alat_id', 'ruangan_id', 'jenis_peminjaman', 'tujuan_peminjaman', 'catatan', 'tgl_peminjaman', 'tgl_pengembalian', 'jam_peminjaman', 'jam_pengembalian', 'status_peminjaman', 'status_pengembalian'];
 
-    public function user()
+    public function anggota()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'anggota_id');
+    }
+
+    public function dosen()
+    {
+        return $this->belongsTo(User::class, 'dosen_id');
     }
 
     public function alat()

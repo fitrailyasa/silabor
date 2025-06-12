@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('beranda');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
         Route::resource('check', ClientCekController::class)->only(['index']);
-        Route::resource('pengajuan-peminjaman', ClientPengajuanController::class)->only(['index']);
+        Route::resource('pengajuan-peminjaman', ClientPengajuanController::class)->only(['index', 'store']);
         Route::get('/penggunaan-alat', [ClientPenggunaanController::class, 'indexAlat'])->name('penggunaan-alat');
         Route::get('/penggunaan-ruangan', [ClientPenggunaanController::class, 'indexRuangan'])->name('penggunaan-ruangan');
         Route::resource('history', ClientRiwayatController::class)->only(['index']);

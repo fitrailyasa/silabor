@@ -28,7 +28,7 @@ class ClientRiwayatController extends Controller
 
         $userId = Auth::id();
 
-        $query = Laporan::where('user_id', $userId);
+        $query = Laporan::where('anggota_id', $userId);
 
         if ($search) {
             $query->where('name', 'like', "%{$search}%");

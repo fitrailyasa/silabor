@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('anggota_id')->nullable();
+            $table->foreignId('dosen_id')->nullable();
             $table->foreignId('alat_id')->nullable();
             $table->foreignId('ruangan_id')->nullable();
             $table->string('jenis_peminjaman')->nullable();

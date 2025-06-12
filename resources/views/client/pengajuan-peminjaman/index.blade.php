@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 
-    <form class="bg-white p-8 rounded shadow mb-5" method="POST" action="#" enctype="multipart/form-data">
-        <div x-data="{ jenis: 'pribadi', anggota: '', daftarAnggota: [], alat: '', qty: 1, daftarAlat: [] }">
+    <form class="bg-white p-8 rounded shadow mb-5" method="POST" action="{{ route('mahasiswa.pengajuan-peminjaman.store') }}" enctype="multipart/form-data">
+        <div x-data="{ jenis: 'pribadi', anggota_id: '', daftarAnggota: [], alat_id: '', qty: 1, daftarAlat: [] }">
             <!-- Jenis Peminjaman -->
             <div class="mb-6">
                 <label class="font-semibold block mb-2">Jenis Peminjaman</label>
@@ -37,11 +37,11 @@
             <div class="mb-6" x-show="jenis === 'kelompok'" x-cloak>
                 <label class="block font-semibold mb-2">Tambah Anggota</label>
                 <div class="flex items-center gap-2 mb-2">
-                    <select x-model="anggota" class="border border-gray-300 px-4 py-2 rounded w-1/2">
-                        <option value="" disabled selected>Pilih anggota</option>
-                        <option value="Orang 1">Orang 1</option>
-                        <option value="Orang 2">Orang 2</option>
-                        <option value="Orang 3">Orang 3</option>
+                    <select x-model="anggota_id" class="border border-gray-300 px-4 py-2 rounded w-1/2">
+                        <option value="" disabled selected>Pilih Anggota</option>
+                        @foreach ($anggotas as $anggota)
+                            <option value="{{ $anggota->name }}">{{ $anggota->name }}</option>
+                        @endforeach
                     </select>
                     <button type="button"
                         @click="if (anggota && !daftarAnggota.includes(anggota)) { daftarAnggota.push(anggota); anggota = '' }"
@@ -57,7 +57,7 @@
             <!-- Keperluan -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Keperluan</label>
-                <input type="text" class="w-full border border-gray-300 px-4 py-2 rounded"
+                <input name="tujuan_peminjaman" type="text" class="w-full border border-gray-300 px-4 py-2 rounded"
                     placeholder="Masukkan keperluan">
             </div>
 
@@ -79,29 +79,34 @@
             <!-- Judul Penelitian -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Judul Penelitian</label>
-                <input type="text" class="w-full border border-gray-300 px-4 py-2 rounded">
+                <input name="judul_penelitian" type="text" class="w-full border border-gray-300 px-4 py-2 rounded">
             </div>
 
             <!-- Dosen Pembimbing -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Dosen Pembimbing</label>
-                <input type="text" class="w-full border border-gray-300 px-4 py-2 rounded">
+                <select name="dosen_pembimbing" class="border border-gray-300 px-4 py-2 rounded w-full">
+                    <option value="" disabled selected>Pilih Dosen</option>
+                    @foreach ($dosens as $dosen)
+                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Tambah Alat -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam</label>
                 <div class="flex items-center gap-2 mb-2">
-                    <select x-model="alat" class="border border-gray-300 px-4 py-2 rounded w-1/2">
-                        <option value="" disabled selected>Pilih alat</option>
-                        <option value="Alat 1">Alat 1</option>
-                        <option value="Alat 2">Alat 2</option>
-                        <option value="Alat 3">Alat 3</option>
+                    <select x-model="alat_id" class="border border-gray-300 px-4 py-2 rounded w-1/2">
+                        <option value="" disabled selected>Pilih Alat</option>
+                        @foreach ($alats as $alat)
+                            <option value="{{ $alat->name }}">{{ $alat->name }}</option>
+                        @endforeach
                     </select>
                     <input x-model="qty" type="number" min="1"
                         class="border border-gray-300 px-4 py-2 rounded w-20">
                     <button type="button"
-                        @click="if (alat) { daftarAlat.push({ nama: alat, qty: qty }); alat=''; qty=1 }"
+                        @click="if (alat_id) { daftarAlat.push({ nama: alat_id, qty: qty }); alat_id=''; qty=1 }"
                         class="bg-blue-600 text-white px-4 py-2 rounded">+</button>
                 </div>
                 <ul class="list-decimal pl-5 space-y-1">
