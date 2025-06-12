@@ -92,20 +92,22 @@ class AdminAlatController extends Controller
         $validated = $request->validated();
         $qty = (int) $request->input('qty', 1);
 
-        $file_name = null;
-        if ($request->hasFile('img')) {
-            $img = $request->file('img');
-            $file_name = Str::slug($validated['name']) . '_' . time() . '.' . $img->getClientOriginalExtension();
-            $img->storeAs('public', $file_name);
-        }
-
         $created = [];
         $prefix = strtoupper(Str::substr($validated['name'], 0, 2));
         $year = Carbon::now()->year;
         $series = Alat::max('id') + 100;
 
+        $img = $request->file('img');
+        $timestamp = time();
+
         for ($i = 1; $i <= $qty; $i++) {
             $serial_number = "{$prefix}-{$year}-{$series}-{$i}";
+
+            $file_name = null;
+            if ($img) {
+                $file_name = Str::slug($validated['name']) . "_{$timestamp}_{$i}." . $img->getClientOriginalExtension();
+                $img->storeAs('public', $file_name);
+            }
 
             $alat = Alat::create([
                 'name' => $validated['name'] . " #{$i}",
