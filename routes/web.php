@@ -47,7 +47,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('bahan', AdminBahanController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('category', AdminCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('ruangan', AdminRuanganController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('transaksi', AdminTransaksiController::class)->only(['index']);
+        Route::get('/transaksi/peminjaman', [AdminTransaksiController::class, 'transaksiPeminjaman'])->name('transaksi.peminjaman');
+        Route::get('/transaksi/penggunaan', [AdminTransaksiController::class, 'transaksiPenggunaan'])->name('transaksi.penggunaan');
+        Route::get('/transaksi/pengembalian', [AdminTransaksiController::class, 'transaksiPengembalian'])->name('transaksi.pengembalian');
+        Route::post('/transaksi/peminjaman', [AdminTransaksiController::class, 'validasiPeminjaman'])->name('validasi.peminjaman');
+        Route::post('/transaksi/penggunaan', [AdminTransaksiController::class, 'validasiPenggunaan'])->name('validasi.penggunaan');
+        Route::post('/transaksi/pengembalian', [AdminTransaksiController::class, 'validasiPengembalian'])->name('validasi.pengembalian');
         Route::resource('laporan', AdminLaporanController::class)->only(['index']);
     });
 

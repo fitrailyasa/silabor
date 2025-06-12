@@ -18,8 +18,8 @@ class RoleAndPermissionSeeder extends Seeder
             'alat' => ['view', 'create', 'edit', 'delete'],
             'bahan' => ['view', 'create', 'edit', 'delete'],
             'ruangan' => ['view', 'create', 'edit', 'delete'],
-            'transaksi' => ['view'],
-            'laporan' => ['view'],
+            'transaksi' => ['view', 'peminjaman', 'pengembalian', 'penggunaan'],
+            'laporan' => ['view', 'peminjaman', 'penggunaan', 'pengembalian'],
             'client' => ['check', 'pengajuan-peminjaman', 'penggunaan-alat', 'penggunaan-ruangan', 'history'],
         ];
 

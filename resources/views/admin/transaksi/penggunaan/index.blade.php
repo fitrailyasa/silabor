@@ -2,7 +2,7 @@
 
     <!-- Title -->
     <x-slot name="title">
-        Validasi
+        Validasi Penggunaan
     </x-slot>
 
     <!-- Search & Pagination -->
@@ -60,8 +60,8 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                        @can('view-transaksi')
-                            @include('admin.transaksi.detail')
+                        @can('validasi-penggunaan-transaksi')
+                            @include('admin.transaksi.penggunaan.validate')
                         @endcan
                     </td>
                 </tr>

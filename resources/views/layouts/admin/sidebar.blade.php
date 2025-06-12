@@ -22,7 +22,11 @@
                         'admin.category.index',
                     ];
 
-                    $dataTransaksiRoutes = ['admin.transaksi.index'];
+                    $dataTransaksiRoutes = [
+                        'admin.transaksi.peminjaman',
+                        'admin.transaksi.penggunaan',
+                        'admin.transaksi.pengembalian',
+                    ];
 
                     $dataLaporanRoutes = ['admin.laporan.index'];
 
@@ -66,12 +70,12 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <x-sidebar-link route="admin.transaksi.index" label="Validasi Peminjaman"
-                                can="view-transaksi" />
-                            <x-sidebar-link route="admin.transaksi.index" label="Validasi Penggunaan"
-                                can="view-transaksi" />
-                            <x-sidebar-link route="admin.transaksi.index" label="Validasi Pengembalian"
-                                can="view-transaksi" />
+                            <x-sidebar-link route="admin.transaksi.peminjaman" label="Validasi Peminjaman"
+                                can="peminjaman-transaksi" />
+                            <x-sidebar-link route="admin.transaksi.penggunaan" label="Validasi Penggunaan"
+                                can="penggunaan-transaksi" />
+                            <x-sidebar-link route="admin.transaksi.pengembalian" label="Validasi Pengembalian"
+                                can="pengembalian-transaksi" />
                         </ul>
                     </li>
                 @endcan
@@ -86,10 +90,9 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <x-sidebar-link route="admin.laporan.index" label="Laporan Peminjaman" can="view-laporan" />
-                            <x-sidebar-link route="admin.laporan.index" label="Laporan Penggunaan" can="view-laporan" />
-                            <x-sidebar-link route="admin.laporan.index" label="Laporan Pengembalian" can="view-laporan" />
-                            <x-sidebar-link route="admin.laporan.index" label="Laporan Kerusakan" can="view-laporan" />
+                            <x-sidebar-link route="admin.laporan.peminjaman" label="Laporan Peminjaman" can="laporan-peminjaman" />
+                            <x-sidebar-link route="admin.laporan.penggunaan" label="Laporan Penggunaan" can="laporan-penggunaan" />
+                            <x-sidebar-link route="admin.laporan.pengembalian" label="Laporan Pengembalian" can="laporan-peminjaman" />
                         </ul>
                     </li>
                 @endcan

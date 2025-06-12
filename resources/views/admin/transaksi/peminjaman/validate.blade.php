@@ -1,0 +1,1 @@
+<button role="button" class="btn btn-sm m-1 btn-success" data-bs-toggle="modal" data-bs-target=".formValidate"><i class="fas fa-check"></i> Validasi</button>
