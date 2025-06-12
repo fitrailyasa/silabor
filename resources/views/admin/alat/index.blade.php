@@ -138,6 +138,28 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
+                                            @php
+                                                $total = $group->count();
+                                                $jumlah_baik = $group->where('condition', 'Baik')->count();
+                                                $jumlah_rusak = $group->where('condition', 'Rusak')->count();
+                                                $jumlah_tersedia = $group->where('status', 'Tersedia')->count();
+                                            @endphp
+
+                                            <!-- Tambahkan ringkasan jumlah -->
+                                            <div class="mb-3">
+                                                <strong>Ringkasan:</strong>
+                                                <p class="m-0 p-0">Total Alat: <strong>{{ $total }}</strong></p>
+                                                <p class="m-0 p-0">Jumlah Baik: <span
+                                                        class="text-success"><strong>{{ $jumlah_baik }}</strong></span>
+                                                </p>
+                                                <p class="m-0 p-0">Jumlah Rusak: <span
+                                                        class="text-danger"><strong>{{ $jumlah_rusak }}</strong></span>
+                                                </p>
+                                                <p class="m-0 p-0">Jumlah Tersedia: <span
+                                                        class="text-primary"><strong>{{ $jumlah_tersedia }}</strong></span>
+                                                </p>
+                                            </div>
+
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
@@ -167,6 +189,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
