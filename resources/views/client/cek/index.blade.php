@@ -2,7 +2,7 @@
 
     <!-- Title -->
     <x-slot name="title">
-        Cek Alat, Bahan, Ruangan
+        Cek Alat dan Ruangan
     </x-slot>
 
 </x-admin-layout>
