@@ -12,9 +12,33 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <x-sidebar-link route="admin.dashboard" icon="tachometer-alt" label="Dashboard" />
 
-                @can('view-user' || 'view-role' || 'view-ruangan' || 'view-alat' || 'view-bahan' || 'view-category')
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link text-white">
+                @php
+                    $dataMasterRoutes = [
+                        'admin.user.index',
+                        'admin.role.index',
+                        'admin.ruangan.index',
+                        'admin.alat.index',
+                        'admin.bahan.index',
+                        'admin.category.index',
+                    ];
+
+                    $dataTransaksiRoutes = ['admin.transaksi.index'];
+
+                    $dataLaporanRoutes = ['admin.laporan.index'];
+
+                    $isDataMasterActive = in_array(Route::currentRouteName(), $dataMasterRoutes);
+                    $isDataTransaksiActive = in_array(Route::currentRouteName(), $dataTransaksiRoutes);
+                    $isDataLaporanActive = in_array(Route::currentRouteName(), $dataLaporanRoutes);
+                @endphp
+
+                @if (Auth::user()->can('view-user') ||
+                        Auth::user()->can('view-role') ||
+                        Auth::user()->can('view-alat') ||
+                        Auth::user()->can('view-bahan') ||
+                        Auth::user()->can('view-ruangan') ||
+                        Auth::user()->can('view-category'))
+                    <li class="nav-item has-treeview {{ $isDataMasterActive ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link text-white {{ $isDataMasterActive ? 'active' : '' }}">
                             <i class="nav-icon fas fa-database"></i>
                             <p>
                                 Data Master
@@ -30,11 +54,11 @@
                             <x-sidebar-link route="admin.category.index" label="Data Kategori" can="view-category" />
                         </ul>
                     </li>
-                @endcan
+                @endif
 
                 @can('view-transaksi')
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link text-white">
+                    <li class="nav-item has-treeview {{ $isDataTransaksiActive ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link text-white {{ $isDataTransaksiActive ? 'active' : '' }}">
                             <i class="nav-icon fas fa-receipt"></i>
                             <p>
                                 Transaksi
@@ -53,8 +77,8 @@
                 @endcan
 
                 @can('view-laporan')
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link text-white">
+                    <li class="nav-item has-treeview {{ $isDataLaporanActive ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link text-white {{ $isDataLaporanActive ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-signature"></i>
                             <p>
                                 Laporan
@@ -71,19 +95,23 @@
                 @endcan
 
                 @can('check-client')
-                    <x-sidebar-link route="mahasiswa.check.index" icon="search" label="Cek Alat dan Ruangan" can="check-client" />
+                    <x-sidebar-link route="mahasiswa.check.index" icon="search" label="Cek Alat dan Ruangan"
+                        can="check-client" />
                 @endcan
 
                 @can('pengajuan-peminjaman-client')
-                    <x-sidebar-link route="mahasiswa.pengajuan-peminjaman.index" icon="user-friends" label="Pengajuan Peminjaman" can="pengajuan-peminjaman-client" />
-                @endcan 
+                    <x-sidebar-link route="mahasiswa.pengajuan-peminjaman.index" icon="user-friends"
+                        label="Pengajuan Peminjaman" can="pengajuan-peminjaman-client" />
+                @endcan
 
                 @can('penggunaan-alat-client')
-                    <x-sidebar-link route="mahasiswa.penggunaan-alat" icon="tools" label="Penggunaan Alat" can="penggunaan-alat-client" />
+                    <x-sidebar-link route="mahasiswa.penggunaan-alat" icon="tools" label="Penggunaan Alat"
+                        can="penggunaan-alat-client" />
                 @endcan
 
                 @can('penggunaan-ruangan-client')
-                    <x-sidebar-link route="mahasiswa.penggunaan-ruangan" icon="building" label="Penggunaan Ruangan" can="penggunaan-ruangan-client" />
+                    <x-sidebar-link route="mahasiswa.penggunaan-ruangan" icon="building" label="Penggunaan Ruangan"
+                        can="penggunaan-ruangan-client" />
                 @endcan
 
                 @can('history-client')
