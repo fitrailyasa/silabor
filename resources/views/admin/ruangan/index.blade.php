@@ -124,7 +124,7 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                        <!-- Edit and Delete Button -->
+                        @include('admin.ruangan.detail')
                         @can('edit-ruangan')
                             @include('admin.ruangan.edit')
                         @endcan
