@@ -119,7 +119,7 @@
                 @endcan
 
                 <li class="nav-item">
-                    <form id="logout-form" action="logout" method="POST" hidden>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>
                         @csrf
                     </form>
                     <a href="#" class="nav-link text-white"
