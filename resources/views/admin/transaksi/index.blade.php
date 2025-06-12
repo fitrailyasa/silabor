@@ -61,7 +61,7 @@
                     </td>
                     <td class="manage-row text-center">
                         @can('view-transaksi')
-                            @include('admin.transaksi').detail')
+                            @include('admin.transaksi.detail')
                         @endcan
                     </td>
                 </tr>
