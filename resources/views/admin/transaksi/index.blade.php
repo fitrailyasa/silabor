@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $laporans->firstItem() + $loop->index }}</td>
                     <td>
-                        <a href="https://wa.me/+62{{ $laporan->user->no_hp ?? '-' }}"><span>{{ $laporan->user->name ?? '-' }}</span>
+                        <a href="https://wa.me/+62{{ $laporan->anggota->no_hp ?? '-' }}"><span>{{ $laporan->anggota->name ?? '-' }}</span>
                             <i class="fa fa-whatsapp text-success"></i></a>
                     </td>
                     <td>
