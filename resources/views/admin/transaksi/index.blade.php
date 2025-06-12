@@ -60,8 +60,8 @@
                         @endif
                     </td>
                     <td class="manage-row text-center">
-                        @can('view-laporan')
-                            @include('admin.laporan.detail')
+                        @can('view-transaksi')
+                            @include('admin.transaksi').detail')
                         @endcan
                     </td>
                 </tr>
