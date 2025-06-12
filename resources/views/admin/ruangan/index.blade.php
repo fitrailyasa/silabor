@@ -43,21 +43,21 @@
                         @if ($ruangan->foto_ruangan == null)
                             <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}" width="100">
                         @else
-                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $ruangan->id }}">
+                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModalRuangan{{ $ruangan->id }}">
                                 <img class="img img-fluid rounded"
                                     src="{{ asset('storage/' . $ruangan->foto_ruangan) }}"
                                     alt="{{ $ruangan->foto_ruangan }}" width="100" loading="lazy">
                             </a>
 
                             <!-- Modal -->
-                            <div class="modal fade myModal{{ $ruangan->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade myModalRuangan{{ $ruangan->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">{{ $ruangan->name }}</h3>
+                                                    <h3 class="card-title">Foto Ruangan</h3>
                                                     <div class="card-tools">
                                                         <button type="button" class="btn btn-tool"
                                                             data-card-widget="maximize"><i
@@ -86,20 +86,20 @@
                             <img src="{{ asset('assets/img/default.png') }}" alt="{{ $ruangan->name }}"
                                 width="100">
                         @else
-                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModal{{ $ruangan->id }}">
+                            <a href="#" data-bs-toggle="modal" data-bs-target=".myModalDenah{{ $ruangan->id }}">
                                 <img class="img img-fluid rounded" src="{{ asset('storage/' . $ruangan->foto_denah) }}"
                                     alt="{{ $ruangan->foto_denah }}" width="100" loading="lazy">
                             </a>
 
                             <!-- Modal -->
-                            <div class="modal fade myModal{{ $ruangan->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade myModalDenah{{ $ruangan->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h3 class="card-title">{{ $ruangan->name }}</h3>
+                                                    <h3 class="card-title">Foto Denah</h3>
                                                     <div class="card-tools">
                                                         <button type="button" class="btn btn-tool"
                                                             data-card-widget="maximize"><i
