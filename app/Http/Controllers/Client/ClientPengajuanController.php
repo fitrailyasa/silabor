@@ -7,7 +7,6 @@ use App\Models\Alat;
 use App\Models\Laporan;
 use App\Models\User;
 use App\Models\Ruangan;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClientPengajuanController extends Controller
@@ -47,17 +46,46 @@ class ClientPengajuanController extends Controller
 
     public function store(Request $request)
     {
-        $start = Carbon::parse($request->input('start_datetime'));
-        $end = Carbon::parse($request->input('end_datetime'));
+        $request->validate([
+            'jenis' => 'required|in:pribadi,kelompok',
+            'tujuan_peminjaman' => 'required|string',
+            'judul_penelitian' => 'required|string',
+            'dosen_pembimbing' => 'required|exists:users,id',
+            'tgl_peminjaman' => 'required|date',
+            'tgl_pengembalian' => 'required|date|after_or_equal:tgl_peminjaman',
+            'daftar_anggota' => 'nullable|string',
+            'daftar_alat' => 'required|string',
+        ]);
 
-        $data = [
-            'tgl_peminjaman'   => $start->format('Y-m-d'),
-            'jam_peminjaman'   => $start->format('H:i'),
-            'tgl_pengembalian' => $end->format('Y-m-d'),
-            'jam_pengembalian' => $end->format('H:i'),
-        ];
+        $laporan = Laporan::create([
+            'user_id' => auth()->id(),
+            'dosen_id' => $request->dosen_pembimbing,
+            'jenis_peminjaman' => $request->jenis,
+            'judul_penelitian' => $request->judul_penelitian,
+            'tujuan_peminjaman' => $request->tujuan_peminjaman,
+            'tgl_peminjaman' => $request->tgl_peminjaman,
+            'tgl_pengembalian' => $request->tgl_pengembalian,
+            'status_peminjaman' => 'menunggu',
+        ]);
 
-        dd($data);
-        Laporan::create($data);
+        $alatList = json_decode($request->daftar_alat, true);
+        foreach ($alatList as $alatData) {
+            $alat = Alat::where('name', $alatData['nama'])->first();
+            if ($alat) {
+                $laporan->alats()->attach($alat->id, ['qty' => $alatData['qty']]);
+            }
+        }
+
+        if ($request->jenis === 'kelompok') {
+            $anggotaList = json_decode($request->daftar_anggota, true);
+            foreach ($anggotaList as $anggotaName) {
+                $user = User::where('name', $anggotaName)->first();
+                if ($user) {
+                    $laporan->anggotas()->attach($user->id);
+                }
+            }
+        }
+
+        return redirect()->route('mahasiswa.pengajuan-peminjaman.index')->with('message', 'Peminjaman berhasil diajukan.');
     }
 }

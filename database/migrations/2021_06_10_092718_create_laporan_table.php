@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anggota_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('dosen_id')->nullable();
             $table->foreignId('alat_id')->nullable();
             $table->foreignId('ruangan_id')->nullable();
@@ -23,10 +23,12 @@ return new class extends Migration
             $table->string('tujuan_peminjaman')->nullable();
             $table->string('catatan')->nullable();
             $table->date('tgl_peminjaman')->nullable();
+            $table->date('tgl_penggunaan')->nullable();
             $table->date('tgl_pengembalian')->nullable();
-            $table->string('jam_peminjaman')->nullable();
-            $table->string('jam_pengembalian')->nullable();
+            $table->string('waktu_mulai')->nullable();
+            $table->string('waktu_selesai')->nullable();
             $table->string('status_peminjaman')->nullable();
+            $table->string('status_penggunaan')->nullable();
             $table->string('status_pengembalian')->nullable();
             $table->timestamps();
         });

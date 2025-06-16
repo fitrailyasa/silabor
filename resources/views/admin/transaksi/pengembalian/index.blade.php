@@ -48,8 +48,8 @@
                             -
                         @endif
                     </td>
-                    <td>{{ $laporan->jam_peminjaman ?? '-' }}</td>
-                    <td>{{ $laporan->jam_pengembalian ?? '-' }}</td>
+                    <td>{{ $laporan->waktu_mulai ?? '-' }}</td>
+                    <td>{{ $laporan->waktu_selesai ?? '-' }}</td>
                     <td>
                         @if ($laporan->status_peminjaman == 'Diterima')
                             <span class="badge badge-success">Diterima</span>

@@ -23,7 +23,7 @@ class LaporanFactory extends Factory
         $dosenId = User::role('dosen')->inRandomOrder()->value('id');
 
         return [
-            'anggota_id' => $anggotaId,
+            'user_id' => $anggotaId,
             'dosen_id' => $dosenId,
             'alat_id' => $selected === 'alat' ? $this->faker->numberBetween(1, 10) : null,
             'ruangan_id' => $selected === 'ruangan' ? $this->faker->numberBetween(1, 10) : null,
@@ -32,8 +32,8 @@ class LaporanFactory extends Factory
             'catatan' => $this->faker->sentence(5),
             'tgl_peminjaman' => $startDate->format('Y-m-d'),
             'tgl_pengembalian' => $endDate->format('Y-m-d'),
-            'jam_peminjaman' => $this->faker->time('H:i'),
-            'jam_pengembalian' => $this->faker->time('H:i'),
+            'waktu_mulai' => $this->faker->time('H:i'),
+            'waktu_selesai' => $this->faker->time('H:i'),
             'status_peminjaman' => $this->faker->randomElement(['Diterima', 'Menunggu', 'Ditolak']),
             'status_pengembalian' => $this->faker->randomElement(['Sudah Dikembalikan', 'Belum Dikembalikan']),
         ];

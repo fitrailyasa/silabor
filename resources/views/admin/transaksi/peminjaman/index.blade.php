@@ -21,8 +21,8 @@
                 <th>{{ __('Keterangan') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>
-                <th>{{ __('Jam Peminjaman') }}</th>
-                <th>{{ __('Jam Pengembalian') }}</th>
+                <th>{{ __('Jam Mulai') }}</th>
+                <th>{{ __('Jam Selesai') }}</th>
                 <th>{{ __('Status Peminjaman') }}</th>
                 <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
@@ -48,8 +48,8 @@
                             -
                         @endif
                     </td>
-                    <td>{{ $laporan->jam_peminjaman ?? '-' }}</td>
-                    <td>{{ $laporan->jam_pengembalian ?? '-' }}</td>
+                    <td>{{ $laporan->waktu_mulai ?? '-' }}</td>
+                    <td>{{ $laporan->waktu_selesai ?? '-' }}</td>
                     <td>
                         @if ($laporan->status_peminjaman == 'Diterima')
                             <span class="badge badge-success">Diterima</span>
@@ -76,8 +76,8 @@
                 <th>{{ __('Keterangan') }}</th>
                 <th>{{ __('Tanggal Peminjaman') }}</th>
                 <th>{{ __('Tanggal Pengembalian') }}</th>
-                <th>{{ __('Jam Peminjaman') }}</th>
-                <th>{{ __('Jam Pengembalian') }}</th>
+                <th>{{ __('Jam Mulai') }}</th>
+                <th>{{ __('Jam Selesai') }}</th>
                 <th>{{ __('Status Peminjaman') }}</th>
                 <th class="text-center">{{ __('Aksi') }}</th>
             </tr>
