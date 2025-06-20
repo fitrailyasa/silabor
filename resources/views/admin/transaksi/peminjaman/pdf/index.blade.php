@@ -165,7 +165,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 40; $i++)
+                @for ($i = 1; $i <= 20; $i++)
                     <tr>
                         <td>{{ $i }}</td>
                         <td></td>
@@ -184,11 +184,13 @@
     <div style="page-break-before: always;"></div>
 
     <div class="signature-2">
-        <p>Lampung Selatan, .................... 20..</p>
         <table class="no-border" style="width: 100%; margin-top: 20px;">
             <tr>
-                <td class="center">Laboran …<br><br><br><br>Nama<br>NRK/NIP</td>
-                <td class="center">Koordinator Laboratorium<br>Program Studi …<br><br><br>Nama<br>NRK/NIP</td>
+                <td class="left">Lampung Selatan, .................... 20..</td>
+            </tr>
+            <tr>
+                <td class="left me-3">Laboran …<br>Program Studi …<br><br><br><br>Nama<br>NRK/NIP</td>
+                <td class="left">Koordinator Laboratorium<br><br><br><br><br>Nama<br>NRK/NIP</td>
             </tr>
         </table>
         <br><br>
