@@ -28,7 +28,7 @@ class AdminBahanController extends Controller
         $search = $request->input('search');
         $perPage = (int) $request->input('perPage', 10);
 
-        $categories = Category::all();
+        $categories = Category::where('type', 'bahan')->get();
 
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 

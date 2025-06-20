@@ -36,7 +36,7 @@ class AdminAlatController extends Controller
         $page = $request->input('page', 1);
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
-        $categories = Category::all();
+        $categories = Category::where('type', 'alat')->get();
 
         if ($view === 'detail') {
             $alats = Alat::with('category')
