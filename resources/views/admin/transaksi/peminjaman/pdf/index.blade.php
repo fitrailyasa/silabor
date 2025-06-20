@@ -205,11 +205,8 @@
     <div class="signature-2">
         <table class="no-border" style="width: 100%; margin-top: 20px;">
             <tr>
-                <td class="left">{{ $tanggalHariIni }}</td>
-            </tr>
-            <tr>
-                <td class="left me-3">Laboran …<br><br><br><br><br>Nama<br>NRK/NIP</td>
-                <td class="left">Koordinator Laboratorium<br>Program Studi …<br><br><br><br>Nama<br>NRK/NIP</td>
+                <td width="50%"><br><br>Laboran …<br><br><br><br><br>Nama<br>NRK/NIP</td>
+                <td width="50%">{{ $tanggalHariIni }}<br><br>Koordinator Laboratorium<br>Program Studi …<br><br><br><br>Nama<br>NRK/NIP</td>
             </tr>
         </table>
         <br><br>

@@ -91,8 +91,10 @@ class ClientPengajuanController extends Controller
         return redirect()->route('mahasiswa.pengajuan-peminjaman.index')->with('message', 'Peminjaman berhasil diajukan.');
     }
 
-    public function generateFormulir()
+    public function generateFormulir($id)
     {
+        $laporan = Laporan::with(['alats', 'anggotas'])->findOrFail($id);
+        
         $user = Auth::user();
 
         $bulanIndo = [

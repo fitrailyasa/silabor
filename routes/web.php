@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('check', ClientCekController::class)->only(['index']);
         Route::get('/pengajuan-peminjaman', [ClientPengajuanController::class, 'index'])->name('pengajuan-peminjaman.index');
         Route::post('/pengajuan-peminjaman', [ClientPengajuanController::class, 'store'])->name('pengajuan-peminjaman.store');
-        Route::get('/generate-formulir', [ClientPengajuanController::class, 'generateFormulir'])->name('pengajuan-peminjaman.generate-formulir');
+        Route::get('/generate-formulir/{id}', [ClientPengajuanController::class, 'generateFormulir'])->name('pengajuan-peminjaman.generate-formulir');
         Route::get('/penggunaan-alat', [ClientPenggunaanController::class, 'indexAlat'])->name('penggunaan-alat');
         Route::get('/penggunaan-ruangan', [ClientPenggunaanController::class, 'indexRuangan'])->name('penggunaan-ruangan');
         Route::post('/penggunaan-ruangan', [ClientPenggunaanController::class, 'storeRuangan'])->name('penggunaan-ruangan.store');
