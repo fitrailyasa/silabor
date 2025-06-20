@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'no_hp' => '081234567890',
             'nim' => $this->faker->unique()->numerify('#########'),
-            'prodi' => $this->faker->randomElement(['Matematika', 'Fisika', 'Kimia', 'Biologi']),
+            'prodi' => $this->faker->randomElement(['Teknik Biomedis', 'Fisika', 'Kimia', 'Biologi']),
             'angkatan' => $this->faker->year(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),

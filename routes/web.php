@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('pengajuan-peminjaman', ClientPengajuanController::class)->only(['index', 'store']);
         Route::get('/penggunaan-alat', [ClientPenggunaanController::class, 'indexAlat'])->name('penggunaan-alat');
         Route::get('/penggunaan-ruangan', [ClientPenggunaanController::class, 'indexRuangan'])->name('penggunaan-ruangan');
+        Route::post('/penggunaan-ruangan', [ClientPenggunaanController::class, 'storeRuangan'])->name('penggunaan-ruangan.store');
         Route::resource('history', ClientRiwayatController::class)->only(['index']);
     });
 });

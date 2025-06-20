@@ -8,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 
-    <form class="bg-white p-8 rounded shadow mb-5" method="POST" action="#" enctype="multipart/form-data">
+    <form class="bg-white p-8 rounded shadow mb-5" method="POST" action="{{ route('mahasiswa.penggunaan-ruangan.store') }}" enctype="multipart/form-data">
+        @csrf
         <div>
             <!-- Ruangan -->
             <div class="mb-6">
@@ -28,12 +29,12 @@
                     <div>
                         <label class="block mb-1">Tanggal & Jam Mulai</label>
                         <input name="start_datetime" type="datetime-local"
-                            class="w-full border border-gray-300 px-4 py-2 rounded">
+                            class="w-full border border-gray-300 px-4 py-2 rounded" required>
                     </div>
                     <div>
                         <label class="block mb-1">Tanggal & Jam Selesai</label>
                         <input name="end_datetime" type="datetime-local"
-                            class="w-full border border-gray-300 px-4 py-2 rounded">
+                            class="w-full border border-gray-300 px-4 py-2 rounded" required>
                     </div>
                 </div>
             </div>
@@ -41,7 +42,7 @@
             <!-- Tujuan Peminjaman -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Tujuan Peminjaman</label>
-                <input name="tujuan_peminjaman" type="text" class="w-full border border-gray-300 px-4 py-2 rounded">
+                <input name="tujuan_peminjaman" type="text" class="w-full border border-gray-300 px-4 py-2 rounded" required value="{{ old('tujuan_peminjaman') }}">
             </div>
         </div>
 

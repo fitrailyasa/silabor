@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Alat;
-use App\Models\Bahan;
 use App\Models\Ruangan;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ClientPenggunaanController extends Controller
 {
@@ -58,5 +59,26 @@ class ClientPenggunaanController extends Controller
         }
 
         return view("client.penggunaan-ruangan.index", compact('ruangans', 'search', 'perPage'));
+    }
+
+    public function storeRuangan(Request $request)
+    {        
+        $start = Carbon::parse($request->input('start_datetime'));
+        $end = Carbon::parse($request->input('end_datetime'));
+
+        $data = [
+            'ruangan_id' => $request->input('ruangan_id'),
+            'tgl_peminjaman'   => $start->format('Y-m-d'),
+            'waktu_mulai'   => $start->format('H:i'),
+            'tgl_pengembalian' => $end->format('Y-m-d'),
+            'waktu_selesai' => $end->format('H:i'),
+            'tujuan_peminjaman' => $request->input('tujuan_peminjaman'),
+        ];
+
+        dd($data);
+
+        Laporan::create($data);
+
+        return redirect()->back()->with('message', 'Data berhasil disimpan');
     }
 }

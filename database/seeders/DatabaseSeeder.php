@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AlatSeeder::class);
         $this->call(BahanSeeder::class);
         $this->call(RuanganSeeder::class);
-        $this->call(LaporanSeeder::class);
+        // $this->call(LaporanSeeder::class);
     }
 }

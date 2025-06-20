@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <label class="form-label">{{ __('NIM') }}<span class="text-danger">*</span></label>
+                                <label class="form-label">{{ __('Nomor Induk') }}<span class="text-danger">*</span></label>
                                 <input type="number" class="form-control @error('nim') is-invalid @enderror"
                                     placeholder="123456789" name="nim" id="nim"
                                     value="{{ old('nim', $user->nim) }}" required>
@@ -72,7 +72,7 @@
                             <div class="mb-2">
                                 <label class="form-label">{{ __('Prodi') }}<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('prodi') is-invalid @enderror"
-                                    placeholder="Matematika" name="prodi" id="prodi"
+                                    placeholder="Teknik Biomedis" name="prodi" id="prodi"
                                     value="{{ old('prodi', $user->prodi) }}" required>
                                 @error('prodi')
                                     <div class="invalid-feedback">{{ $message }}</div>

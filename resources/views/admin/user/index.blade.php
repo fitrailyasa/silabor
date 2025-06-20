@@ -18,7 +18,7 @@
             <tr>
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama') }}</th>
-                <th class="d-none d-lg-table-cell">{{ __('NIM') }}</th>
+                <th class="d-none d-lg-table-cell">{{ __('Nomor Induk') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Level') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Foto') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>
@@ -98,7 +98,7 @@
             <tr>
                 <th>{{ __('No') }}</th>
                 <th>{{ __('Nama') }}</th>
-                <th class="d-none d-lg-table-cell">{{ __('NIM') }}</th>
+                <th class="d-none d-lg-table-cell">{{ __('Nomor Induk') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Level') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Foto') }}</th>
                 <th class="d-none d-lg-table-cell">{{ __('Status') }}</th>
