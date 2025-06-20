@@ -52,7 +52,7 @@
                                 } elseif (str_contains($name, 'export')) {
                                     $badgeClass = 'badge-success';
                                 } else {
-                                    $badgeClass = 'badge-gray';
+                                    $badgeClass = 'badge-info';
                                 }
                             @endphp
 
