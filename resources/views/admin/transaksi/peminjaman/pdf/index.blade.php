@@ -165,7 +165,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 20; $i++)
+                @for ($i = 1; $i <= 40; $i++)
                     <tr>
                         <td>{{ $i }}</td>
                         <td></td>
@@ -180,6 +180,8 @@
         </table>
 
     </div>
+
+    <div style="page-break-before: always;"></div>
 
     <div class="signature-2">
         <p>Lampung Selatan, .................... 20..</p>
