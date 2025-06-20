@@ -95,7 +95,24 @@ class ClientPengajuanController extends Controller
     {
         $user = Auth::user();
 
-        $pdf = Pdf::loadView('admin.transaksi.peminjaman.pdf.index', compact('user'))->setPaper('A4', 'portrait');
+        $bulanIndo = [
+            1 => 'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+
+        $tanggalHariIni = 'Lampung Selatan, ' . date('j') . ' ' . $bulanIndo[date('n')] . ' ' . date('Y');
+
+        $pdf = Pdf::loadView('admin.transaksi.peminjaman.pdf.index', compact('user', 'tanggalHariIni'))->setPaper('A4', 'portrait');
         return $pdf->stream('Formulir-Peminjaman-Alat.pdf');
     }
 }

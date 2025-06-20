@@ -127,8 +127,7 @@
     <div class="signature-1">
         <table class="no-border" style="width: 100%; margin-top: 20px; margin-left: 330px;">
             <tr>
-                <td>Lampung Selatan, ....................
-                    20..<br>Peminjam,<br><br><br><br><br>{{ $user->name ?? '-' }}<br>{{ $user->nim ?? '-' }}</td>
+                <td>{{ $tanggalHariIni }}<br>Peminjam,<br><br><br><br><br>{{ $user->name ?? '-' }}<br>{{ $user->nim ?? '-' }}</td>
             </tr>
         </table>
     </div>
@@ -205,7 +204,7 @@
     <div class="signature-2">
         <table class="no-border" style="width: 100%; margin-top: 20px;">
             <tr>
-                <td class="left">Lampung Selatan, .................... 20..</td>
+                <td class="left">{{ $tanggalHariIni }}</td>
             </tr>
             <tr>
                 <td class="left me-3">Laboran …<br><br><br><br><br>Nama<br>NRK/NIP</td>
