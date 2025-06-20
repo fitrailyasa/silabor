@@ -127,7 +127,8 @@
     <div class="signature-1">
         <table class="no-border" style="width: 100%; margin-top: 20px; margin-left: 330px;">
             <tr>
-                <td>{{ $tanggalHariIni }}<br>Peminjam,<br><br><br><br><br>{{ $user->name ?? '-' }}<br>{{ $user->nim ?? '-' }}</td>
+                <td>{{ $tanggalHariIni }}<br>Peminjam,<br><br><br><br><br>{{ $user->name ?? '-' }}<br>{{ $user->nim ?? '-' }}
+                </td>
             </tr>
         </table>
     </div>
@@ -144,23 +145,23 @@
         <table class="no-border">
             <tr>
                 <td>Keperluan</td>
-                <td>: ................................................</td>
+                <td>: {{ $keperluan ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Tempat Kegiatan</td>
-                <td>: ................................................</td>
+                <td>: {{ $tempatKegiatan ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Lama Waktu Peminjaman</td>
-                <td>: ….. sampai dengan tanggal ……..</td>
+                <td>: {{ $tanggalPeminjaman ?? '-' }} s.d. {{ $tanggalPengembalian ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Judul Penelitian</td>
-                <td>: ................................................</td>
+                <td>: {{ $judulPenelitian ?? '-' }}</td>
             </tr>
             <tr>
                 <td>Dosen Pembimbing</td>
-                <td>: ................................................</td>
+                <td>: {{ $dosenPembimbing ?? '-' }}</td>
             </tr>
         </table>
     </div>
@@ -183,17 +184,17 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 15; $i++)
+                @foreach ($alatDipinjam as $index => $alat)
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $alat['nama'] ?? '-' }}</td>
+                        <td>{{ $alat['jumlah'] ?? '-' }}</td>
+                        <td>{{ $alat['kondisi'] ?? '-' }}</td>
+                        <td>{{ $alat['tgl_pengembalian'] ?? '-' }}</td>
                         <td></td>
                         <td></td>
                     </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
 

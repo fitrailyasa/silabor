@@ -97,22 +97,55 @@ class ClientPengajuanController extends Controller
 
         $bulanIndo = [
             1 => 'Januari',
-            'Februari',
-            'Maret',
-            'April',
-            'Mei',
-            'Juni',
-            'Juli',
-            'Agustus',
-            'September',
-            'Oktober',
-            'November',
-            'Desember'
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
         ];
 
-        $tanggalHariIni = 'Lampung Selatan, ' . date('j') . ' ' . $bulanIndo[date('n')] . ' ' . date('Y');
+        $formatTanggalIndo = function ($date) use ($bulanIndo) {
+            $tanggal = $date->format('j');
+            $bulan = $bulanIndo[(int)$date->format('n')];
+            $tahun = $date->format('Y');
+            return "$tanggal $bulan $tahun";
+        };
 
-        $pdf = Pdf::loadView('admin.transaksi.peminjaman.pdf.index', compact('user', 'tanggalHariIni'))->setPaper('A4', 'portrait');
+        $tanggalHariIni = 'Lampung Selatan, ' . $formatTanggalIndo(now());
+        $tanggalPeminjaman = $formatTanggalIndo(now());
+        $tanggalPengembalian = $formatTanggalIndo(now()->addDays(3));
+
+        $keperluan = 'Tugas Akhir';
+        $tempatKegiatan = 'Ruangan Penelitian';
+        $judulPenelitian = 'Penelitian Tugas Akhir';
+        $dosenPembimbing = 'Dr. Nama Dosen Pembimbing';
+
+        $alatDipinjam = [
+            ['nama' => 'Mikroskop', 'jumlah' => 2, 'kondisi' => 'Baik', 'tgl_pengembalian' => $tanggalPengembalian],
+            ['nama' => 'Cawan Petri', 'jumlah' => 10, 'kondisi' => 'Baik', 'tgl_pengembalian' => $tanggalPengembalian],
+            ['nama' => 'Pipet Ukur', 'jumlah' => 5, 'kondisi' => 'Baik', 'tgl_pengembalian' => $tanggalPengembalian],
+            ['nama' => 'Erlenmeyer', 'jumlah' => 3, 'kondisi' => 'Baik', 'tgl_pengembalian' => $tanggalPengembalian],
+            ['nama' => 'Tabung Reaksi', 'jumlah' => 12, 'kondisi' => 'Baik', 'tgl_pengembalian' => $tanggalPengembalian],
+        ];
+
+        $pdf = Pdf::loadView('admin.transaksi.peminjaman.pdf.index', compact(
+            'user',
+            'tanggalHariIni',
+            'keperluan',
+            'tempatKegiatan',
+            'tanggalPeminjaman',
+            'tanggalPengembalian',
+            'judulPenelitian',
+            'dosenPembimbing',
+            'alatDipinjam',
+        ))->setPaper('A4', 'portrait');
+
         return $pdf->stream('Formulir-Peminjaman-Alat.pdf');
     }
 }
