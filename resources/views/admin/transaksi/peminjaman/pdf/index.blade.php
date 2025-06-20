@@ -208,16 +208,15 @@
                 <td class="left">Lampung Selatan, .................... 20..</td>
             </tr>
             <tr>
-                <td class="left me-3">Laboran …<br>Program Studi …<br><br><br><br>Nama<br>NRK/NIP</td>
-                <td class="left">Koordinator Laboratorium<br><br><br><br><br>Nama<br>NRK/NIP</td>
+                <td class="left me-3">Laboran …<br><br><br><br><br>Nama<br>NRK/NIP</td>
+                <td class="left">Koordinator Laboratorium<br>Program Studi …<br><br><br><br>Nama<br>NRK/NIP</td>
             </tr>
         </table>
         <br><br>
         <p>Menyetujui,</p>
         <p>Koordinator Laboratorium Fakultas Teknologi Industri</p>
         <br><br><br>
-        <p><strong>Dr. Kardo Rajagukguk, S.Pd., M.Eng.</strong></p>
-        <p>NIP 198909272019031014</p>
+        <p><strong>Dr. Kardo Rajagukguk, S.Pd., M.Eng.</strong><br>NIP 198909272019031014</p>
     </div>
 
 </body>
