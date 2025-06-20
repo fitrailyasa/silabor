@@ -39,7 +39,9 @@ class AdminBahanController extends Controller
             $bahans = Bahan::paginate($validPerPage);
         }
 
-        return view("admin.bahan.index", compact('bahans', 'categories', 'search', 'perPage'));
+        $stokRendah = Bahan::whereColumn('stock', '<=', 'min_stock')->get();
+
+        return view("admin.bahan.index", compact('bahans', 'stokRendah', 'categories', 'search', 'perPage'));
     }
 
     public function store(BahanRequest $request)

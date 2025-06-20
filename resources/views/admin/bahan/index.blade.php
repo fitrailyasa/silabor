@@ -17,10 +17,6 @@
         @include('components.search')
     </x-slot>
 
-    @php
-        $stokRendah = $bahans->filter(fn($b) => $b->stock <= $b->min_stock);
-    @endphp
-
     @if ($stokRendah->count())
         <div class="alert border border-warning bg-warning bg-opacity-10 text-dark">
             <div class="mb-1">
