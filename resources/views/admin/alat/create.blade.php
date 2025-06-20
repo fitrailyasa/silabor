@@ -51,9 +51,25 @@
 
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Lokasi') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('location') is-invalid @enderror"
-                            name="location" placeholder="Masukkan Lokasi Alat" value="{{ old('location') }}" required>
+                        <select name="location" class="form-select @error('location') is-invalid @enderror" id="location">
+                            <option value="">{{ __('Pilih Lokasi') }}</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}"
+                                    {{ old('location') == $location->id ? 'selected' : '' }}>
+                                    {{ $location->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('location')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Detail Lokasi') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('detail_location') is-invalid @enderror"
+                            name="detail_location" placeholder="Masukkan Lokasi Alat" value="{{ old('detail_location') }}" required>
+                        @error('detail_location')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

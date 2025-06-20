@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Alat;
+use App\Models\Ruangan;
 use Illuminate\Http\Request;
 use App\Http\Requests\AlatRequest;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class AdminAlatController extends Controller
 {
@@ -37,6 +39,7 @@ class AdminAlatController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         $categories = Category::where('type', 'alat')->get();
+        $locations = Ruangan::all();
 
         if ($view === 'detail') {
             $alats = Alat::with('category')
@@ -48,7 +51,7 @@ class AdminAlatController extends Controller
                 })
                 ->paginate($validPerPage);
 
-            return view('admin.alat.index', compact('alats', 'categories', 'search', 'perPage', 'view', 'status'));
+            return view('admin.alat.index', compact('alats', 'categories', 'locations', 'search', 'perPage', 'view', 'status'));
         }
 
         $allAlats = Alat::with('category')->get();
@@ -79,6 +82,7 @@ class AdminAlatController extends Controller
 
         return view('admin.alat.index', [
             'alat_groups' => $alat_groups_paginated,
+            'locations' => $locations,
             'categories' => $categories,
             'search' => $search,
             'perPage' => $perPage,
@@ -132,11 +136,15 @@ class AdminAlatController extends Controller
         $alat->update($request->validated());
 
         if ($request->hasFile('img')) {
+            if ($alat->img && Storage::exists("public/{$alat->img}")) {
+                Storage::delete("public/{$alat->img}");
+            }
+
             $img = $request->file('img');
-            $file_name = $alat->name . '_' . time() . '.' . $img->getClientOriginalExtension();
-            $alat->img = $file_name;
-            $alat->update();
+            $file_name = Str::slug($alat->name) . '_' . time() . '.' . $img->getClientOriginalExtension();
             $img->storeAs('public', $file_name);
+
+            $alat->update(['img' => $file_name]);
         }
 
         return back()->with('message', 'Berhasil Edit Data Alat!');

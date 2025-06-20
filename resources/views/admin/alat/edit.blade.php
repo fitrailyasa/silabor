@@ -31,8 +31,8 @@
                     <!-- Gambar -->
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Gambar (Opsional)') }}</label>
-                        <input type="file" class="form-control @error('img') is-invalid @enderror"
-                            name="img" id="edit_img">
+                        <input type="file" class="form-control @error('img') is-invalid @enderror" name="img"
+                            id="edit_img">
                         <small class="form-text text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
                         @error('img')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -42,7 +42,8 @@
                     <!-- Kategori -->
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Kategori') }}<span class="text-danger">*</span></label>
-                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" required>
+                        <select class="form-control @error('category_id') is-invalid @enderror" name="category_id"
+                            required>
                             <option value="">{{ __('Pilih Kategori') }}</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"
@@ -55,13 +56,32 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <!-- Lokasi -->
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Lokasi') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('location') is-invalid @enderror"
-                            name="location" placeholder="Masukkan Lokasi Alat" value="{{ old('location', $alat->location) }}" required>
+                        <select name="location" class="form-select @error('location') is-invalid @enderror"
+                            id="location">
+                            <option value="">{{ __('Pilih Lokasi') }}</option>
+                            @foreach ($locations as $location)
+                                <option value="{{ $location->id }}"
+                                    {{ old('location', $alat->location) == $location->id ? 'selected' : '' }}>
+                                    {{ $location->name }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('location')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Detail Lokasi -->
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">{{ __('Detail Lokasi') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('detail_location') is-invalid @enderror"
+                            name="detail_location" placeholder="Masukkan Lokasi Alat"
+                            value="{{ old('detail_location', $alat->detail_location) }}" required>
+                        @error('detail_location')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -69,7 +89,8 @@
                     <!-- Spesifikasi -->
                     <div class="mb-3 col-md-12">
                         <label class="form-label">{{ __('Spesifikasi Alat') }}</label>
-                        <textarea class="form-control @error('desc') is-invalid @enderror" name="desc" rows="1" placeholder="Masukkan Spesifikasi Alat">{{ old('desc', $alat->desc) }}</textarea>
+                        <textarea class="form-control @error('desc') is-invalid @enderror" name="desc" rows="1"
+                            placeholder="Masukkan Spesifikasi Alat">{{ old('desc', $alat->desc) }}</textarea>
                         @error('desc')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -79,8 +100,10 @@
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Kondisi Alat') }}<span class="text-danger">*</span></label>
                         <select name="condition" class="form-select @error('condition') is-invalid @enderror">
-                            <option value="Baik" {{ old('condition', $alat->condition) == 'Baik' ? 'selected' : '' }}>Baik</option>
-                            <option value="Rusak" {{ old('condition', $alat->condition) == 'Rusak' ? 'selected' : '' }}>Rusak</option>
+                            <option value="Baik"
+                                {{ old('condition', $alat->condition) == 'Baik' ? 'selected' : '' }}>Baik</option>
+                            <option value="Rusak"
+                                {{ old('condition', $alat->condition) == 'Rusak' ? 'selected' : '' }}>Rusak</option>
                         </select>
                         @error('condition')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -91,8 +114,10 @@
                     <div class="mb-3 col-md-6">
                         <label class="form-label">{{ __('Status Alat') }}<span class="text-danger">*</span></label>
                         <select name="status" class="form-select @error('status') is-invalid @enderror">
-                            <option value="Tersedia" {{ old('status', $alat->status) == 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
-                            <option value="Dipinjam" {{ old('status', $alat->status) == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+                            <option value="Tersedia"
+                                {{ old('status', $alat->status) == 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
+                            <option value="Dipinjam"
+                                {{ old('status', $alat->status) == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
                         </select>
                         @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -24,6 +24,7 @@ class AlatRequest extends FormRequest
             'condition' => 'nullable|max:100',
             'status' => 'nullable|max:100',
             'location' => 'required|max:100',
+            'detail_location' => 'nullable|max:200',
             'category_id' => 'required|exists:categories,id',
         ];
     }
@@ -46,6 +47,7 @@ class AlatRequest extends FormRequest
             'status.max' => 'Status maksimal 100 karakter!',
             'location.required' => 'Lokasi tidak boleh kosong!',
             'location.max' => 'Lokasi maksimal 100 karakter!',
+            'detail_location.max' => 'Detail lokasi maksimal 200 karakter!',
             'category_id.required' => 'Kategori tidak boleh kosong!',
             'category_id.exists' => 'Kategori tidak valid!',
         ];

@@ -82,7 +82,7 @@
                                 <span class="badge bg-warning">{{ $alat->status }}</span>
                             @endif
                         </td>
-                        <td>{{ $alat->location ?? '-' }}</td>
+                        <td>{{ $alat->ruangan->name ?? '-' }}</td>
                         <td>
                             @if ($alat->img)
                                 <img src="{{ asset('storage/' . $alat->img) }}" alt="Gambar" width="100">
@@ -121,7 +121,7 @@
                         <td>{{ $loop->iteration + ($alat_groups->currentPage() - 1) * $alat_groups->perPage() }}</td>
                         <td>{{ $key }}</td>
                         <td>{{ $group->first()->category->name ?? '-' }}</td>
-                        <td>{{ $group->first()->location ?? '-' }}</td>
+                        <td>{{ $group->first()->ruangan->name ?? '-' }}</td>
                         <td>{{ $group->count() }}</td>
                         <td class="manage-row text-center">
                             <!-- Tombol Lihat atau Detail -->

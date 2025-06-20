@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->string('condition')->nullable()->default('Baik');
             $table->string('status')->nullable()->default('Tersedia');
-            $table->string('location')->nullable();
+            $table->foreignId('location')->nullable();
+            $table->string('detail_location')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->timestamps();
         });
