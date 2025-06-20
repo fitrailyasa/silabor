@@ -66,7 +66,7 @@
                             required>
                             <option value="">{{ __('-- Pilih Satuan --') }}</option>
                             @php
-                                $units = ['Kg', 'Liter', 'Pcs', 'Unit'];
+                                $units = ['Kg', 'Liter', 'Pcs', 'Unit', 'mL', 'gram'];
                             @endphp
                             @foreach ($units as $unit)
                                 <option value="{{ $unit }}" {{ old('unit') == $unit ? 'selected' : '' }}>

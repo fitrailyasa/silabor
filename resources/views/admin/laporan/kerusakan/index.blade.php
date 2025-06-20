@@ -2,7 +2,7 @@
 
     <!-- Title -->
     <x-slot name="title">
-        Laporan
+        Laporan Kerusakan
     </x-slot>
 
     <!-- Search & Pagination -->

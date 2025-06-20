@@ -2,7 +2,7 @@
 
     <!-- Title -->
     <x-slot name="title">
-        Laporan
+        Laporan Pengajuan Peminjaman
     </x-slot>
 
     <!-- Search & Pagination -->
