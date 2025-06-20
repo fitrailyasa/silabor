@@ -21,6 +21,7 @@ class RuanganRequest extends FormRequest
             'kapasitas' => 'required|numeric',
             'gedung' => 'required|max:100',
             'lantai' => 'required|max:100',
+            'keterangan' => 'nullable|max:1000',
             'foto_ruangan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'foto_denah' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
@@ -37,6 +38,7 @@ class RuanganRequest extends FormRequest
             'gedung.max' => 'Gedung maksimal 100 karakter!',
             'lantai.required' => 'Lantai tidak boleh kosong!',
             'lantai.max' => 'Lantai maksimal 100 karakter!',
+            'keterangan.max' => 'Keterangan maksimal 1000 karakter!',
             'foto_ruangan.image' => 'File harus berupa gambar!',
             'foto_ruangan.mimes' => 'Format gambar tidak valid!',
             'foto_ruangan.max' => 'Ukuran gambar maksimal 2MB!',

@@ -46,6 +46,11 @@
                                         <td class="text-center">:</td>
                                         <td class="text-start ps-2">{{ $ruangan->lantai }}</td>
                                     </tr>
+                                    <tr>
+                                        <td class="text-end pe-3"><strong>Keterangan</strong></td>
+                                        <td class="text-center">:</td>
+                                        <td class="text-start ps-2">{{ $ruangan->keterangan ?? '-' }}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>

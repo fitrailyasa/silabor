@@ -16,6 +16,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 50,
                 'gedung' => 'GKU 1',
                 'lantai' => 'Lantai 1',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -23,6 +24,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 50,
                 'gedung' => 'GKU 1',
                 'lantai' => 'Lantai 1',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -30,6 +32,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 50,
                 'gedung' => 'GKU 1',
                 'lantai' => 'Lantai 1',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -37,6 +40,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 50,
                 'gedung' => 'GKU 1',
                 'lantai' => 'Lantai 1',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -44,6 +48,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 50,
                 'gedung' => 'GKU 1',
                 'lantai' => 'Lantai 1',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -51,6 +56,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 100,
                 'gedung' => 'GKU 2',
                 'lantai' => 'Lantai 2',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -58,6 +64,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 100,
                 'gedung' => 'GKU 2',
                 'lantai' => 'Lantai 2',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -65,6 +72,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 100,
                 'gedung' => 'GKU 2',
                 'lantai' => 'Lantai 2',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -72,6 +80,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 100,
                 'gedung' => 'GKU 2',
                 'lantai' => 'Lantai 2',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
             [
@@ -79,6 +88,7 @@ class RuanganSeeder extends Seeder
                 'kapasitas' => 100,
                 'gedung' => 'GKU 2',
                 'lantai' => 'Lantai 2',
+                'keterangan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.',
                 'category_id' => $this->Category('Ruangan'),
             ],
         ];

@@ -65,6 +65,14 @@
                             <input type="file" name="foto_denah" class="form-control @error('foto_denah') is-invalid @enderror" accept="image/*">
                             @error('foto_denah') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
+
+                        <!-- Keterangan -->
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">{{ __('Keterangan') }}</label>
+                            <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror"
+                                      placeholder="keterangan ruangan">{{ old('keterangan', $ruangan->keterangan) }}</textarea>
+                            @error('keterangan') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

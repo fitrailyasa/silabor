@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('lantai')->nullable();
             $table->string('foto_ruangan')->nullable();
             $table->string('foto_denah')->nullable();
+            $table->text('keterangan')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->timestamps();
         });
