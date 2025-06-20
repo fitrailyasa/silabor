@@ -8,6 +8,8 @@ use App\Models\Laporan;
 use App\Models\User;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class ClientPengajuanController extends Controller
 {
@@ -87,5 +89,13 @@ class ClientPengajuanController extends Controller
         }
 
         return redirect()->route('mahasiswa.pengajuan-peminjaman.index')->with('message', 'Peminjaman berhasil diajukan.');
+    }
+
+    public function generateFormulir()
+    {
+        $user = Auth::user();
+
+        $pdf = Pdf::loadView('admin.transaksi.peminjaman.pdf.index', compact('user'))->setPaper('A4', 'portrait');
+        return $pdf->stream('Formulir-Peminjaman-Alat.pdf');
     }
 }
