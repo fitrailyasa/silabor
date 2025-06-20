@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
         }
 
@@ -46,7 +46,7 @@
 
         .signature-1 {
             text-align: left;
-            margin: 80mm 20mm 0mm 20mm;
+            margin: 40mm 20mm 0mm 20mm;
         }
 
         .signature-2 {
@@ -75,49 +75,68 @@
         .alat-table th {
             background-color: #f9f9f9;
         }
+
+        .footer {
+            width: 60%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            padding-top: 5px;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="header">
-        <img src="{{ public_path('assets/kop-surat.png') }}" alt="" width="95%">
-        <h3>FORMULIR PEMINJAMAN ALAT LABORATORIUM</h3>
+        <img src="{{ public_path('assets/kop-surat.png') }}" alt="" width="100%">
+        <hr>
+        <h4>FORMULIR PEMINJAMAN ALAT LABORATORIUM</h4>
     </div>
 
     <div class="section">
         <p>Dengan ini menyatakan bahwa:</p>
-        <table class="no-border">
+        <table class="no-border" style="width: 100%; margin: 0mm 10mm 0mm 10mm;">
             <tr>
-                <td>Nama</td>
-                <td>: {{ $user->name ?? '-' }}</td>
+                <td style="width: 25%;">Nama</td>
+                <td style="width: 75%;">: {{ $user->name ?? '-' }}</td>
             </tr>
             <tr>
-                <td>NIM</td>
-                <td>: {{ $user->nim ?? '-' }}</td>
+                <td style="width: 25%;">NIM</td>
+                <td style="width: 75%;">: {{ $user->nim ?? '-' }}</td>
             </tr>
             <tr>
-                <td>No. HP</td>
-                <td>: {{ $user->no_hp ?? '-' }}</td>
+                <td style="width: 25%;">No. HP</td>
+                <td style="width: 75%;">: {{ $user->no_hp ?? '-' }}</td>
             </tr>
             <tr>
-                <td>Program Studi</td>
-                <td>: {{ $user->prodi ?? '-' }}</td>
+                <td style="width: 25%;">Program Studi</td>
+                <td style="width: 75%;">: {{ $user->prodi ?? '-' }}</td>
             </tr>
         </table>
 
-        <p>Mengajukan permohonan peminjaman alat laboratorium dengan rincian terlampir.</p>
-        <p>Peminjam bersedia memenuhi persyaratan yang ada di laboratorium dan jika terjadi kerusakan atau kehilangan
+        <p align="justify">Mengajukan permohonan peminjaman alat laboratorium dengan rincian terlampir.</p>
+        <p align="justify">Peminjam bersedia memenuhi persyaratan yang ada di laboratorium dan jika terjadi kerusakan
+            atau kehilangan
             barang yang dipinjam, maka peminjam bersedia untuk bertanggung jawab.</p>
     </div>
 
     <div class="signature-1">
-        <p>Lampung Selatan, .................... 20..</p>
-        <p>Peminjam,</p>
-        <br><br><br>
-        <p>{{ $user->name ?? '-' }}</p>
-        <p>{{ $user->nim ?? '-' }}</p>
+        <table class="no-border" style="width: 100%; margin-top: 20px; margin-left: 330px;">
+            <tr>
+                <td>Lampung Selatan, ....................
+                    20..<br>Peminjam,<br><br><br><br><br>{{ $user->name ?? '-' }}<br>{{ $user->nim ?? '-' }}</td>
+            </tr>
+        </table>
     </div>
+
+    <div class="footer">
+        <img width="100%" src="{{ public_path('assets/kop-surat-footer.png') }}" alt="">
+    </div>
+
 
     <div style="page-break-before: always;"></div>
 
@@ -148,7 +167,7 @@
     </div>
 
     <div class="section">
-        <h4>DAFTAR ALAT YANG DIPINJAM</h4>
+        <h4 align="center">DAFTAR ALAT YANG DIPINJAM</h4>
         <table class="alat-table">
             <thead>
                 <tr>
@@ -165,7 +184,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 1; $i <= 20; $i++)
+                @for ($i = 1; $i <= 15; $i++)
                     <tr>
                         <td>{{ $i }}</td>
                         <td></td>
