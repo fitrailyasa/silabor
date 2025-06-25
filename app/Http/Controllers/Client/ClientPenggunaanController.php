@@ -47,7 +47,16 @@ class ClientPenggunaanController extends Controller
         if (!is_array($alatIds)) {
             $alatIds = [$alatIds];
         }
-        foreach ($alatIds as $alatId) {
+
+        $waktuMulai = Carbon::parse($request->input('waktu_mulai'))->startOfDay();
+        $waktuAkhir = Carbon::parse($request->input('waktu_mulai'))->endOfDay();
+        foreach ($alatIds as $alatId) {
+            // Cek duplikasi berdasarkan tanggal yang sama dan status aktif
+            $existing = Laporan::where('user_id', Auth::id())
+                ->where('alat_id', $alatId)
+                ->whereBetween('waktu_mulai', [$waktuMulai, $waktuAkhir])
+                ->whereIn('status_peminjaman', ['Menunggu', 'Diterima'])
+                ->first();
             $laporan = Laporan::create([
                 'user_id'           => Auth::id(),
                 'alat_id'           => $alatId,
@@ -57,10 +66,6 @@ class ClientPenggunaanController extends Controller
                 'status_peminjaman' => 'Menunggu',
                 'tipe'              => 'alat',
             ]);
-
-            if ($existing) {
-                continue;
-            }
 
             $alat = Alat::findOrFail($laporan->alat_id);
             $alat->status = 'Sedang Digunakan';
