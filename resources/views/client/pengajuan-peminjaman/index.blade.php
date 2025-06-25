@@ -1,0 +1,200 @@
+<x-admin-layout>
+    <!-- Title -->
+    <x-slot name="title">
+        Pengajuan Peminjaman
+    </x-slot>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+
+    @include('components.alert')
+
+    <form class="bg-white p-8 rounded shadow mb-5" method="POST"
+        action="{{ route('client.pengajuan-peminjaman.store') }}">
+        @csrf
+
+        <div x-data="pengajuanAlat()">
+            <!-- Jenis Peminjaman -->
+            <div class="mb-6">
+                <label class="font-semibold block mb-2">Jenis Peminjaman<span class="text-red-600">*</span></label>
+                <div class="flex space-x-4">
+                    <label>
+                        <input type="radio" name="jenis" value="pribadi" x-model="jenis" class="hidden">
+                        <div :class="jenis === 'pribadi' ? 'bg-gray-800 text-white' :
+                            'bg-white border border-gray-300 text-gray-700'"
+                            class="px-4 py-2 rounded cursor-pointer">
+                            PRIBADI
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="jenis" value="kelompok" x-model="jenis" class="hidden">
+                        <div :class="jenis === 'kelompok' ? 'bg-gray-800 text-white' :
+                            'bg-white border border-gray-300 text-gray-700'"
+                            class="px-4 py-2 rounded cursor-pointer">
+                            KELOMPOK
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tambah Anggota (kelompok saja) -->
+            <div class="mb-6" x-show="jenis === 'kelompok'" x-cloak>
+                <label class="block font-semibold mb-2">Tambah Anggota</label>
+                <div class="flex items-center gap-2 mb-2">
+                    <select x-model="anggota" class="border border-gray-300 px-4 py-2 rounded w-1/2">
+                        <option value="" disabled selected>Pilih Anggota</option>
+                        @foreach ($anggotas as $anggota)
+                            <option value="{{ $anggota->name }}">{{ $anggota->name }}</option>
+                        @endforeach
+                    </select>
+                    <button type="button"
+                        @click="if (anggota && !daftarAnggota.includes(anggota)) { daftarAnggota.push(anggota); anggota = '' }"
+                        class="bg-blue-600 text-white px-4 py-2 rounded">+</button>
+                </div>
+                <ul class="list-decimal pl-5 space-y-1">
+                    <template x-for="(item, index) in daftarAnggota" :key="index">
+                        <li x-text="`${item}`"></li>
+                    </template>
+                </ul>
+            </div>
+
+            <!-- Keperluan -->
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Keperluan<span class="text-red-600">*</span></label>
+                <input name="tujuan_peminjaman" type="text" required
+                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Masukkan keperluan"
+                    value="{{ old('tujuan_peminjaman') }}">
+            </div>
+
+            <!-- Durasi -->
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Durasi Kegiatan<span class="text-red-600">*</span></label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-1">Tanggal Mulai<span class="text-red-600">*</span></label>
+                        <input type="date" name="tgl_peminjaman" x-model="tanggalPeminjaman" :min="hariIni"
+                            class="w-full border border-gray-300 px-4 py-2 rounded" required
+                            value="{{ old('tgl_peminjaman') }}">
+                    </div>
+                    <div>
+                        <label class="block mb-1">Tanggal Selesai<span class="text-red-600">*</span></label>
+                        <input type="date" name="tgl_pengembalian" x-model="tanggalPengembalian"
+                            :min="tanggalPeminjaman" :disabled="!tanggalPeminjaman"
+                            class="w-full border border-gray-300 px-4 py-2 rounded" required
+                            value="{{ old('tgl_pengembalian') }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Judul Penelitian -->
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Judul Penelitian<span class="text-red-600">*</span></label>
+                <input name="judul_penelitian" type="text" required
+                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Judul Penelitian"
+                    value="{{ old('judul_penelitian') }}">
+            </div>
+
+            <!-- Dosen Pembimbing -->
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Dosen Pembimbing<span class="text-red-600">*</span></label>
+                <select name="dosen_pembimbing" class="border border-gray-300 px-4 py-2 rounded w-full" required>
+                    <option value="{{ old('dosen_pembimbing') }}" disabled selected>Pilih Dosen</option>
+                    @foreach ($dosens as $dosen)
+                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Tambah Alat -->
+            <div class="mb-6">
+                <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam<span class="text-red-600">*</span></label>
+                <div class="flex items-center gap-2 mb-2">
+                    <select x-model="selectedBaseName" class="border border-gray-300 px-4 py-2 rounded w-1/2" required>
+                        <option value="" disabled selected>Pilih Alat</option>
+                        <template x-for="(group, baseName) in compactedAlat" :key="baseName">
+                            <option :value="baseName" x-text="baseName + ' (' + group.length + ' tersedia)'">
+                            </option>
+                        </template>
+                    </select>
+                    <input x-model.number="selectedQty" type="number" min="1"
+                        :max="selectedBaseName ? compactedAlat[selectedBaseName]?.length : 1"
+                        class="border border-gray-300 px-4 py-2 rounded w-20" :disabled="!selectedBaseName">
+                    <button type="button" @click="addAlat()" class="bg-blue-600 text-white px-4 py-2 rounded"
+                        :disabled="!selectedBaseName || !selectedQty || selectedQty < 1 || selectedQty > (compactedAlat[
+                            selectedBaseName]?.length || 0)">+</button>
+                </div>
+                <ul class="list-decimal pl-5 space-y-1">
+                    <template x-for="(item, index) in daftarAlat" :key="item.baseName">
+                        <li>
+                            <span x-text="item.baseName + ' (Qty: ' + item.ids.length + ')'"></span>
+                            <button type="button" @click="removeAlat(item.baseName)"
+                                class="text-red-600 ml-2">Hapus</button>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+
+            <!-- Hidden Inputs -->
+            <input type="hidden" name="daftar_anggota" :value="JSON.stringify(daftarAnggota)">
+            <input type="hidden" name="daftar_alat" :value="JSON.stringify(flatAlatIds)">
+
+            <!-- Submit -->
+            <div class="text-center">
+                <button type="submit"
+                    @click.prevent="
+                        $el.form.daftar_anggota.value = JSON.stringify(daftarAnggota);
+                        $el.form.daftar_alat.value = JSON.stringify(flatAlatIds);
+                        $el.form.submit();
+                    "
+                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</x-admin-layout>
+
+<script>
+    function pengajuanAlat() {
+        // Group alat by base name
+        const allAlats = @json($alats);
+        let compacted = {};
+        allAlats.forEach(alat => {
+            const baseName = alat.name.replace(/\s+#\d+$/, '');
+            if (!compacted[baseName]) compacted[baseName] = [];
+            compacted[baseName].push(alat);
+        });
+        return {
+            jenis: 'pribadi',
+            anggota: '',
+            daftarAnggota: [],
+            selectedBaseName: '',
+            selectedQty: 1,
+            compactedAlat: compacted,
+            daftarAlat: [], // [{ baseName, ids: [id, id, ...] }]
+            tanggalPeminjaman: '',
+            tanggalPengembalian: '',
+            hariIni: new Date().toISOString().split('T')[0],
+            get flatAlatIds() {
+                // Flatten all selected alat IDs
+                return this.daftarAlat.flatMap(item => item.ids);
+            },
+            addAlat() {
+                if (!this.selectedBaseName || !this.selectedQty) return;
+                const available = this.compactedAlat[this.selectedBaseName] || [];
+                // Exclude already selected IDs
+                const alreadySelected = this.flatAlatIds;
+                const filtered = available.filter(a => !alreadySelected.includes(a.id));
+                if (filtered.length < this.selectedQty) return;
+                const ids = filtered.slice(0, this.selectedQty).map(a => a.id);
+                this.daftarAlat.push({
+                    baseName: this.selectedBaseName,
+                    ids
+                });
+                this.selectedBaseName = '';
+                this.selectedQty = 1;
+            },
+            removeAlat(baseName) {
+                this.daftarAlat = this.daftarAlat.filter(item => item.baseName !== baseName);
+            }
+        }
+    }
+</script>
