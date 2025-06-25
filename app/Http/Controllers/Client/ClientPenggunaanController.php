@@ -58,6 +58,10 @@ class ClientPenggunaanController extends Controller
                 'tipe'              => 'alat',
             ]);
 
+            if ($existing) {
+                continue;
+            }
+
             $alat = Alat::findOrFail($laporan->alat_id);
             $alat->status = 'Sedang Digunakan';
             $alat->save();
