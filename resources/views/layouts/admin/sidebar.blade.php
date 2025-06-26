@@ -89,7 +89,7 @@
                                         <p>
                                             Validasi Peminjaman
                                             @if ($jumlahValidasiPeminjaman > 0)
-                                                <span class="badge badge-danger right">{{ $jumlahValidasiPeminjaman }}</span>
+                                                <span class="badge badge-danger">{{ $jumlahValidasiPeminjaman }}</span>
                                             @endif
                                         </p>
                                     </a>
@@ -102,7 +102,7 @@
                                         <p>
                                             Validasi Penggunaan
                                             @if ($jumlahValidasiPenggunaan > 0)
-                                                <span class="badge badge-danger right">{{ $jumlahValidasiPenggunaan }}</span>
+                                                <span class="badge badge-danger">{{ $jumlahValidasiPenggunaan }}</span>
                                             @endif
                                         </p>
                                     </a>
@@ -116,7 +116,7 @@
                                         <p>
                                             Validasi Pengembalian
                                             @if ($jumlahValidasiPengembalian > 0)
-                                                <span class="badge badge-danger right">{{ $jumlahValidasiPengembalian }}</span>
+                                                <span class="badge badge-danger">{{ $jumlahValidasiPengembalian }}</span>
                                             @endif
                                         </p>
                                     </a>
