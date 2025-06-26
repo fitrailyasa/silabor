@@ -33,7 +33,7 @@
         <tbody>
             @forelse ($users->where('email', '!=', 'super@admin.com') as $user)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $users->firstItem() + $loop->index }}</td>
                     <td>{{ $user->name ?? '-' }}</td>
                     <td class="d-none d-lg-table-cell">{{ $user->nim ?? '-' }}</td>
                     <td class="d-none d-lg-table-cell">
