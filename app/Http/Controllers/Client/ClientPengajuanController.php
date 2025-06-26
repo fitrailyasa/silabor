@@ -59,7 +59,7 @@ class ClientPengajuanController extends Controller
 
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
-        $query = LaporanPeminjaman::where('user_id', Auth::user()->id)->where('status_validasi', 'Menunggu');
+        $query = LaporanPeminjaman::where('user_id', Auth::user()->id)->where('status_validasi', 'Menunggu')->orderBy('updated_at', 'desc');
 
         $query->orderByRaw("CASE WHEN status_validasi = 'Menunggu' THEN 0 ELSE 1 END");
 
