@@ -109,7 +109,7 @@ class ClientPengajuanController extends Controller
             [
                 'jenis.required' => 'Jenis peminjaman harus diisi.',
                 'tujuan_peminjaman.required' => 'Tujuan peminjaman harus diisi.',
-                'judul_penelitian.required' => 'Judul penelitian harus diisi.',
+                'judul_penelitian.required' => 'Judul penelitian / Kegiatan harus diisi.',
                 'dosen_pembimbing.required' => 'Dosen pembimbing harus dipilih.',
                 'dosen_pembimbing.exists' => 'Dosen pembimbing tidak ditemukan.',
                 'tgl_peminjaman.required' => 'Tanggal peminjaman harus diisi.',

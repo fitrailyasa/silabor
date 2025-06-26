@@ -72,11 +72,11 @@
                 </div>
             </div>
 
-            <!-- Judul Penelitian -->
+            <!-- Judul Penelitian / Kegiatan -->
             <div class="mb-6">
-                <label class="block font-semibold mb-2">Judul Penelitian<span class="text-red-600">*</span></label>
+                <label class="block font-semibold mb-2">Judul Penelitian/Kegiatan<span class="text-red-600">*</span></label>
                 <input name="judul_penelitian" type="text" required
-                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Judul Penelitian"
+                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Judul Penelitian/Kegiatan"
                     value="{{ old('judul_penelitian') }}">
             </div>
 
