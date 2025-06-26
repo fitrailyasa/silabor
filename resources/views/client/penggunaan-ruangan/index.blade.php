@@ -9,7 +9,6 @@
 
     <!-- Tailwind CSS & AlpineJS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/alpinejs" defer></script>
 
     <!-- Flatpickr CSS & JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
