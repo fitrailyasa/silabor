@@ -97,11 +97,11 @@ class AdminLaporanController extends Controller
             ->paginate($validPerPage);
 
         $users = User::orderBy('name')->get();
-        $items = collect($laporans)
+        $items = $laporans->getCollection()
             ->map(function ($laporan) {
-                return $laporan->alat->name
-                    ?? $laporan->bahan->name
-                    ?? $laporan->ruangan->name;
+                return optional($laporan->alat)->name
+                    ?? optional($laporan->bahan)->name
+                    ?? optional($laporan->ruangan)->name;
             })
             ->filter()
             ->unique()
