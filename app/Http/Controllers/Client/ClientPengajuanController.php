@@ -104,6 +104,19 @@ class ClientPengajuanController extends Controller
             'tgl_pengembalian' => 'required|date|after_or_equal:tgl_peminjaman',
             'daftar_anggota' => 'nullable|string',
             'daftar_alat' => 'required|string',
+        ],
+        [
+            'jenis.required' => 'Jenis peminjaman harus diisi.',
+            'tujuan_peminjaman.required' => 'Tujuan peminjaman harus diisi.',
+            'judul_penelitian.required' => 'Judul penelitian harus diisi.',
+            'dosen_pembimbing.required' => 'Dosen pembimbing harus dipilih.',
+            'dosen_pembimbing.exists' => 'Dosen pembimbing tidak ditemukan.',
+            'tgl_peminjaman.required' => 'Tanggal peminjaman harus diisi.',
+            'tgl_peminjaman.date' => 'Tanggal peminjaman harus berupa tanggal.',
+            'tgl_pengembalian.required' => 'Tanggal pengembalian harus diisi.',
+            'tgl_pengembalian.date' => 'Tanggal pengembalian harus berupa tanggal.',
+            'tgl_pengembalian.after_or_equal' => 'Tanggal pengembalian harus setelah tanggal peminjaman.',
+            'daftar_alat.required' => 'Daftar alat harus diisi.',
         ]);
 
         // daftar_alat is now a flat array of alat IDs

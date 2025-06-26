@@ -89,9 +89,14 @@ class AdminTransaksiController extends Controller
         ]);
 
         if ($request->status_validasi == 'Ditolak') {
-            $request->validate([
-                'catatan' => 'required|string|max:1000',
-            ]);
+            $request->validate(
+                [
+                    'catatan' => 'required|string|max:1000',
+                ],
+                [
+                    'catatan.required' => 'Catatan harus diisi.',
+                ]
+            );
         }
 
         $laporan = LaporanPeminjaman::findOrFail($id);
@@ -172,9 +177,14 @@ class AdminTransaksiController extends Controller
         }
 
         if ($request->status_peminjaman === 'Ditolak') {
-            $request->validate([
-                'catatan' => 'required|string|max:1000',
-            ]);
+            $request->validate(
+                [
+                    'catatan' => 'required|string|max:1000',
+                ],
+                [
+                    'catatan.required' => 'Catatan harus diisi.',
+                ]
+            );
         }
 
         if ($request->status_peminjaman === 'Ditolak' && $laporan->alat !== null) {
@@ -239,9 +249,14 @@ class AdminTransaksiController extends Controller
         }
 
         if ($request->kondisi_setelah === 'Rusak') {
-            $request->validate([
-                'deskripsi_kerusakan' => 'required|string|max:1000',
-            ]);
+            $request->validate(
+                [
+                    'deskripsi_kerusakan' => 'required|string|max:1000',
+                ],
+                [
+                    'deskripsi_kerusakan.required' => 'Deskripsi kerusakan harus diisi.',
+                ]
+            );
         }
 
         $laporan->status_pengembalian = 'Sudah Dikembalikan';

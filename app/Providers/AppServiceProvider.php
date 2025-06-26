@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setLocale('id');
 
         View::composer('*', function ($view) {
-            $jumlahValidasiPeminjaman = \App\Models\LaporanPeminjaman::where('status_validasi', 'Menunggu')->where('surat', '!=', null)->count();
+            $jumlahValidasiPeminjaman = \App\Models\LaporanPeminjaman::where('status_validasi', 'Menunggu')->count();
             $jumlahValidasiPenggunaan = \App\Models\Laporan::where('status_peminjaman', 'Menunggu')->count();
             $jumlahValidasiPengembalian = \App\Models\Laporan::where('status_peminjaman', 'Diterima')->where('status_pengembalian', 'Belum Dikembalikan')->count();
 

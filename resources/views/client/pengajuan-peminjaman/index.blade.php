@@ -21,28 +21,7 @@
         @csrf
 
         <div x-data="pengajuanAlat()" x-init="() => initTomSelect(compactedAlat)">
-            <!-- Jenis Peminjaman -->
-            <div class="mb-6">
-                <label class="font-semibold block mb-2">Jenis Peminjaman<span class="text-red-600">*</span></label>
-                <div class="flex space-x-4">
-                    <label>
-                        <input type="radio" name="jenis" value="pribadi" x-model="jenis" class="hidden">
-                        <div :class="jenis === 'pribadi' ? 'bg-gray-800 text-white' :
-                            'bg-white border border-gray-300 text-gray-700'"
-                            class="px-4 py-2 rounded cursor-pointer">
-                            PRIBADI
-                        </div>
-                    </label>
-                    <label>
-                        <input type="radio" name="jenis" value="kelompok" x-model="jenis" class="hidden">
-                        <div :class="jenis === 'kelompok' ? 'bg-gray-800 text-white' :
-                            'bg-white border border-gray-300 text-gray-700'"
-                            class="px-4 py-2 rounded cursor-pointer">
-                            KELOMPOK
-                        </div>
-                    </label>
-                </div>
-            </div>
+            <input type="hidden" name="jenis" x-model="jenis" value="pribadi">
 
             <!-- Tambah Anggota (kelompok saja) -->
             <div class="mb-6" x-show="jenis === 'kelompok'" x-cloak>
