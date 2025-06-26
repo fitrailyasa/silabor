@@ -23,33 +23,29 @@
         <div x-data="pengajuanAlat()" x-init="() => initTomSelect(compactedAlat)">
             <input type="hidden" name="jenis" x-model="jenis" value="pribadi">
 
-            <!-- Tambah Anggota (kelompok saja) -->
-            <div class="mb-6" x-show="jenis === 'kelompok'" x-cloak>
-                <label class="block font-semibold mb-2">Tambah Anggota</label>
-                <div class="flex items-center gap-2 mb-2">
-                    <select x-model="anggota" class="border border-gray-300 px-4 py-2 rounded w-1/2">
-                        <option value="" disabled selected>Pilih Anggota</option>
-                        @foreach ($anggotas as $anggota)
-                            <option value="{{ $anggota->name }}">{{ $anggota->name }}</option>
-                        @endforeach
-                    </select>
-                    <button type="button"
-                        @click="if (anggota && !daftarAnggota.includes(anggota)) { daftarAnggota.push(anggota); anggota = '' }"
-                        class="bg-blue-600 text-white px-4 py-2 rounded">+</button>
-                </div>
-                <ul class="list-decimal pl-5 space-y-1">
-                    <template x-for="(item, index) in daftarAnggota" :key="index">
-                        <li x-text="`${item}`"></li>
-                    </template>
-                </ul>
-            </div>
-
             <!-- Keperluan -->
-            <div class="mb-6">
+            <div class="mb-6" x-data="{
+                selectedKeperluan: '',
+                customKeperluan: ''
+            }">
                 <label class="block font-semibold mb-2">Keperluan<span class="text-red-600">*</span></label>
-                <input name="tujuan_peminjaman" type="text" required
-                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Masukkan keperluan"
-                    value="{{ old('tujuan_peminjaman') }}">
+
+                <select x-model="selectedKeperluan" class="w-full border border-gray-300 px-4 py-2 rounded mb-2"
+                    required>
+                    <option value="" disabled selected>Pilih keperluan</option>
+                    <option value="Tugas Akhir">Tugas Akhir</option>
+                    <option value="Tugas Mata Kuliah">Tugas Mata Kuliah</option>
+                    <option value="lainnya">Lainnya</option>
+                </select>
+
+                <!-- Muncul hanya jika "Lainnya" dipilih -->
+                <input x-show="selectedKeperluan === 'lainnya'" x-model="customKeperluan" type="text"
+                    class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Masukkan keperluan lainnya"
+                    :required="selectedKeperluan === 'lainnya'">
+
+                <!-- Hidden input untuk dikirim ke server -->
+                <input type="hidden" name="tujuan_peminjaman"
+                    :value="selectedKeperluan === 'lainnya' ? customKeperluan : selectedKeperluan">
             </div>
 
             <!-- Durasi -->
@@ -74,7 +70,8 @@
 
             <!-- Judul Penelitian / Kegiatan -->
             <div class="mb-6">
-                <label class="block font-semibold mb-2">Judul Penelitian/Kegiatan<span class="text-red-600">*</span></label>
+                <label class="block font-semibold mb-2">Judul Penelitian/Kegiatan<span
+                        class="text-red-600">*</span></label>
                 <input name="judul_penelitian" type="text" required
                     class="w-full border border-gray-300 px-4 py-2 rounded" placeholder="Judul Penelitian/Kegiatan"
                     value="{{ old('judul_penelitian') }}">
