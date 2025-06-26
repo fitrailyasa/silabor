@@ -2,6 +2,7 @@
 <aside class="main-sidebar elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link border-bottom text-center">
+        <img src="{{ asset('assets/logo.jpg') }}" class="img-circle elevation-2 img-fluid me-1" width="35" alt="">
         <span class="brand-text font-weight-bold text-white">{{ strtoupper(config('app.name')) }}</span>
     </a>
 
@@ -9,7 +10,8 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
                 <x-sidebar-link route="admin.dashboard" icon="tachometer-alt" label="Dashboard" />
 
                 @php
