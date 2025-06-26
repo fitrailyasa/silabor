@@ -48,10 +48,10 @@ class AdminLaporanController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $laporans = LaporanPeminjaman::whereIn('status_validasi', ['Diterima', 'Ditolak'])->where('name', 'like', "%{$search}%")
+            $laporans = LaporanPeminjaman::whereIn('status_validasi', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->where('name', 'like', "%{$search}%")
                 ->paginate($validPerPage);
         } else {
-            $laporans = LaporanPeminjaman::whereIn('status_validasi', ['Diterima', 'Ditolak'])->paginate($validPerPage);
+            $laporans = LaporanPeminjaman::whereIn('status_validasi', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->paginate($validPerPage);
         }
 
         return view("admin.laporan.peminjaman.index", compact('laporans', 'search', 'perPage'));
@@ -70,10 +70,10 @@ class AdminLaporanController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->where('name', 'like', "%{$search}%")
+            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->where('name', 'like', "%{$search}%")
                 ->paginate($validPerPage);
         } else {
-            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->paginate($validPerPage);
+            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->paginate($validPerPage);
         }
 
         return view("admin.laporan.penggunaan.index", compact('laporans', 'search', 'perPage'));
@@ -92,10 +92,10 @@ class AdminLaporanController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->where('kondisi_setelah', 'Rusak')->where('name', 'like', "%{$search}%")
+            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->where('kondisi_setelah', 'Rusak')->where('name', 'like', "%{$search}%")
                 ->paginate($validPerPage);
         } else {
-            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->where('kondisi_setelah', 'Rusak')->paginate($validPerPage);
+            $laporans = Laporan::whereIn('status_peminjaman', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->where('kondisi_setelah', 'Rusak')->paginate($validPerPage);
         }
 
         return view("admin.laporan.kerusakan.index", compact('laporans', 'search', 'perPage'));

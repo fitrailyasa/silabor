@@ -28,10 +28,10 @@ class ClientRiwayatController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $laporans = LaporanPeminjaman::where('user_id', Auth::user()->id)->whereIn('status_validasi', ['Diterima', 'Ditolak'])->where('name', 'like', "%{$search}%")
+            $laporans = LaporanPeminjaman::where('user_id', Auth::user()->id)->whereIn('status_validasi', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->where('name', 'like', "%{$search}%")
                 ->paginate($validPerPage);
         } else {
-            $laporans = LaporanPeminjaman::where('user_id', Auth::user()->id)->whereIn('status_validasi', ['Diterima', 'Ditolak'])->paginate($validPerPage);
+            $laporans = LaporanPeminjaman::where('user_id', Auth::user()->id)->whereIn('status_validasi', ['Diterima', 'Ditolak'])->orderBy('updated_at', 'desc')->paginate($validPerPage);
         }
         return view("client.riwayat.pengajuan.index", compact('laporans', 'search', 'perPage'));
     }
@@ -49,10 +49,10 @@ class ClientRiwayatController extends Controller
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
         if ($search) {
-            $laporans = Laporan::where('user_id', Auth::user()->id)->where('name', 'like', "%{$search}%")
+            $laporans = Laporan::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->where('name', 'like', "%{$search}%")
                 ->paginate($validPerPage);
         } else {
-            $laporans = Laporan::where('user_id', Auth::user()->id)->paginate($validPerPage);
+            $laporans = Laporan::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate($validPerPage);
         }
 
         return view("client.riwayat.penggunaan.index", compact('laporans', 'search', 'perPage'));
