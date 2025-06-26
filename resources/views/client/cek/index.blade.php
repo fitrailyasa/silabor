@@ -14,9 +14,9 @@
                 </div>
                 <div class="col-md-1">
                     <select name="perPage" class="form-select">
-                        <option value="10" {{ request('perPage') == 10 ? 'selected' : '' }}>10</option>
-                        <option value="50" {{ request('perPage') == 50 ? 'selected' : '' }}>50</option>
-                        <option value="100" {{ request('perPage') == 100 ? 'selected' : '' }}>100</option>
+                        <option value="12" {{ request('perPage') == 12 ? 'selected' : '' }}>12</option>
+                        <option value="60" {{ request('perPage') == 60 ? 'selected' : '' }}>60</option>
+                        <option value="120" {{ request('perPage') == 120 ? 'selected' : '' }}>120</option>
                     </select>
                 </div>
 

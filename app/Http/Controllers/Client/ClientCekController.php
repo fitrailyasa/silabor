@@ -21,16 +21,16 @@ class ClientCekController extends Controller
     {
         $request->validate([
             'search' => 'nullable|string|max:255',
-            'perPage' => 'nullable|integer|in:10,50,100',
+            'perPage' => 'nullable|integer|in:12,60,120',
             'view' => 'nullable|in:compact,detail',
         ]);
 
         $search = $request->input('search');
-        $perPage = (int) $request->input('perPage', 10);
+        $perPage = (int) $request->input('perPage', 12);
         $view = $request->input('view', 'compact');
         $page = $request->input('page', 1);
 
-        $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
+        $validPerPage = in_array($perPage, [12, 60, 120]) ? $perPage : 12;
 
         if ($view === 'detail') {
             $alats = Alat::when($search, fn($q) => $q->where('name', 'like', "%$search%"))
