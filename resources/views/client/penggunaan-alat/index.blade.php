@@ -36,7 +36,7 @@
             }
         @endphp
         @foreach ($compactedAlat as $baseName => $group)
-            <div class="col-12 col-xs-6 col-sm-6 col-md-4 col-lg-3">
+            <div class="col-6 col-xs-6 col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 shadow-sm">
                     <img src="{{ $group[0]->img ? '/storage/' . $group[0]->img : '/assets/img/default.png' }}"
                         class="card-img-top object-fit-cover" style="height: 180px;" alt="{{ $baseName }}">
