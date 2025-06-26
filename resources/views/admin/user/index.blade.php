@@ -12,6 +12,11 @@
         @endcan
     </x-slot>
 
+    <!-- Search & Pagination -->
+    <x-slot name="search">
+        @include('components.search')
+    </x-slot>
+
     <!-- Table -->
     <table id="" class="table table-bordered table-striped">
         <thead>
