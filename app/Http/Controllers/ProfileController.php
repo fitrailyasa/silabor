@@ -22,7 +22,7 @@ class ProfileController extends Controller
             'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'no_hp' => ['nullable', 'string', 'max:255'],
-            'nim' => ['nullable', 'string', 'max:9'],
+            'nim' => ['nullable', 'string', 'max:20'],
             'prodi' => ['nullable', 'string', 'max:255'],
             'angkatan' => ['nullable', 'string', 'max:4'],
         ]);

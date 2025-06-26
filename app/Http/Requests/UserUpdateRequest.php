@@ -25,7 +25,7 @@ class UserUpdateRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($id),
             ],
             'no_hp' => 'nullable|max:255',
-            'nim' => 'nullable|max:9',
+            'nim' => 'nullable|max:20',
             'prodi' => 'nullable|max:100',
             'angkatan' => 'nullable|max:255',
             'password' => 'nullable|min:8',
