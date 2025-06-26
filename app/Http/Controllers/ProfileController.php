@@ -27,17 +27,30 @@ class ProfileController extends Controller
             'angkatan' => ['nullable', 'string', 'max:4'],
         ]);
 
-        $request->user()->update($request->all());
+        $user = $request->user();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->no_hp = $request->no_hp;
+        $user->nim = $request->nim;
+        $user->prodi = $request->prodi;
+        $user->angkatan = $request->angkatan;
+
+        // Update password hanya jika diisi
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
 
         // img
         if ($request->hasFile('img')) {
             $img = $request->file('img');
-            $file_name = $request->user()->name . '_' . time() . '.' . $img->getClientOriginalExtension();
-            $request->user()->img = $file_name;
-            $request->user()->update();
+            $file_name = $user->name . '_' . time() . '.' . $img->getClientOriginalExtension();
+            $user->img = $file_name;
             $img->storeAs('public', $file_name);
         }
-        
-        return redirect()->route('profile.edit')->with('message', 'profile updated successfully');
+
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('message', 'Profile updated successfully');
     }
 }
