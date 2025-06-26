@@ -159,7 +159,7 @@
                 <td>Judul Penelitian</td>
                 <td>: {{ $judulPenelitian ?? '-' }}</td>
             </tr>
-            @if (auth()->user()->role != 'dosen')
+            @if (!auth()->user()->hasRole('dosen'))
                 <tr>
                     <td>Dosen Pembimbing</td>
                     <td>: {{ $dosenPembimbing ?? '-' }}</td>
