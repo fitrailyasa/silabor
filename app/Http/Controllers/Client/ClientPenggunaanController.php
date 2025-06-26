@@ -138,6 +138,29 @@ class ClientPenggunaanController extends Controller
 
     public function kembalikanAlat($alatId)
     {
-        //
+        $alat = Alat::findOrFail($alatId);
+        $laporans = Laporan::where('alat_id', $alatId)
+            ->where('user_id', Auth::id())
+            ->where('status_pengembalian', '!=', 'Sudah Dikembalikan')
+            ->get();
+
+        if ($alat && $laporans->count()) {
+            $alat->status = 'Tersedia';
+            $alat->save();
+            foreach ($laporans as $laporan) {
+                $laporan->status_pengembalian = 'Sudah Dikembalikan';
+                $laporan->save();
+            }
+            return response()->json(['success' => true, 'message' => 'Alat berhasil dikembalikan.']);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal mengembalikan alat. Tidak ditemukan laporan aktif untuk alat ini.',
+            'debug' => [
+                'alat_id' => $alatId,
+                'user_id' => Auth::id(),
+                'laporans_count' => $laporans->count(),
+            ]
+        ], 400);
     }
 }

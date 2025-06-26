@@ -172,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer d-flex justify-content-between">
+                                <div class="modal-footer d-flex justify-content-end">
                                     <button type="button" class="btn btn-success"
                                         onclick="document.getElementById('status_validasi_modal_{{ $laporan->id }}').value='Diterima'; this.form.submit();">Setuju</button>
                                     <button type="button" class="btn btn-danger"

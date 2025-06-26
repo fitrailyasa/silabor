@@ -108,18 +108,18 @@
                 <div class="modal-content p-3">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="catatan">Catatan</label>
                                 <textarea name="catatan" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="gambar_sebelum">Gambar Alat Sebelum <small
                                         class="text-muted">(opsional)</small></label>
                                 <input type="file" name="gambar_sebelum" class="form-control" accept="image/*">
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex justify-content-between">
+                    <div class="modal-footer d-flex justify-content-end">
                         <button type="button" class="btn btn-success"
                             onclick="submitValidasi('Diterima')">Setuju</button>
                         <button type="button" class="btn btn-danger" onclick="submitValidasi('Ditolak')">Tolak</button>
