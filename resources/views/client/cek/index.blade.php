@@ -24,7 +24,9 @@
                 <div class="col-md-2 mb-4">
                     <select name="type" class="form-select">
                         <option value="alat" {{ request('type', 'alat') == 'alat' ? 'selected' : '' }}>Alat</option>
-                        <option value="bahan" {{ request('type') == 'bahan' ? 'selected' : '' }}>Bahan</option>
+                        @if (!auth()->user()->hasRole('dosen'))
+                            <option value="bahan" {{ request('type') == 'bahan' ? 'selected' : '' }}>Bahan</option>
+                        @endif
                         <option value="ruangan" {{ request('type') == 'ruangan' ? 'selected' : '' }}>Ruangan</option>
                     </select>
                 </div>
