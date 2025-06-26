@@ -159,10 +159,12 @@
                 <td>Judul Penelitian</td>
                 <td>: {{ $judulPenelitian ?? '-' }}</td>
             </tr>
-            <tr>
-                <td>Dosen Pembimbing</td>
-                <td>: {{ $dosenPembimbing ?? '-' }}</td>
-            </tr>
+            @if (auth()->user()->role != 'dosen')
+                <tr>
+                    <td>Dosen Pembimbing</td>
+                    <td>: {{ $dosenPembimbing ?? '-' }}</td>
+                </tr>
+            @endif
         </table>
     </div>
 
@@ -205,7 +207,8 @@
         <table class="no-border" style="width: 100%; margin-top: 20px;">
             <tr>
                 <td width="50%"><br><br>Laboran<br><br><br><br><br>Ading Atma Gamilang<br>NRK/NIP</td>
-                <td width="50%">{{ $tanggalHariIni }}<br><br>Koordinator Laboratorium<br>Program Studi Teknik Biomedis<br><br><br><br>Doni Bowo Nugroho, S.Pd., M.Sc<br>NRK. 1992092420211411</td>
+                <td width="50%">{{ $tanggalHariIni }}<br><br>Koordinator Laboratorium<br>Program Studi Teknik
+                    Biomedis<br><br><br><br>Doni Bowo Nugroho, S.Pd., M.Sc<br>NRK. 1992092420211411</td>
             </tr>
         </table>
         <br><br>
