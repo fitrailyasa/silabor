@@ -97,11 +97,16 @@ class AdminLaporanController extends Controller
             ->paginate($validPerPage);
 
         $users = User::orderBy('name')->get();
-        $items = collect([
-            ...Alat::all()->pluck('name'),
-            ...Bahan::all()->pluck('name'),
-            ...Ruangan::all()->pluck('name'),
-        ])->unique()->sort()->values();
+        $items = collect($laporans)
+            ->map(function ($laporan) {
+                return $laporan->alat->name
+                    ?? $laporan->bahan->name
+                    ?? $laporan->ruangan->name;
+            })
+            ->filter()
+            ->unique()
+            ->sort()
+            ->values();
 
         return view("admin.laporan.penggunaan.index", compact('laporans', 'search', 'perPage', 'users', 'items'));
     }
