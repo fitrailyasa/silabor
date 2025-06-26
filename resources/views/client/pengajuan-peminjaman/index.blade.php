@@ -107,7 +107,8 @@
 
             <!-- Tambah Alat -->
             <div class="mb-6">
-                <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam<span class="text-red-600">*</span></label>
+                <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam<span
+                        class="text-red-600">*</span></label>
                 <div class="flex items-center gap-2 mb-2">
                     <select x-model="selectedBaseName" class="border border-gray-300 px-4 py-2 rounded w-1/2" required>
                         <option value="" disabled selected>Pilih Alat</option>
@@ -139,15 +140,18 @@
             <input type="hidden" name="daftar_alat" :value="JSON.stringify(flatAlatIds)">
 
             <!-- Submit -->
-            <div class="text-center">
-                <button type="submit"
-                    @click.prevent="
-                        $el.form.daftar_anggota.value = JSON.stringify(daftarAnggota);
-                        $el.form.daftar_alat.value = JSON.stringify(flatAlatIds);
-                        $el.form.submit();
-                    "
-                    class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">SUBMIT</button>
-            </div>
+            <button type="submit"
+                @click.prevent="
+        if (flatAlatIds.length === 0) {
+            alert('Silakan tambahkan minimal satu alat sebelum submit.');
+            return;
+        }
+        $el.form.daftar_anggota.value = JSON.stringify(daftarAnggota);
+        $el.form.daftar_alat.value = JSON.stringify(flatAlatIds);
+        $el.form.submit();
+    "
+                class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">SUBMIT</button>
+        </div>
         </div>
     </form>
 </x-admin-layout>

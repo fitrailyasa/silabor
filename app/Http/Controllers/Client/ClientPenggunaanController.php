@@ -49,22 +49,22 @@ class ClientPenggunaanController extends Controller
         }
 
         foreach ($alatIds as $alatId) {
-            $waktuMulai = Carbon::parse($request->input('waktu_mulai'));
-            $waktuSelesai = Carbon::parse($request->input('waktu_selesai'));
-            $tujuan = $request->input('tujuan_penggunaan');
+            $waktuMulai = Carbon::parse($request->input('waktu_mulai'));
+            $waktuSelesai = Carbon::parse($request->input('waktu_selesai'));
+            $tujuan = $request->input('tujuan_penggunaan');
 
-            // Cek jika laporan identik sudah ada
-            $existing = Laporan::where('user_id', Auth::id())
-                ->where('alat_id', $alatId)
-                ->where('waktu_mulai', $waktuMulai)
-                ->where('waktu_selesai', $waktuSelesai)
-                ->where('tujuan_penggunaan', $tujuan)
-                ->whereIn('status_peminjaman', ['Menunggu', 'Diterima'])
-                ->first();
+            // Cek jika laporan identik sudah ada
+            $existing = Laporan::where('user_id', Auth::id())
+                ->where('alat_id', $alatId)
+                ->where('waktu_mulai', $waktuMulai)
+                ->where('waktu_selesai', $waktuSelesai)
+                ->where('tujuan_penggunaan', $tujuan)
+                ->whereIn('status_peminjaman', ['Menunggu', 'Diterima'])
+                ->first();
 
-            if ($existing) {
-                continue;
-            }
+            if ($existing) {
+                continue;
+            }
 
             $laporan = Laporan::create([
                 'user_id'           => Auth::id(),
