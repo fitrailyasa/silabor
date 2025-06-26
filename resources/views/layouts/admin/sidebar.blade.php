@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link border-bottom text-center">
         <div class="brand-image">
-            <img src="{{ asset('assets/logo.jpg') }}" class="img-circle elevation-2 img-fluid me-1" width="35" alt="">
+            <img src="{{ asset('assets/logo.jpg') }}" class="img-circle elevation-2 img-fluid" width="35" alt="">
         </div>
         <span class="brand-text font-weight-bold text-white">{{ strtoupper(config('app.name')) }}</span>
     </a>
