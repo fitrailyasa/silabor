@@ -71,6 +71,7 @@
                     <td>{{ $bahan->location ?? '-' }}</td>
                     <td>{{ $bahan->date_received ?? '-' }}</td>
                     <td class="manage-row text-center">
+                        @include('admin.bahan.detail')
                         @can('edit-bahan')
                             @include('admin.bahan.edit')
                         @endcan
