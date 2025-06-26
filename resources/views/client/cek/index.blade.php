@@ -53,7 +53,7 @@
                                     style="height: 160px; object-fit: cover; border-top-left-radius: 1rem; border-top-right-radius: 1rem; border-bottom: 4px solid #fff;">
                             @endif
                             <div class="card-body py-2">
-                                <h5 class="card-title fw-bold text-primary">{{ $groupName }}</h5>
+                                <h5 class="card-title fw-bold text-primary">{{ Str::limit($groupName, 25, '...') }}</h5>
                                 <p class="card-text m-0 p-0 text-muted">{{ $items->first()->ruangan->name }}</p>
                                 <p class="card-text m-0 p-0">Total: {{ $items->count() }}</p>
 
@@ -177,7 +177,7 @@
                                         alt="Default">
                                 @endif
                                 <div class="card-body py-2">
-                                    <h5 class="card-title fw-bold text-primary">{{ $bahan->name }}</h5>
+                                    <h5 class="card-title fw-bold text-primary">{{ Str::limit($bahan->name, 25, '...') }}</h5>
                                     <p class="card-text m-0 p-0">Stok: <span
                                             class="badge bg-success">{{ $bahan->stock }}
                                             {{ $bahan->unit }}</span></p>
@@ -210,7 +210,7 @@
                                     alt="Default">
                             @endif
                             <div class="card-body py-2">
-                                <h5 class="card-title fw-bold text-primary">{{ $ruangan->name }}</h5>
+                                <h5 class="card-title fw-bold text-primary">{{ Str::limit($ruangan->name, 25, '...') }}</h5>
                                 <p class="card-text m-0 p-0 text-muted">Gedung: {{ $ruangan->gedung }}</p>
                                 <p class="card-text m-0 p-0 text-muted">Lantai: {{ $ruangan->lantai }}</p>
                                 <p class="card-text m-0 p-0">Kapasitas: <span
