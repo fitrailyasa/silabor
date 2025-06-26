@@ -68,7 +68,7 @@ class AdminTransaksiController extends Controller
 
         $validPerPage = in_array($perPage, [10, 50, 100]) ? $perPage : 10;
 
-        $query = LaporanPeminjaman::where('status_validasi', 'Menunggu')->where('surat', '!=', null);
+        $query = LaporanPeminjaman::where('status_validasi', 'Menunggu');
 
         $query->orderByRaw("CASE WHEN status_validasi = 'Menunggu' THEN 0 ELSE 1 END");
 
