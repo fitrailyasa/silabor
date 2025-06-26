@@ -18,9 +18,9 @@ class LaporanFactory extends Factory
         $types = ['alat', 'bahan', 'ruangan'];
         $selected = $this->faker->randomElement($types);
 
-        $anggotaId = User::role('mahasiswa')->inRandomOrder()->value('id');
+        $anggotaId = User::role('Mahasiswa')->inRandomOrder()->value('id');
 
-        $dosenId = User::role('dosen')->inRandomOrder()->value('id');
+        $dosenId = User::role('Dosen')->inRandomOrder()->value('id');
 
         return [
             'user_id' => $anggotaId,

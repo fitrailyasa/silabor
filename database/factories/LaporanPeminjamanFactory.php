@@ -14,8 +14,8 @@ class LaporanPeminjamanFactory extends Factory
         $endDate = $this->faker->dateTimeBetween($startDate, '+7 days');
 
         // Ambil user dan dosen acak
-        $anggotaId = User::role('mahasiswa')->inRandomOrder()->value('id');
-        $dosenId = User::role('dosen')->inRandomOrder()->value('id');
+        $anggotaId = User::role('Mahasiswa')->inRandomOrder()->value('id');
+        $dosenId = User::role('Dosen')->inRandomOrder()->value('id');
 
         // Ambil 2-4 alat acak
         $alatIds = Alat::inRandomOrder()->limit(rand(2, 4))->pluck('id')->toArray();

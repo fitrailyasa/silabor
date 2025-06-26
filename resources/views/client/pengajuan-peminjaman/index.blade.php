@@ -80,7 +80,7 @@
                     value="{{ old('judul_penelitian') }}">
             </div>
 
-            @if (!auth()->user()->hasRole('dosen'))
+            @if (!auth()->user()->hasRole('Dosen'))
                 <!-- Dosen Pembimbing -->
                 <div class="mb-6">
                     <label class="block font-semibold mb-2">Dosen Pembimbing<span class="text-red-600">*</span></label>

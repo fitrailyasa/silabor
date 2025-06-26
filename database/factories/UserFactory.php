@@ -34,7 +34,7 @@ class UserFactory extends Factory
     // public function configure(): static
     // {
     //     return $this->afterCreating(function (User $user) {
-    //         $role = ['admin', 'dosen', 'mahasiswa'];
+    //         $role = ['Admin', 'Dosen', 'Mahasiswa'];
     //         $user->assignRole($this->faker->randomElement($role));
     //     });
     // }

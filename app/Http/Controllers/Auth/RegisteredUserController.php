@@ -33,14 +33,14 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, 'ends_with:@student.itera.ac.id'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class, 'ends_with:@student.itera.ac.id'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'nim' => ['required', 'string', 'max:9'],
             'prodi' => ['required', 'string', 'max:255'],
             'no_hp' => ['required', 'string', 'max:255'],
         ]);
 
-        $mahasiswaRole = Role::firstOrCreate(['name' => 'mahasiswa']);
+        $mahasiswaRole = Role::firstOrCreate(['name' => 'Mahasiswa']);
 
         $user = User::create([
             'name' => $request->name,

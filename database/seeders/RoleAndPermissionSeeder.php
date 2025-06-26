@@ -30,9 +30,9 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         $roles = [
-            'super-admin' => Permission::where('name', 'not like', '%-client')->pluck('name')->toArray(),
-            'admin' => Permission::where('name', 'not like', '%-role')->where('name', 'not like', '%-client')->pluck('name')->toArray(),
-            'dosen' => [
+            'Super Admin' => Permission::where('name', 'not like', '%-client')->pluck('name')->toArray(),
+            'Admin' => Permission::where('name', 'not like', '%-role')->where('name', 'not like', '%-client')->pluck('name')->toArray(),
+            'Dosen' => [
                 'view-bahan',
                 'create-bahan',
                 'edit-bahan',
@@ -44,7 +44,7 @@ class RoleAndPermissionSeeder extends Seeder
                 'jadwal-dashboard',
                 'history-client',
             ],
-            'mahasiswa' => [
+            'Mahasiswa' => [
                 'check-client',
                 'pengajuan-peminjaman-client',
                 'penggunaan-alat-client',

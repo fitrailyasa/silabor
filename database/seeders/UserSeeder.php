@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Buat roles jika belum ada
-        $superAdminRole = Role::firstOrCreate(['name' => 'super-admin']);
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $dosenRole = Role::firstOrCreate(['name' => 'dosen']);
-        $mahasiswaRole = Role::firstOrCreate(['name' => 'mahasiswa']);
+        $superAdminRole = Role::firstOrCreate(['name' => 'Super Admin']);
+        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
+        $dosenRole = Role::firstOrCreate(['name' => 'Dosen']);
+        $mahasiswaRole = Role::firstOrCreate(['name' => 'Mahasiswa']);
 
         // Daftar user
         $users = [
@@ -67,14 +67,14 @@ class UserSeeder extends Seeder
 
         User::factory()
             ->afterCreating(function ($user) {
-                $user->assignRole('dosen');
+                $user->assignRole('Dosen');
             })
             ->count(5)
             ->create();
 
         User::factory()
             ->afterCreating(function ($user) {
-                $user->assignRole('mahasiswa');
+                $user->assignRole('Mahasiswa');
             })
             ->count(20)
             ->create();
