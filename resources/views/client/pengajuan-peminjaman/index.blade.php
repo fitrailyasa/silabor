@@ -1,11 +1,18 @@
 <x-admin-layout>
-    <!-- Title -->
     <x-slot name="title">
         Pengajuan Peminjaman
     </x-slot>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+    <style>
+        .ts-wrapper.single .ts-control {
+            @apply px-4 py-2 rounded border border-gray-300 text-sm;
+            min-height: 2.5rem;
+        }
+    </style>
 
     @include('components.alert')
 
@@ -13,7 +20,7 @@
         action="{{ route('client.pengajuan-peminjaman.store') }}">
         @csrf
 
-        <div x-data="pengajuanAlat()">
+        <div x-data="pengajuanAlat()" x-init="() => initTomSelect(compactedAlat)">
             <!-- Jenis Peminjaman -->
             <div class="mb-6">
                 <label class="font-semibold block mb-2">Jenis Peminjaman<span class="text-red-600">*</span></label>
@@ -110,12 +117,9 @@
                 <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam<span
                         class="text-red-600">*</span></label>
                 <div class="flex items-center gap-2 mb-2">
-                    <select x-model="selectedBaseName" class="border border-gray-300 px-4 py-2 rounded w-1/2" required>
-                        <option value="" disabled selected>Pilih Alat</option>
-                        <template x-for="(group, baseName) in compactedAlat" :key="baseName">
-                            <option :value="baseName" x-text="baseName + ' (' + group.length + ' tersedia)'">
-                            </option>
-                        </template>
+                    <select id="alatDropdown" x-model="selectedBaseName"
+                        class="w-1/2" required>
+                        <option value="" disabled selected></option>
                     </select>
                     <input x-model.number="selectedQty" type="number" min="1"
                         :max="selectedBaseName ? compactedAlat[selectedBaseName]?.length : 1"
@@ -142,23 +146,21 @@
             <!-- Submit -->
             <button type="submit"
                 @click.prevent="
-        if (flatAlatIds.length === 0) {
-            alert('Silakan tambahkan minimal satu alat sebelum submit.');
-            return;
-        }
-        $el.form.daftar_anggota.value = JSON.stringify(daftarAnggota);
-        $el.form.daftar_alat.value = JSON.stringify(flatAlatIds);
-        $el.form.submit();
-    "
+                    if (flatAlatIds.length === 0) {
+                        alert('Silakan tambahkan minimal satu alat sebelum submit.');
+                        return;
+                    }
+                    $el.form.daftar_anggota.value = JSON.stringify(daftarAnggota);
+                    $el.form.daftar_alat.value = JSON.stringify(flatAlatIds);
+                    $el.form.submit();
+                "
                 class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">SUBMIT</button>
-        </div>
         </div>
     </form>
 </x-admin-layout>
 
 <script>
     function pengajuanAlat() {
-        // Group alat by base name
         const allAlats = @json($alats);
         let compacted = {};
         allAlats.forEach(alat => {
@@ -166,6 +168,7 @@
             if (!compacted[baseName]) compacted[baseName] = [];
             compacted[baseName].push(alat);
         });
+
         return {
             jenis: 'pribadi',
             anggota: '',
@@ -173,18 +176,18 @@
             selectedBaseName: '',
             selectedQty: 1,
             compactedAlat: compacted,
-            daftarAlat: [], // [{ baseName, ids: [id, id, ...] }]
+            daftarAlat: [],
             tanggalPeminjaman: '',
             tanggalPengembalian: '',
             hariIni: new Date().toISOString().split('T')[0],
+
             get flatAlatIds() {
-                // Flatten all selected alat IDs
                 return this.daftarAlat.flatMap(item => item.ids);
             },
+
             addAlat() {
                 if (!this.selectedBaseName || !this.selectedQty) return;
                 const available = this.compactedAlat[this.selectedBaseName] || [];
-                // Exclude already selected IDs
                 const alreadySelected = this.flatAlatIds;
                 const filtered = available.filter(a => !alreadySelected.includes(a.id));
                 if (filtered.length < this.selectedQty) return;
@@ -195,9 +198,29 @@
                 });
                 this.selectedBaseName = '';
                 this.selectedQty = 1;
+                if (window.alatSelect) alatSelect.clear(); // clear dropdown selection
             },
+
             removeAlat(baseName) {
                 this.daftarAlat = this.daftarAlat.filter(item => item.baseName !== baseName);
+            },
+
+            initTomSelect(alatGrouped) {
+                const alatDropdown = document.getElementById('alatDropdown');
+                // Kosongkan dulu
+                alatDropdown.innerHTML = '<option value=""></option>';
+                for (const baseName in alatGrouped) {
+                    const option = document.createElement('option');
+                    option.value = baseName;
+                    option.textContent = `${baseName} (${alatGrouped[baseName].length} tersedia)`;
+                    alatDropdown.appendChild(option);
+                }
+
+                window.alatSelect = new TomSelect('#alatDropdown', {
+                    placeholder: 'Cari alat...',
+                    allowEmptyOption: true,
+                    maxOptions: 100,
+                });
             }
         }
     }
