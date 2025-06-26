@@ -39,7 +39,6 @@
                 <th rowspan="2">Durasi Kegiatan</th>
                 <th rowspan="2">Surat</th>
                 <th rowspan="2">Status Validasi</th>
-                <th rowspan="2">Status Kegiatan</th>
                 <th rowspan="2">Catatan Admin</th>
                 <th rowspan="2">Aksi</th>
             </tr>
@@ -108,17 +107,6 @@
                             <span class="badge badge-warning">Menunggu</span>
                         @elseif ($laporan->status_validasi == 'Ditolak')
                             <span class="badge badge-danger">Ditolak</span>
-                        @endif
-                    </td>
-                    <td>
-                        @php
-                            $today = \Carbon\Carbon::today();
-                            $tglPengembalian = \Carbon\Carbon::parse($laporan->tgl_pengembalian);
-                        @endphp
-                        @if ($today->gt($tglPengembalian))
-                            <span class="badge badge-success">Selesai</span>
-                        @else
-                            <span class="badge badge-warning">Sedang Berjalan</span>
                         @endif
                     </td>
                     <td>{{ $laporan->catatan ?? '-' }}</td>
