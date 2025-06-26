@@ -18,7 +18,7 @@
                     <option value="">Filter by Pengguna</option>
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}" {{ request('filter') == $user->id ? 'selected' : '' }}>
-                            {{ $user->name }} ({{ $user->nim }})
+                            {{ $user->name }} - {{ $user->nim }}
                         </option>
                     @endforeach
                 </select>
