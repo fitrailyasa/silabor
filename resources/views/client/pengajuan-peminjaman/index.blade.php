@@ -80,24 +80,25 @@
                     value="{{ old('judul_penelitian') }}">
             </div>
 
-            <!-- Dosen Pembimbing -->
-            <div class="mb-6">
-                <label class="block font-semibold mb-2">Dosen Pembimbing<span class="text-red-600">*</span></label>
-                <select name="dosen_pembimbing" class="border border-gray-300 px-4 py-2 rounded w-full" required>
-                    <option value="{{ old('dosen_pembimbing') }}" disabled selected>Pilih Dosen</option>
-                    @foreach ($dosens as $dosen)
-                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            @if (!auth()->user()->hasRole('dosen'))
+                <!-- Dosen Pembimbing -->
+                <div class="mb-6">
+                    <label class="block font-semibold mb-2">Dosen Pembimbing<span class="text-red-600">*</span></label>
+                    <select name="dosen_pembimbing" class="border border-gray-300 px-4 py-2 rounded w-full" required>
+                        <option value="{{ old('dosen_pembimbing') }}" disabled selected>Pilih Dosen</option>
+                        @foreach ($dosens as $dosen)
+                            <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <!-- Tambah Alat -->
             <div class="mb-6">
                 <label class="block font-semibold mb-2">Tambah Alat Yang Dipinjam<span
                         class="text-red-600">*</span></label>
                 <div class="flex items-center gap-2 mb-2">
-                    <select id="alatDropdown" x-model="selectedBaseName"
-                        class="w-1/2" required>
+                    <select id="alatDropdown" x-model="selectedBaseName" class="w-1/2" required>
                         <option value="" disabled selected></option>
                     </select>
                     <input x-model.number="selectedQty" type="number" min="1"

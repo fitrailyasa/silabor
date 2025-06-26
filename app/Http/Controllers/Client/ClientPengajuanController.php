@@ -99,7 +99,7 @@ class ClientPengajuanController extends Controller
             'jenis' => 'required|in:pribadi,kelompok',
             'tujuan_peminjaman' => 'required|string',
             'judul_penelitian' => 'required|string',
-            'dosen_pembimbing' => 'required|exists:users,id',
+            'dosen_pembimbing' => 'nullable|exists:users,id',
             'tgl_peminjaman' => 'required|date',
             'tgl_pengembalian' => 'required|date|after_or_equal:tgl_peminjaman',
             'daftar_anggota' => 'nullable|string',
