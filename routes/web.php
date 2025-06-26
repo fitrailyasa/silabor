@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/penggunaan-ruangan', [ClientPenggunaanController::class, 'storeRuangan'])->name('penggunaan-ruangan.store');
         Route::get('/riwayat-pengajuan', [ClientRiwayatController::class, 'riwayatPengajuan'])->name('riwayat-pengajuan');
         Route::get('/riwayat-penggunaan', [ClientRiwayatController::class, 'riwayatPenggunaan'])->name('riwayat-penggunaan');
+        Route::post('/penggunaan-alat/kembalikan/{id}', [ClientPenggunaanController::class, 'kembalikanAlat'])->name('penggunaan-alat.kembalikan');
     });
 
     Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal');

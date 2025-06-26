@@ -14,6 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/confirmDate/confirmDate.css">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @if ($alats->isEmpty())
         <div class="text-danger mb-3">
             <p class="mb-3">Tidak ada alat yang tersedia, silahkan ajukan peminjaman alat terlebih dahulu.</p>
@@ -128,14 +130,14 @@
     <!-- Modal Kembalikan Alat (dummy, implement as needed) -->
     <div class="modal fade" id="modalKembalikan" tabindex="-1" aria-labelledby="modalKembalikanLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalKembalikanLabel">Kembalikan Alat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                    <div id="kembalikanContent"></div>
                 </div>
             </div>
         </div>
@@ -249,6 +251,63 @@
                 });
                 html += `</tbody></table></div>`;
                 document.getElementById('detailContent').innerHTML = html;
+            });
+
+            // Modal Kembalikan
+            var modalKembalikan = document.getElementById('modalKembalikan');
+            modalKembalikan.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var baseName = button.getAttribute('data-basename');
+                const group = compactedAlat[baseName] || [];
+                let html =
+                    `<div class="mb-3"><strong>Ringkasan:</strong><br>
+                    Total Alat: <span>${group.length}</span><br>
+                    Jumlah Baik: <span class="text-success">${group.filter(a => a.condition === 'Baik').length}</span><br>
+                    Jumlah Rusak: <span class="text-danger">${group.filter(a => a.condition === 'Rusak').length}</span><br>
+                    Jumlah Tersedia: <span class="text-primary">${group.filter(a => a.status === 'Tersedia').length}</span></div>`;
+                html +=
+                    `<div class="table-responsive"><table class="table table-bordered table-sm"><thead><tr><th>Nama Alat</th><th>Kondisi</th><th>Status</th><th>Lokasi</th><th>Aksi</th></tr></thead><tbody>`;
+                group.forEach(alat => {
+                    html +=
+                        `<tr><td>${alat.name}</td><td>${alat.condition}</td><td>${alat.status}</td><td>${alat.ruangan?.name || '-'}<\/td><td>`;
+                    if (alat.status !== 'Tersedia') {
+                        html +=
+                            `<button class='btn btn-sm btn-success btn-kembalikan-alat' data-alatid='${alat.id}'>Kembalikan<\/button>`;
+                    } else {
+                        html += `<span class='text-success'>Sudah Tersedia<\/span>`;
+                    }
+                    html += `</td></tr>`;
+                });
+                html += `</tbody></table></div>`;
+                document.getElementById('kembalikanContent').innerHTML = html;
+            });
+
+            // Event delegation for kembalikan button
+            document.getElementById('kembalikanContent').addEventListener('click', function(e) {
+                if (e.target.classList.contains('btn-kembalikan-alat')) {
+                    const alatId = e.target.getAttribute('data-alatid');
+                    if (confirm('Yakin ingin mengembalikan alat ini?')) {
+                        fetch(`/client/penggunaan-alat/kembalikan/${alatId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                        .getAttribute('content'),
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json',
+                                },
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert('Alat berhasil dikembalikan!');
+                                    location.reload();
+                                } else {
+                                    alert(data.message || 'Gagal mengembalikan alat.');
+                                }
+                            })
+                            .catch(() => alert('Terjadi kesalahan.'));
+                    }
+                }
             });
         });
     </script>

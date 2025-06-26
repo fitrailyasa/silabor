@@ -135,4 +135,9 @@ class ClientPenggunaanController extends Controller
 
         return redirect()->route('client.riwayat-penggunaan')->with('message', 'Penggunaan ruangan berhasil disimpan.');
     }
+
+    public function kembalikanAlat($alatId)
+    {
+        //
+    }
 }
