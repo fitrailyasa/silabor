@@ -22,7 +22,7 @@
                 <th>{{ __('Waktu Selesai') }}</th>
                 <th>{{ __('Durasi Penggunaan') }}</th>
                 <th>{{ __('Waktu Pengembalian') }}</th>
-                <th>{{ __('Status Peminjaman') }}</th>
+                <th>{{ __('Status Penggunaan') }}</th>
                 <th>{{ __('Kondisi Setelah Penggunaan') }}</th>
                 <th>{{ __('Catatan') }}</th>
             </tr>
