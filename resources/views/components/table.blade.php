@@ -26,6 +26,10 @@
 
                     {{ $autoValidate ?? '' }}
 
+                    {{ $filter ?? '' }}
+
+                    {{ $filter2 ?? '' }} 
+
                     {{ $export ?? '' }}
 
                 </div>

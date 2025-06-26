@@ -10,6 +10,38 @@
         @include('components.search')
     </x-slot>
 
+    <!-- Button filter -->
+    <x-slot name="filter">
+        <div class="d-flex justify-items-center">
+            <form method="GET" class="me-2">
+                <select class="form-select" name="filter" onchange="this.form.submit()">
+                    <option value="">Filter by Pengguna</option>
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}" {{ request('filter') == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }} ({{ $user->nim }})
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
+    </x-slot>
+
+    <!-- Button filter2 -->
+    <x-slot name="filter2">
+        <div class="d-flex justify-items-center">
+            <form method="GET">
+                <select class="form-select" name="filter2" onchange="this.form.submit()">
+                    <option value="">Filter by Alat/Bahan/Ruangan</option>
+                    @foreach ($items as $item)
+                        <option value="{{ $item }}" {{ request('filter2') == $item ? 'selected' : '' }}>
+                            {{ $item }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
+    </x-slot>
+
     <!-- Button Export -->
     <x-slot name="export">
         @include('admin.laporan.penggunaan.export')
