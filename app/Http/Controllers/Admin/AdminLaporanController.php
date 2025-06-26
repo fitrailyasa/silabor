@@ -96,7 +96,12 @@ class AdminLaporanController extends Controller
             })
             ->paginate($validPerPage);
 
-        $users = User::orderBy('name')->get();
+        $users = $laporans->getCollection()
+            ->map(fn($laporan) => optional($laporan->user))
+            ->filter(fn($user) => $user && $user->id)
+            ->unique('id')
+            ->sortBy('name')
+            ->values();
         $items = $laporans->getCollection()
             ->map(function ($laporan) {
                 return optional($laporan->alat)->name
