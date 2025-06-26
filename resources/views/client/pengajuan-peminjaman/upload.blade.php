@@ -148,7 +148,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="surat">Upload Surat (PDF)</label>
+                                                <label for="surat">Upload Surat Peminjaman yang sudah disetujui (PDF: maks. 2MB)</label>
                                                 <input type="file" name="surat" class="form-control" accept=".pdf"
                                                     required>
                                             </div>
