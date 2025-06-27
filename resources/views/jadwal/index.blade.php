@@ -33,7 +33,6 @@
                 <div class="d-flex align-items-center">
                     <span class="badge bg-success me-2">Diterima</span>
                     <span class="badge bg-warning me-2">Menunggu</span>
-                    <span class="badge bg-danger me-2">Ditolak</span>
                 </div>
             </div>
         </div>

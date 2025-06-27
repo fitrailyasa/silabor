@@ -30,7 +30,8 @@ class JadwalController extends Controller
         // Get events for the calendar
         $query = Laporan::whereNotNull('ruangan_id')
             ->whereHas('ruangan')
-            ->whereBetween('waktu_mulai', [$startOfMonth, $endOfMonth]);
+            ->whereBetween('waktu_mulai', [$startOfMonth, $endOfMonth])
+            ->whereNotIn('status_peminjaman', ['Ditolak']); // Exclude rejected bookings
 
         if ($search) {
             $query->whereHas('user', function ($q) use ($search) {
