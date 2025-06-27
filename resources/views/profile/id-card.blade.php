@@ -19,19 +19,41 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
+        }
+
+        .aspect-ratio-box {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1.6;
+            /* 400 / 250 */
+            position: relative;
         }
 
         .id-card {
-            width: 400px;
-            height: 250px;
-            background: linear-gradient(135deg, #111da2 0%, #15055d 100%);
-            border-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             padding: 20px;
+            border-radius: 15px;
             color: white;
-            position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #111da2 0%, #15055d 100%);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .id-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('{{ asset('assets/logo.png') }}');
+            background-repeat: no-repeat;
+            background-size: 200px;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .id-card::before {
@@ -77,8 +99,8 @@
         .photo {
             width: 80px;
             height: 100px;
-            border-radius: 8px;
             object-fit: cover;
+            border-radius: 8px;
             border: 3px solid rgba(255, 255, 255, 0.3);
         }
 
@@ -92,9 +114,9 @@
 
         .info-label {
             font-size: 9px;
-            opacity: 0.8;
             font-weight: bold;
             text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .info-value {
@@ -120,13 +142,37 @@
             right: 15px;
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8px;
             z-index: 1;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 15px;
+            }
+
+            .header p {
+                font-size: 10px;
+            }
+
+            .photo {
+                width: 70px;
+                height: 90px;
+            }
+
+            .info-label,
+            .info-value {
+                font-size: 9px;
+            }
+
+            .footer {
+                font-size: 9px;
+            }
         }
 
         @media print {
@@ -142,23 +188,21 @@
                 color-adjust: exact;
             }
 
-            .id-card::before {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                color-adjust: exact;
-            }
-
+            .id-card::before,
             .qr-code {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
                 color-adjust: exact;
             }
+
+            .print-button {
+                display: none;
+            }
         }
 
         .print-button {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 20px;
             background: #007bff;
             color: white;
             border: none;
@@ -166,16 +210,11 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
+            z-index: 10;
         }
 
         .print-button:hover {
             background: #0056b3;
-        }
-
-        @media print {
-            .print-button {
-                display: none;
-            }
         }
     </style>
 </head>
@@ -183,45 +222,47 @@
 <body>
     <button class="print-button" onclick="window.print()">Cetak ID Card</button>
 
-    <div class="id-card">
-        <div class="header">
-            <h1>KARTU TANDA ANGGOTA</h1>
-            <p>LABORATORIUM TEKNIK BIOMEDIS</p>
-        </div>
-
-        <div class="content">
-            <div class="photo-section">
-                @if ($user->img)
-                    <img src="{{ asset('storage/' . $user->img) }}" alt="Foto" class="photo">
-                @else
-                    <img src="{{ asset('assets/profile/default.png') }}" alt="Foto" class="photo">
-                @endif
+    <div class="aspect-ratio-box">
+        <div class="id-card">
+            <div class="header">
+                <h1>KARTU TANDA ANGGOTA</h1>
+                <p>LABORATORIUM TEKNIK BIOMEDIS</p>
             </div>
 
-            <div class="info-section">
-                <div class="info-row">
-                    <div class="info-label">Nama</div>
-                    <div class="info-value">{{ $user->name }}</div>
+            <div class="content">
+                <div class="photo-section">
+                    @if ($user->img)
+                        <img src="{{ asset('storage/' . $user->img) }}" alt="Foto" class="photo">
+                    @else
+                        <img src="{{ asset('assets/profile/default.png') }}" alt="Foto" class="photo">
+                    @endif
                 </div>
 
-                <div class="info-row">
-                    <div class="info-label">NIM</div>
-                    <div class="info-value">{{ $user->nim ?? '-' }}</div>
-                </div>
+                <div class="info-section">
+                    <div class="info-row">
+                        <div class="info-label">Nama</div>
+                        <div class="info-value">{{ $user->name }}</div>
+                    </div>
 
-                <div class="info-row">
-                    <div class="info-label">Program Studi</div>
-                    <div class="info-value">{{ $user->prodi ?? '-' }}</div>
-                </div>
+                    <div class="info-row">
+                        <div class="info-label">NIM</div>
+                        <div class="info-value">{{ $user->nim ?? '-' }}</div>
+                    </div>
 
-                <div class="info-row">
-                    <div class="info-label">Angkatan</div>
-                    <div class="info-value">{{ $user->angkatan ?? '-' }}</div>
-                </div>
+                    <div class="info-row">
+                        <div class="info-label">Program Studi</div>
+                        <div class="info-value">{{ $user->prodi ?? '-' }}</div>
+                    </div>
 
-                <div class="info-row">
-                    <div class="info-label">Email</div>
-                    <div class="info-value">{{ $user->email }}</div>
+                    <div class="info-row">
+                        <div class="info-label">Angkatan</div>
+                        <div class="info-value">{{ $user->angkatan ?? '-' }}</div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">{{ $user->email }}</div>
+                    </div>
                 </div>
             </div>
         </div>
