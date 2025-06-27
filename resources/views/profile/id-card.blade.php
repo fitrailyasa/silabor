@@ -137,6 +137,21 @@
             .id-card {
                 box-shadow: none;
                 border: 1px solid #ccc;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+
+            .id-card::before {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
+            }
+
+            .qr-code {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                color-adjust: exact;
             }
         }
 
@@ -169,10 +184,6 @@
     <button class="print-button" onclick="window.print()">Cetak ID Card</button>
 
     <div class="id-card">
-        {{-- <div class="qr-code">
-            QR
-        </div> --}}
-
         <div class="header">
             <h1>KARTU TANDA ANGGOTA</h1>
             <p>LABORATORIUM TEKNIK BIOMEDIS</p>
