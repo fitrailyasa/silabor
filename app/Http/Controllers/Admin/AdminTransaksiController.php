@@ -7,6 +7,9 @@ use App\Models\Alat;
 use App\Models\Laporan;
 use App\Models\LaporanPeminjaman;
 use App\Models\AutoValidate;
+use App\Notifications\PeminjamanValidatedNotification;
+use App\Notifications\PenggunaanValidatedNotification;
+use App\Notifications\PengembalianValidatedNotification;
 use Illuminate\Http\Request;
 
 class AdminTransaksiController extends Controller
@@ -111,6 +114,10 @@ class AdminTransaksiController extends Controller
             $laporan->catatan = $request->catatan;
             $laporan->updated_at = now();
             $laporan->save();
+
+            // Send email notification
+            $laporan->user->notify(new PeminjamanValidatedNotification($laporan, 'Ditolak', $request->catatan));
+
             return redirect()->back()->with('message', 'Peminjaman ditolak.');
         }
 
@@ -118,6 +125,9 @@ class AdminTransaksiController extends Controller
         $laporan->catatan = $request->catatan;
         $laporan->updated_at = now();
         $laporan->save();
+
+        // Send email notification
+        $laporan->user->notify(new PeminjamanValidatedNotification($laporan, 'Diterima', $request->catatan));
 
         return redirect()->back()->with('message', 'Validasi peminjaman berhasil dilakukan.');
     }
@@ -203,6 +213,9 @@ class AdminTransaksiController extends Controller
         $laporan->updated_at = now();
         $laporan->save();
 
+        // Send email notification
+        $laporan->user->notify(new PenggunaanValidatedNotification($laporan, $request->status_peminjaman, $request->catatan));
+
         return redirect()->back()->with('message', 'Validasi penggunaan berhasil dilakukan.');
     }
 
@@ -283,6 +296,14 @@ class AdminTransaksiController extends Controller
             $laporan->ruangan->status = 'Tersedia';
             $laporan->ruangan->save();
         }
+
+        // Send email notification
+        $laporan->user->notify(new PengembalianValidatedNotification(
+            $laporan,
+            $request->kondisi_setelah,
+            $request->catatan,
+            $request->deskripsi_kerusakan
+        ));
 
         return redirect()->back()->with('message', 'Validasi pengembalian berhasil.');
     }
