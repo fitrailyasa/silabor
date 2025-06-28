@@ -161,7 +161,7 @@
             </div>
         @endif
 
-        @if (auth()->user()->hasRole('Dosen'))
+        @if (!auth()->user()->hasRole('Mahasiswa'))
             @if (request('type') === 'bahan')
                 {{-- Bahan Section --}}
                 <h4 class="mt-5 mb-3">Bahan</h4>
