@@ -1,93 +1,51 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.auth.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <div class="relative">
-                <x-text-input id="password" class="block mt-1 w-full pr-10" type="password" name="password" required
-                    autocomplete="current-password" />
-                <button type="button" id="togglePassword"
-                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600">
-                    <svg id="eyeIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                        </path>
-                    </svg>
-                    <svg id="eyeSlashIcon" class="h-5 w-5 hidden" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21">
-                        </path>
-                    </svg>
-                </button>
+@section('content')
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-100 to-white">
+        <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+            <div class="flex flex-col items-center mb-6">
+                <img src="{{ asset('assets/logo.jpg') }}" alt="Logo" class="h-16 mb-2">
+                <h1 class="text-2xl font-bold text-gray-800">Sistem Informasi</h1>
+                <p class="text-gray-500 text-center text-sm">Sistem Informasi Laboratorium Biomedis</p>
             </div>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+                {{-- email --}}
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1" for="email">Email Address</label>
+                    <input id="email" name="email" type="email" required autofocus placeholder="Masukkan email kamu"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <div class="flex items-center justify-end">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+                {{-- password --}}
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1" for="password">Password</label>
+                    <input id="password" name="password" type="password" required placeholder="Masukkan password kamu"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
+                </div>
+                <div class="flex items-center justify-between mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="remember" class="mr-2">
+                        <span class="text-sm text-gray-600">Ingat saya</span>
+                    </label>
+                    <a href="{{ route('password.request') }}" class="text-sm text-blue-500 hover:underline">Lupa
+                        password?</a>
+                </div>
+                <button type="submit"
+                    class="w-full py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold hover:from-blue-600 hover:to-indigo-600 transition">Masuk</button>
+            </form>
+            <div class="my-6 flex items-center">
+                <div class="flex-grow border-t"></div>
+                <span class="mx-2 text-gray-400 text-xs">atau</span>
+                <div class="flex-grow border-t"></div>
+            </div>
+            <div class="text-center text-sm">
+                Belum punya akun?
+                <a href="{{ route('register') }}" class="text-blue-500 font-semibold hover:underline">Daftar sekarang</a>
+            </div>
+            <div class="mt-6 text-center text-xs text-gray-400">
+                © 2025 <a href="#" class="text-blue-600 font-semibold hover:underline">Lab Teknik Biomedis</a>
             </div>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('register'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('register') }}">
-                    {{ __('Don\'t have an account? Register') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const togglePassword = document.getElementById('togglePassword');
-            const password = document.getElementById('password');
-            const eyeIcon = document.getElementById('eyeIcon');
-            const eyeSlashIcon = document.getElementById('eyeSlashIcon');
-
-            togglePassword.addEventListener('click', function() {
-                // Toggle the type attribute
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-
-                // Toggle the eye / eye slash icon
-                if (type === 'password') {
-                    eyeIcon.classList.remove('hidden');
-                    eyeSlashIcon.classList.add('hidden');
-                } else {
-                    eyeIcon.classList.add('hidden');
-                    eyeSlashIcon.classList.remove('hidden');
-                }
-            });
-        });
-    </script>
-</x-guest-layout>
+    </div>
+@endsection
